@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Équations</title>
+    <meta charset="utf-8">
+  </head>
+<body>
+<h1>Résolution des équations du deuxième degré</h1>
+
+<h2>Théorie</h2>
+<latex>
+Toute équation quadratique donnée sous la forme $ax^2+bx+c=0$
+peut être résolue à l'aide de la formule suivante
+$$x_{1,2}=\dfrac{-b \pm \sqrt{b^2-4ac}}{2a}$$
+
+${x_1}$ et ${x_2}$ sont appelées les \textbf{racines} du trinôme.\\
+L'expression sous la racine $$\Delta=b^2-4ac$$ est appelée le \textbf{discriminant} et détermine le nombre de solutions d'une équation quadratique:\\
+\begin{tabular}{l l}
+$\Delta>0$: & L'équation a \textbf{deux solutions} réelles\\
+ & Le polynôme factorisé est de la forme: $ a(x - x_{1})(x - x_{2})$\\
+$\Delta=0$: & L'équation a \textbf{une solution} réelle (solution double)\\
+& Le polynôme factorisé est de la forme: $ a(x - x_{1})^2$\\
+$\Delta<0$: & L'équation \textbf{n'a pas de solution} réelle\\
+& Le polynôme ne peut pas être factorisé.
+\end{tabular}\par
+</latex>
+
+%Tag avec info minimale
+<video>
+https://www.youtube.com/embed/tc9wvbYuZts //ou juste tc9wvbYuZts
+</video>
+<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/tc9wvbYuZts" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+
+
+
+<h2>Exemples</h2>
+<latex>
+\begin{compactenum}[a)]
+\item $x^2+3x-4=0$ possède deux solutions.\par
+$$\Delta = b^2-4ac = 3^2 - 4 \cdot 1 \cdot (-4) = 9 + 16 = 25$$
+$$x_{1,2}=\frac{-3 \pm \sqrt{25}}{2 \cdot 1}=\frac{-3 \pm 5}{2}$$
+et donc
+$$x_1=1 \, \text{ et } \, x_2=-4 \, \text{ et donc} \, S = \{-4 , 1\}$$
+\vfill
+\item L'équation $4x^2+2=4x$ n'a pas de solution.
+Il faut d'abord mettre tous les termes du même côté $4x^2+2=4x \Longleftrightarrow 4x^2-4x+2=0$
+$$\Delta = b^2-4ac = (-4)^2 - 4 \cdot 4 \cdot 2 = 16 - 32 = -16 < 0$$
+$$S = \emptyset$$
+\vfill
+\item L'équation $x^2+2x+1=0$ possède une solution.
+$$\Delta = b^2-4ac = 2^2 - 4 \cdot 1 \cdot 1 = 4 - 4 = 0$$
+$$x = \frac{-2}{2 \cdot 1} = -1 \, \text{ et donc} \, S = \{-1\}$$
+\vfill
+\end{compactenum}
+</latex>
+
+<p>
+Résoudre une équation du deuxième degré correspond à calculer les zéros de la fonction quadratique correspondante, c'est-à-dire calculer les intersections avec l'axe des x:
+<p/>
+<geogebra>
+  https://www.geogebra.org/classic/cpmbrfxg?embed
+</geogebra>
+<!--<iframe src="https://www.geogebra.org/classic/cpmbrfxg?embed" width="1200" height="800" allowfullscreen style="border: 1px solid #e4e4e4;border-radius: 4px;" frameborder="0"></iframe>-->
+
+<h2>Exemple résolu pas à pas</h2>
+<video>
+https://www.youtube.com/embed/youUIZ-wsYk //ou juste youUIZ-wsYk
+</video>
+<!--<iframe width="560" height="315" src="https://www.youtube.com/embed/youUIZ-wsYk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>-->
+
+<h2>Exercice</h2>
+<latex>
+Résoudre les équations suivantes et écrire le polynôme sous forme factorisée.
+\vspace{-0.4cm}
+\begin{multicols}{3}
+\begin{compactenum}[a)]
+\item $2x^2=50$
+\item $4x^2-9x=0$
+\item $x^2+6x=-9$
+\item $-\dfrac{3}{4}x^2+\dfrac{5}{2}x=4$
+\item $3x^2-48=0$
+\item $4x^2+\dfrac{1}{4}x=5x-3$
+\item $6x^2-x=2$
+\item $4x^2+81=36x$
+\item $6x^2-13x-5 = 0$
+
+\end{compactenum}
+\end{multicols}
+</latex>
+
+<h2>Solutions</h2>
+<latex>
+\begin{compactenum}[a)]
+\item $S=\{5;-5\}$ et $P(x) = 2(x-5)(x+5)$
+\item $S=\left \{0;\dfrac{9}{4} \right\}$ et $P(x) = 4x\left (x-\dfrac{9}{4}\right)= x(4x-9)$
+\item $S=\{-3\}$  et $P(x) = (x+3)^2$
+\item $S=\varnothing$ et P(x) ne peut pas être factorisé.
+\item $S=\{4;-4\}$ et $P(x) = 3(x-4)(x+4)$
+\item $S=\varnothing$ et P(x) ne peut pas être factorisé.
+\item $S=\left \{-\dfrac{1}{2};\dfrac{2}{3} \right\}$ et $P(x) = 6\left(x+\dfrac{1}{2}\right)\left(x-\dfrac{2}{3}\right) = (2x+1)(3x-2)$
+\item $S=\left \{\dfrac{9}{2} \right\}$  et $P(x) = 4\left(x-\dfrac{9}{2}\right)^2= (2x-9)^2$
+\item $S=\left \{-\dfrac{1}{3}; \dfrac{5}{2}\right \}$ et $P(x) = 6\left(x+\dfrac{1}{3}\right)\left(x-\dfrac{5}{2}\right) = (3x+1)(2x-5)$
+\end{compactenum}
+</latex>
+
+
+
+</body>
+</html>
