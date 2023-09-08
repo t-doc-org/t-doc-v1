@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta http-equiv="content-language" content="en">
+
+  <!-- Pour éviter l'erreur avec favicon.ico qui n'existe pas -->
+  <link rel="icon" href="data:;base64,iVBORw0KGgo=">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script type="text/javascript">
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+class LatexComponent extends HTMLElement {
+  constructor() {
+    super();
+    this.shadow =  this.attachShadow({mode: 'open'});
+    // let div1 = document.createElement('div');
+    // let content1 = document.createTextNode("Hello World!");
+    // this.shadow.appendChild(div1);
+    // div1.appendChild(content1);
+
+    this.observer = new MutationObserver(async (mutation) => {
+      // console.log(mutation);
+      this.render();
+    });
+  }
+
+  async connectedCallback() {
+    await this.render();
+    this.observer.observe(this, {childList: true, characterData: true, subtree: true});
+  }
+
+  disconnectedCallback() {
+    this.observer.disconnect();
+  }
+
+  async render() {
+    console.log("render");
+    const text = this.textContent;
+    if (!text) return;
+
+    console.log("performing rendering");
+    const response = await fetch('/render-latex', {
+      method: 'POST',
+      headers: {'X-CSRFToken': getCookie('csrftoken')},
+      mode: 'same-origin',
+      cache: 'no-cache',
+      body: text,
+    })
+    this.shadow.innerHTML = await response.text();
+  }
+}
+
+customElements.define('tdoc-latex', LatexComponent);
+
+  </script>
+
+
+  <title>Test du LaTeX WebComponent</title>
+</head>
+
+<body>
+  <h1>Envoyer du latex au serveur</h1>
+
+  <p id="p1"> Ceci est un document qui contient un paragraphe et du latex.</p>
+
+
+  <tdoc-latex>
+    Ca sera du latex jkdfsn sdlfl
+<!-- \documentclass{article}
+\usepackage{multicol}
+
+\begin{document}
+\section{Équations du deuxième degré}
+\subsection{théorie}
+Toute \flqq équation quadratique \frqq donnée sous la forme $ax^2+bx+c=0 a \ne 0$ (a  \ne 0 en version texte est ok).
+peut être résolue à l'aide de la formule suivante
+$$x_{1,2}=\dfrac{-b \pm \sqrt{b^2-4ac}}{2a}$$
+${x_1}$ et ${x_2}$ sont appelées les \textbf{racines} du trinôme.\\
+L'expression sous la racine $$\Delta= \mathbf{b^2-4ac}$$ est appelée le \textbf{discriminant} et détermine le nombre de solutions d'une équation quadratique:\\
+$\begin{array}{|l | l |}
+\hline
+\Delta>0 & \text{L'équation a \textbf{deux solutions} réelles} \\
+& \text{Le polynôme factorisé est de la forme:}  a(x - x_{1})(x - x_{2}) \\
+\hline
+\Delta=0 & \text{L'équation a \textbf{une solution} réelle (solution double)}\\
+& \text{Le polynôme factorisé est de la forme:}  a(x - x_{1})^2\\
+\hline
+\Delta<0 & \text{L'équation \textbf{n'a pas de solution} réelle}\\
+& \text{Le polynôme ne peut pas être factorisé.}\\
+\hline
+\end{array}$\par
+
+
+\end{document} -->
+  </tdoc-latex>
+
+</body>
+
+</html>
