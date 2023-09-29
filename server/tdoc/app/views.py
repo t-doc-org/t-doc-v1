@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from django.views.decorators.csrf import ensure_csrf_cookie
+from django.views.decorators.csrf import csrf_exempt
 
 import html
 import os
@@ -11,10 +11,7 @@ def random_name(base):
     num = struct.unpack("I", os.urandom(4))[0]
     return f"{base}-{num}"
 
-@ensure_csrf_cookie
-def index(request):
-    return render(request, 'testWebComponent.html')
-
+@csrf_exempt
 def renderlatex(request):
     # Command: $ cat testXelatex.tex | make4ht -j latexrendering -
     # Command: $ cat testXelatex.tex | make4ht -d tmp -j latexrendering - mathjax
