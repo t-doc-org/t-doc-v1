@@ -96,7 +96,6 @@ window.MathJax = {
   }
 };
 
-
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -164,3 +163,8 @@ class LatexComponent extends HTMLElement {
 }
 
 customElements.define('tdoc-latex', LatexComponent);
+
+const script = document.createElement("script");
+script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js";
+script.async = true;
+document.head.appendChild(script);
