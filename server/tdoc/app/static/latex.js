@@ -153,6 +153,7 @@ class LatexComponent extends HTMLElement {
       this.shadowRoot.innerHTML = '<mjx-doc><mjx-head></mjx-head><mjx-body>' +
                                   html + '</mjx-body></mjx-doc>';
       await MathJax.typesetShadowPromise(this.shadowRoot);
+      // MathJax.typesetShadow(this.shadowRoot);
     } else {
       const messageError = await response.text();
       this.shadowRoot.innerHTML = "<div style=\" border: 3px solid red; padding-left: 10px;\"><h2>Erreur LaTeX:</h2> <pre></pre></div>";

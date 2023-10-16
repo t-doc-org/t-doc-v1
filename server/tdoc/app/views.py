@@ -41,10 +41,8 @@ class RenderException(Exception):
 
 @csrf_exempt
 def renderlatex(request):
-    # Command: $ cat testXelatexWithcfg.tex | make4ht -c latex.cfg -d tmp -j latexrendering - mathjax
     name = random_name("output")
     latex = request.read()
-    # print(latex)
     with open("latex.cfg") as f:
         config = f.read()
     version = subprocess.run(["make4ht", "-v"], capture_output=True).stdout
