@@ -28,9 +28,36 @@ activate=pageopen
 ]{}{VPlayer.swf}
 }
 
+\usepackage{environ}
+
+\NewEnviron{python}{%
+  \long\xdef\surroundedtext{%
+    \unexpanded{<pre>}%
+    \unexpanded\expandafter{\BODY}%
+    \unexpanded{<post>}}%
+  }
+
+\newenvironment{python}{%
+\begin{frame}[fragile]{HTML Code}
+\begin{lstlisting}[language=html]
+<pre>
+
+</pre>
+\end{lstlisting}
+\end{frame}
+}
 
 \begin{document}
 \section{Équations du deuxième degré}
+
+\subsection{test}
+\begin{python}
+def gotoXY(x, y):
+    penup()
+    goto(x, y)
+    pendown()
+\end{python}
+
 \subsection{théorie}
 L'expression sous la racine $$\Delta= \mathbf{b^2-4ac}$$ est appelée le \textbf{discriminant} et détermine le nombre de solutions d'une équation quadratique:\\
 $\begin{array}{|l | l |}
@@ -61,64 +88,65 @@ Ici j'ajoute un lien vers un document geogebra:\par
 
 \subsection{Python}
 Ici j'ajoute du code python:\par
-% \begin{lstlisting}[language=Python]
-% from turtle import *
-% from math import sqrt
+\begin{lstlisting}[language=Python]
+from turtle import *
+from math import sqrt
 
-% def gotoXY(x, y):
-%     penup()
-%     goto(x, y)
-%     pendown()
+def gotoXY(x, y):
+    penup()
+    goto(x, y)
+    pendown()
 
-% def calcul_hypotenuse(cote):
-%     return sqrt(2)*cote
+def calcul_hypotenuse(cote):
+    return sqrt(2)*cote
 
-% def calcul_cote(hypotenuse):
-%     return hypotenuse / sqrt(2)
+def calcul_cote(hypotenuse):
+    return hypotenuse / sqrt(2)
 
-% def carre(cote, couleur, positionX, positionY, orientation):
-%     gotoXY(positionX, positionY)
-%     setheading(orientation)
-%     fillcolor(couleur)
-%     begin_fill()
-%     for i in range(4):
-%         forward(cote)
-%         left(90)
-%     end_fill()
+def carre(cote, couleur, positionX, positionY, orientation):
+    gotoXY(positionX, positionY)
+    setheading(orientation)
+    fillcolor(couleur)
+    begin_fill()
+    for i in range(4):
+        forward(cote)
+        left(90)
+    end_fill()
 
-% def triangle_iso(cote, couleur, positionX, positionY, orientation):
-%     gotoXY(positionX, positionY)
-%     setheading(orientation)
-%     fillcolor(couleur)
-%     begin_fill()
-%     forward(cote)
-%     left(90)
-%     forward(cote)
-%     left(180-45)
-%     forward(calcul_hypotenuse(cote))
-%     end_fill()
+def triangle_iso(cote, couleur, positionX, positionY, orientation):
+    gotoXY(positionX, positionY)
+    setheading(orientation)
+    fillcolor(couleur)
+    begin_fill()
+    forward(cote)
+    left(90)
+    forward(cote)
+    left(180-45)
+    forward(calcul_hypotenuse(cote))
+    end_fill()
 
-% def parallelogramme(cote, couleur, positionX, positionY, orientation):
-%     gotoXY(positionX, positionY)
-%     setheading(orientation)
-%     fillcolor(couleur)
-%     begin_fill()
-%     for i in range(2):
-%         forward(cote)
-%         left(45)
-%         forward(calcul_hypotenuse(cote))
-%         left(135)
-%     end_fill()
+def parallelogramme(cote, couleur, positionX, positionY, orientation):
+    gotoXY(positionX, positionY)
+    setheading(orientation)
+    fillcolor(couleur)
+    begin_fill()
+    for i in range(2):
+        forward(cote)
+        left(45)
+        forward(calcul_hypotenuse(cote))
+        left(135)
+    end_fill()
 
-% speed(0)
-% triangle_iso(calcul_cote(800), "blue", -400, -400, 45)
-% triangle_iso(calcul_cote(800), "green", -400, 400, -45)
-% triangle_iso(calcul_cote(400), "yellow", 0, -400, 135)
-% carre(calcul_cote(400), "red", 0, -400, 45)
-% triangle_iso(calcul_cote(400), "magenta", 200, 200, -135)
-% parallelogramme(calcul_cote(400), "cyan", 200, -200, 45)
-% triangle_iso(400, "orange", 0, -400, 0)
-% hideturtle()
-% \end{lstlisting}
+speed(0)
+triangle_iso(calcul_cote(800), "blue", -400, -400, 45)
+triangle_iso(calcul_cote(800), "green", -400, 400, -45)
+triangle_iso(calcul_cote(400), "yellow", 0, -400, 135)
+carre(calcul_cote(400), "red", 0, -400, 45)
+triangle_iso(calcul_cote(400), "magenta", 200, 200, -135)
+parallelogramme(calcul_cote(400), "cyan", 200, -200, 45)
+triangle_iso(400, "orange", 0, -400, 0)
+hideturtle()
+\end{python}
+\end{lstlisting}
 
 \end{document}
