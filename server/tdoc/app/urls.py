@@ -3,5 +3,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path("render-latex", views.renderlatex, name="renderlatex"),
+    path("render-html/<file>", views.renderhtml, name="renderhtml"),
+    # path("render-latex", views.renderlatex, name="renderlatex"),
 ]
