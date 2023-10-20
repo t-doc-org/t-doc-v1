@@ -39,42 +39,13 @@ class RenderException(Exception):
         super().__init__(msg)
         self.output = output
 
-# @csrf_exempt
-# def renderlatex(request):
-#     name = random_name("output")
-#     latex = request.read()
-#     with open("latex.cfg") as f:
-#         config = f.read()
-#     version = subprocess.run(["make4ht", "-v"], capture_output=True).stdout
-#     key = generate_key(latex, config, version)
-
-#     def render():
-#         try:
-#             res = subprocess.run(
-#                 ["make4ht", "-j", name, "-c", "latex.cfg", "-", "mathjax"],
-#                 input=latex, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-#             if res.returncode != 0:
-#                 raise RenderException("failed to render", res.stdout)
-#             with open(f"{name}.html") as f:
-#                 content = f.read()
-#             with open(f"{name}.css") as f:
-#                 css = f.read()
-#             return '<style type="text/css">' + html.escape(css) + "</style>\n" + content
-#         finally:
-#             subprocess.run(["make4ht", "-j", name, "-m", "clean", "-"], input="")
-
-#     try:
-#         htmlresp = cache.get_or_set(key, render)
-#         return HttpResponse(htmlresp, content_type="text/html")
-#     except RenderException as e:
-#         return HttpResponse(ansiRE.sub(b"", e.output), status=400, content_type="text/plain")
 
 
-def renderhtml(request, file):
+def doc(request, file):
     name = random_name("output")
-    with open(f"{settings.TEX_ROOT}/{file}.tex", "rb") as f:
+    with open(settings.TEX_ROOT / f"{file}.tex", "rb") as f:
         latex = f.read()
-    configpath = f"{settings.TEX_ROOT}/latex.cfg"
+    configpath = settings.TEX_ROOT / "latex.cfg"
     with open(configpath, "rb") as f:
         config = f.read()
     version = subprocess.run(["make4ht", "-v"], capture_output=True).stdout

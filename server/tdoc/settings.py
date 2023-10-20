@@ -134,5 +134,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Application settings
 
-DOC_ROOT = BASE_DIR / "tdoc" / "app" / "templates"
 TEX_ROOT = BASE_DIR / ".." / "Documents"
