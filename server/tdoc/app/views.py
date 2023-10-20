@@ -44,11 +44,9 @@ css_re = r"<link [^>]*href=[\"']%s\.css[\"'][^>]*>"
 
 def doc(request, file):
     name = random_name("output")
-    with open(settings.TEX_ROOT / f"{file}.tex", "rb") as f:
-        latex = f.read()
+    latex = (settings.TEX_ROOT / f"{file}.tex").read_bytes()
     configpath = settings.TEX_ROOT / "latex.cfg"
-    with open(configpath, "rb") as f:
-        config = f.read()
+    config = configpath.read_bytes()
     version = subprocess.run(["make4ht", "-v"], capture_output=True).stdout
     key = generate_key(latex, config, version)
 
@@ -60,12 +58,10 @@ def doc(request, file):
                 cwd=settings.TMP)
             if res.returncode != 0:
                 raise RenderException("failed to render", res.stdout)
-            with open(settings.TMP / f"{name}.css") as f:
-                css = f.read()
-            with open(settings.TMP / f"{name}.html") as f:
-                content = f.read()
+            css = (settings.TMP / f"{name}.css").read_text()
+            content = (settings.TMP / f"{name}.html").read_text()
                 # <link href='output-2687784357.css' rel='stylesheet' type='text/css' />
-                content = re.sub(css_re % re.escape(name), '<style type="text/css">' + html.escape(css) + "</style>\n", content)
+            content = re.sub(css_re % re.escape(name), '<style type="text/css">' + html.escape(css) + "</style>\n", content)
             return content
         finally:
             for path in settings.TMP.glob(f"{name}*"):
