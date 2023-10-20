@@ -56,18 +56,20 @@ def doc(request, file):
         try:
             res = subprocess.run(
                 ["make4ht", "-j", name, "-c", configpath, "-", "mathjax"],
-                input=latex, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+                input=latex, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
+                cwd=settings.TMP)
             if res.returncode != 0:
                 raise RenderException("failed to render", res.stdout)
-            with open(f"{name}.css") as f:
+            with open(settings.TMP / f"{name}.css") as f:
                 css = f.read()
-            with open(f"{name}.html") as f:
+            with open(settings.TMP / f"{name}.html") as f:
                 content = f.read()
                 # <link href='output-2687784357.css' rel='stylesheet' type='text/css' />
                 content = re.sub(css_re % re.escape(name), '<style type="text/css">' + html.escape(css) + "</style>\n", content)
             return content
         finally:
-            subprocess.run(["make4ht", "-j", name, "-m", "clean", "-"], input="")
+            for path in settings.TMP.glob(f"{name}*"):
+                path.unlink()
 
     try:
         htmlresp = cache.get_or_set(key, render)

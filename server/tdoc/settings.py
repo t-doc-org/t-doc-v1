@@ -135,3 +135,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Application settings
 
 TEX_ROOT = BASE_DIR / ".." / "Documents"
+TMP = BASE_DIR / "tmp"
