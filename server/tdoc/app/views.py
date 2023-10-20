@@ -40,6 +40,7 @@ class RenderException(Exception):
         self.output = output
 
 
+css_re = r"<link [^>]*href=[\"']%s\.css[\"'][^>]*>"
 
 def doc(request, file):
     name = random_name("output")
@@ -58,11 +59,13 @@ def doc(request, file):
                 input=latex, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             if res.returncode != 0:
                 raise RenderException("failed to render", res.stdout)
-            with open(f"{name}.html") as f:
-                content = f.read()
             with open(f"{name}.css") as f:
                 css = f.read()
-            return '<style type="text/css">' + html.escape(css) + "</style>\n" + content
+            with open(f"{name}.html") as f:
+                content = f.read()
+                # <link href='output-2687784357.css' rel='stylesheet' type='text/css' />
+                content = re.sub(css_re % re.escape(name), '<style type="text/css">' + html.escape(css) + "</style>\n", content)
+            return content
         finally:
             subprocess.run(["make4ht", "-j", name, "-m", "clean", "-"], input="")
 
