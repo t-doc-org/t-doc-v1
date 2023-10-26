@@ -6,6 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 import hashlib
 import html
+import mimetypes
 import os
 import re
 import struct
@@ -72,4 +73,12 @@ def doc(request, file):
         return HttpResponse(htmlresp, content_type="text/html")
     except RenderException as e:
         return HttpResponse(ansiRE.sub(b"", e.output), status=400, content_type="text/plain")
+
+def image(request, image):
+    print(image)
+    try:
+        img = (settings.IMG_ROOT / f"{image}").read_bytes()
+        return HttpResponse(img, content_type=mimetypes.guess_type(image)[0])
+    except IOError as e:
+        return HttpResponse(str(e), status=400, content_type="text/plain")
 
