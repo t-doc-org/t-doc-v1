@@ -75,7 +75,6 @@ def doc(request, file):
         return HttpResponse(ansiRE.sub(b"", e.output), status=400, content_type="text/plain")
 
 def image(request, image):
-    print(image)
     try:
         img = (settings.IMG_ROOT / f"{image}").read_bytes()
         return HttpResponse(img, content_type=mimetypes.guess_type(image)[0])
