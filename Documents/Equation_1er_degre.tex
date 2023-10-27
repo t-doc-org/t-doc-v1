@@ -1,0 +1,90 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage[french]{babel}
+\usepackage[T1]{fontenc}
+
+\usepackage{amssymb,amsmath,amsfonts, amsfonts}
+\usepackage{enumitem}
+\usepackage{multicol}
+
+\usepackage{graphicx}
+\graphicspath{images/}
+\usepackage{media9}
+\usepackage{listingsutf8}
+
+\newcommand\video[3]{%
+\includemedia[%
+addresource=#1,
+width=#2,
+height=#3,
+activate=pageopen
+]{}{VPlayer.swf}
+}
+
+\newcommand\geogebra[3]{%
+\includemedia[%
+addresource=#1,
+width=#2,
+height=#3,
+activate=pageopen
+]{}{VPlayer.swf}
+}
+
+\usepackage{environ}
+
+\NewEnviron{python}{%
+\unexpanded\expandafter{\BODY}
+\BODY
+}
+
+
+\begin{document}
+\begin{center}
+\Huge{\textbf{Équations du premier degré}}
+\end{center}
+
+\section{théorie}
+Une \textbf{équation du premier degré} est une égalité entre deux expressions littérales dont le coefficient de la variable est au maximum 1.
+$$\underbrace{2x + 3}_{\text{membre de gauche}} = \underbrace{5 - 5x}_{\text{membre de droite}}$$
+La ou les valeurs qui vérifient l'égalité sont appelées solutions de l'équation. Résoudre une équation, c'est trouver l'\textbf{ensemble des solutions}, noté $S$.
+
+Pour résoudre une équation, on utilise les \textbf{règles d'équivalence}, celles-ci transforment l'équation sans modifier son ensemble de solutions. Les trois règles d'équivalence sont:
+\begin{enumerate}[label*=\arabic*.]
+\item effectuer du calcul littéral dans ses membres.
+\item additionner (ou soustraire) un même nombre, un même monôme ou un même polynôme aux deux membres de l'équation.
+\item multiplier (ou diviser) les deux membres de l'équation par un même nombre \textbf{non nul}.
+\end{enumerate}
+
+
+\section{exemple}
+$\begin{array}{rclrll}
+2x-5+x-2 &=&2x+8-4x &|& \text{CL} & \text{ (calcul littéral)} \\
+3x-7 &=&-2x+8 &|& +2x & \text{ (addition du même monôme)} \\
+5x-7 &=& 8 &|& +7 &  \text{ (addition du même nombre)}\\
+5x &=& 15 &|& :5 & \text{ (division par le même nombre)}\\
+x &=& 3 &&&\\
+S &=& \{3\} &&& \text{ (noter l'ensemble des solutions)}
+\end{array}$
+
+\section{vidéo}
+Théorie sur les équations du 1er degré et exemples:\par
+\video{WoTpA2RyuVU?si=pB7ds5xAY3ulD1I8} %indiquer le pourcentage voulu par rapport à la largeur de la page
+
+\subsection{Représentation graphique}
+Les fonctions qui peuvent s'écrire sous la forme
+$$f(x)=a\cdot x +b$$
+où $a$ et $b$ sont des nombres réels, sont appelées \textbf{fonctions du premier degré}.
+
+Les graphes des fonctions du premier degré sont \textbf{toujours des droites}.
+
+Sur le graphique ci-dessous, tu peux observer comment change la droite en fonction de a qui représente la pente et b qui est l'ordonnée à l'origine:\par
+\geogebra[100]{esdhdhzd} %indiquer le pourcentage voulu par rapport à la largeur de la page
+\begin{enumerate}
+    \item Comment est la droite quand a = 3?
+    \item Comment est la droite quand a = -4?
+    \item Comment est la droite quand a = 0?
+    \item Que se passe-t-il quand on change la valeur de b?
+\end{enumerate}
+
+
+
+\end{document}
