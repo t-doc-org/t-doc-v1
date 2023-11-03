@@ -9,7 +9,9 @@
 \usepackage{graphicx}
 \graphicspath{images/}
 \usepackage{media9}
-%\usepackage{listingsutf8}
+\usepackage{listingsutf8}
+
+\usepackage{hyperref}
 
 \newcommand\video[3]{%
 \includemedia[%
@@ -29,26 +31,17 @@ activate=pageopen
 ]{}{VPlayer.swf}
 }
 
-% \usepackage{environ}
-
-% \NewEnviron{python}{%
-% \unexpanded\expandafter{\BODY}
-% \BODY
-% }
-
-\usepackage{hyperref}
 
 \usepackage{xcolor}
 \definecolor{mybackcolor}{rgb}{0.98,0.98,0.98}
 
-\usepackage{listingsutf8}
 \lstset{language=HTML, basicstyle={\small\ttfamily}, keywordstyle=\color{blue}, identifierstyle=\color{darkgray}, stringstyle=\color{brown}, backgroundcolor=\color{mybackcolor}, numbers=left}
 
+\title{HTML et CSS}
+\date{}
 
 \begin{document}
-\begin{center}
-\Huge{\textbf{HTML et CSS}}
-\end{center}
+\maketitle
 
 \section{Introduction}
 \subsection{Web et Internet}

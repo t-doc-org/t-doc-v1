@@ -54,7 +54,7 @@ def doc(request, file):
     def render():
         try:
             res = subprocess.run(
-                ["make4ht", "-j", name, "-c", configpath, "-", "mathjax"],
+                ["make4ht", "-j", name, "-x", "-c", configpath, "-", "mathjax"],
                 input=latex, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
                 cwd=settings.TMP)
             if res.returncode != 0:
