@@ -1,1 +1,3 @@
-import './latex.js';
+import './highlighting.js';
+//import './latex.js';
+
