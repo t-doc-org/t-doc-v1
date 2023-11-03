@@ -54,7 +54,7 @@ def doc(request, file):
     def render():
         try:
             env = os.environ.copy()
-            env["TEXINPUTS"] = "/home/caro/Documents/UNIFR/Master/t-doc/Documents:"
+            env["TEXINPUTS"] = f"{settings.TEX_ROOT}:"
             res = subprocess.run(
                 ["make4ht", "-j", name, "-x", "-c", configpath, "-", "mathjax"],
                 input=latex, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
