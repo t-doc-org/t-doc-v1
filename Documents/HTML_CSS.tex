@@ -1,35 +1,5 @@
 \documentclass[a4paper,11pt]{article}
-\usepackage[french]{babel}
-\usepackage[T1]{fontenc}
-
-\usepackage{amssymb,amsmath,amsfonts, amsfonts}
-\usepackage{enumitem}
-\usepackage{multicol}
-
-\usepackage{graphicx}
-\graphicspath{images/}
-\usepackage{media9}
-\usepackage{listingsutf8}
-
-\usepackage{hyperref}
-
-\newcommand\video[3]{%
-\includemedia[%
-addresource=#1,
-width=#2,
-height=#3,
-activate=pageopen
-]{}{VPlayer.swf}
-}
-
-\newcommand\geogebra[3]{%
-\includemedia[%
-addresource=#1,
-width=#2,
-height=#3,
-activate=pageopen
-]{}{VPlayer.swf}
-}
+\usepackage{commonpackages}
 
 
 \usepackage{xcolor}
@@ -37,10 +7,10 @@ activate=pageopen
 
 \lstset{language=HTML, basicstyle={\small\ttfamily}, keywordstyle=\color{blue}, identifierstyle=\color{darkgray}, stringstyle=\color{brown}, backgroundcolor=\color{mybackcolor}, numbers=left}
 
-\title{HTML et CSS}
-\date{}
 
 \begin{document}
+\title{HTML et CSS}
+\date{}
 \maketitle
 
 \section{Introduction}
