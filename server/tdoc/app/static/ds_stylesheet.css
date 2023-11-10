@@ -5,3 +5,16 @@
     min-width: 50%;
 }
 
+/* blocs de code */
+.hljs-ln-numbers {
+    text-align: center;
+    color: #ccc;
+    border-right: 1px solid #CCC;
+    vertical-align: top;
+    padding-right: 5px;
+}
+
+.hljs-ln-code {
+    padding-left: 10px;
+}
+
