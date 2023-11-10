@@ -1,32 +1,220 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage{commonpackages}
 
+
+\usepackage{xcolor}
+\definecolor{mybackcolor}{rgb}{0.98,0.98,0.98}
+
 \begin{document}
-\title{Afficher du code}
+\title{Programmation avec Python}
 \date{}
 \maketitle
 
-\section{Python}
+begin{document}
+\maketitle
 
-\lstset{language=Python}
+\section{Introduction}
+Pour apprendre à programmer, nous allons utiliser Thonny qui est un environnement de développement (IDE) pour Python. Il permet d’écrire, de développer, de tester et de déboguer des programmes informatiques écrits en Python.
+Thonny est disponible gratuitement et peut être installer sur Windows, MacOS et Linux.
+Pour l’installer, il suffit de se rendre sur la page officielle :  \url{https://thonny.org}
 
+\section{Syntaxe}
+Dans la partie algorithmique, nous avons vu comment résoudre des problèmes de manière générale sans se soucier du langage de programmation. Maintenant que nous allons programmer en Python, il faudra donc suivre la syntaxe propre à Python.
 
-Avec lstlisting:\par
-\begin{lstlisting}
-for i in range(4):
-    for j in range(5):
-        print(i*j)
-\end{lstlisting}
-
-
-Avec verbatim:\par
+\subsection{Indentation}
+L'indentation est très importante en Python, sinon le programme ne pourra pas s'exécuter. Thonny vous aidera à écrire les instructions au bon endroit.
 \begin{verbatim}{python}
+from turtle import forward, left
 for i in range(4):
-  for j in range(5):
-    print(i*j)
+    forward(100)
+    left(90)
 \end{verbatim}
 
+\subsection{Commentaire}
+Le symbole \# permet d'ajouter des commentaires au code afin de le rendre plus lisible. Cette partie ne sera pas exécutée.
 
+\subsection{Opérateurs mathématiques}
+Les opérateurs mathématiques permettent de faire des calculs simples avec les nombres.\par
+\begin{center}
+$\begin{array}{|c|c|c|c|}
+\hline
+\textbf{Opérateur} & \textbf{Nom} & \textbf{Exemple} & \textbf{Résultat} \\
+\hline
++ & \text{addition} & 3 + 4 & 7\\
+\hline
+- & \text{soustraction} & 9 - 12 & -3\\
+\hline
+* & \text{multiplication} & 5 \cdot 6 & 30\\
+\hline
+/ & \text{division} & 11 / 2 & 5.5\\
+\hline
+\% & \text{modulo (reste de la divison entière)} & 26 \text{mod} 6 & 2\\
+\hline
+** & \text{puissance} & 2**3 & 8\\
+\hline
+// & \text{division entière} & 26 // 6 & 4\\
+\hline
+\end{array}$
+\end{center}
+
+\subsection{Opérateurs d'affectation}
+Les opérateurs d'affectation sont utilisés pour assigner des valeurs à des variables.\par
+\begin{center}
+$\begin{array}{|c|c|c|}
+\hline
+\textbf{Opérateur} & \textbf{Exemple} & \textbf{Équivalent à} \\
+\hline
+= & x = 9 & \\
+\hline
++= & x += 1 & x = x + 1\\
+\hline
+-x & x -= 1 & x = x -1\\
+\hline
+\end{array}$
+\end{center}
+
+\subsection{Opérateurs de comparaison}
+Les opérateurs de comparaison permettent de comparer deux valeurs entre elle. Le résultat est de type booléen: True ou False.\par
+\begin{center}
+$\begin{array}{|c|c|c|c|}
+\hline
+\textbf{Opérateur} & \textbf{Nom} & \textbf{Exemple} & \textbf{Résultat} \\
+\hline
+== & \text{égal à} & 4 == 5 & False\\
+\hline
+!= & \text{différent de} & 7 != 8 & True\\
+\hline
+> & \text{plus grand que} &  -8 > 5 & False\\
+\hline
+< & \text{plus petit que} & 4 < 6 & True\\
+\hline
+>= & \text{plus grand ou égal à} &  5 >= 7 & False\\
+\hline
+<= & \text{plus petit ou égal à} & 6 >= 6 & True\\
+\hline
+\end{array}$
+\end{center}
+
+\subsection{Fonctions}
+\begin{verbatim}{python}
+def nom_fonction(paramètre1, paramètre2):
+  # instructions de la fonction
+\end{verbatim}
+
+\subsection{Boucles}
+\begin{verbatim}{python}
+for ma_variable in range(...):
+  # instructions de la boucle
+\end{verbatim}
+
+\begin{verbatim}{python}
+while condition:
+  # instructions de la boucle
+\end{verbatim}
+
+\subsection{Instructions conditionnelles}
+\begin{verbatim}{python}
+if condition:
+  # instructions à effectuer si la condition est vraie
+\end{verbatim}
+
+\begin{verbatim}{python}
+if condition:
+  # instructions à effectuer si la condition est vraie
+else:
+  # instructions à effectuer sinon
+\end{verbatim}
+
+\begin{verbatim}{python}
+if condition_1:
+  # instructions à effectuer si la condition_1 est vraie
+elif condition_2:
+  # instructions à effectuer si la condition_2 est vraie
+else:
+  # instructions à effectuer sinon (aucune condition n'est vraie)
+\end{verbatim}
+
+\section{Modules}
+
+\subsection{Définition}
+Un module est comme une boîte à outils. Il contient plein de fonctions déjà programmées que nous pouvons utiliser.
+Par exemple, dans le module « math », il y a la fonctions « sqrt » qui te permet de calculer la racine carrée d’un nombre.
+
+\subsection{Importer un module}
+Avant de pouvoir utiliser les fonctions d’un module, il faut les importer.
+Cela se fait en écrivant: from nom\_module import nom\_fonction
+\begin{lstlisting}
+from math import sqrt
+\end{lstlisting}
+
+\section{Fonctions utiles}
+\subsection{Fonctions sans modules}
+Nous n'avons pas besoin d'importer de module pour utiliser les fonctions suivantes:\par
+\begin{tabular}{l l}
+print(x) & afficher x sur la console\\
+input() & demander à l'utilisateur d'entrer une donnée\\
+  & exemple: input("Quel âge avez-vous? ")\\
+abs(x) & donner la valeur absolue d'un nombre |a| \\
+round(x) & arrondir le nombre x à l'entier le plus proche\\
+round(x, n) & arrondir le nombre x à n chiffres après la virgule\\
+float(x) & convertir x en nombre à virgule\\
+int(x) & convertir x en nombre entier\\
+str(x) & convertir x en une chaîne de caractères\\
+\end{tabular}
+
+\subsection{Module math}
+Nous devons importer le module math avant d'utiliser les fonctions suivantes:\par
+\begin{tabular}{l l}
+sqrt(x) & calculer la racine carrée de x: $\sqrt{x}$\\
+pi & valeur de $\pi$\\
+floor(x) & entier juste en dessous de x\\
+ceil(x) & entier juste en dessus de x\\
+gcd(a,b) & pgdc de a et b\\
+\end{tabular}
+
+\subsection{Module turtle}
+Nous devons importer le module turtle avant d'utiliser les fonctions suivantes:\par
+\subsubsection{Déplacements}
+\begin{tabular}{l l}
+forward(n) & avancer de n pixels\\
+backward(n) & reculer de n pixels\\
+goto(x, y) & déplacer la tortue de sa position courante au point (x;y)\\
+& (0;0) est le milieu de la page\\
+left(n) & tourner de n degrés vers la gauche\\
+right(n) & tourner de n degrés vers la droite\\
+speed(n) & changer la vitesse de la tortue (1 = lent, 10 = rapide, 0 = le plus rapide)\\
+circle(r) & tracer un cercle de rayon r\\
+\end{tabular}
+
+
+\subsubsection{Stylo}
+\begin{tabular}{l l}
+penup() & lever le stylo\\
+pendown() & abaisser le stylo\\
+pencolor(n) & changer la couleur du stylo ("black", "white", "grey", "blue",  "red", "yellow", …)\\
+pensize(n)  & changer l'épaisseur du stylo à n pixels\\
+colormode(255) & définir une couleur à l'aide de pencolor en mode RGB\\
+pencolor(…, …, …) & changer la couleur du stylo en mode RGB \\
+\end{tabular}
+
+\subsubsection{Tortue}
+\begin{tabular}{l l}
+hideturtle() & cacher la tortue\\
+showturtle() & montrer la tortue\\
+\end{tabular}
+
+\subsection{Module random}
+Nous devons importer le module random avant d'utiliser les fonctions suivantes:\par
+\begin{tabular}{l l}
+randint(a, b) & obtenir un entier aléatoire n tel que a≤n≤b avec a<b\\
+uniform(a, b) & obtenir un nombre aléatoire à virgule flottante compris entre a et b\\
+\end{tabular}
+
+
+\vfill
+\renewcommand{\refname}{Références}
+\begin{thebibliography}{9}
+\bibitem{sion} DELALOYE, Sarah; DI PASQUALE, Fabrice; DESPRES, Nicolas: \emph{Cours Python Lycée-Collège des Creusets}, Sion 2022
+\end{thebibliography}
 
 \end{document}
-\end{python}
