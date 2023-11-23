@@ -53,12 +53,15 @@ def doc(request, file):
 
     def render():
         try:
+            args = ["make4ht", "-j", name, "-x", "-c", configpath]
+            if settings.RENDER_DRAFT:
+                args += ["-m", "draft"]
+            args += ["-", "mathjax"]
             env = os.environ.copy()
             env["TEXINPUTS"] = f"{settings.TEX_ROOT}:"
-            res = subprocess.run(
-                ["make4ht", "-j", name, "-x", "-c", configpath, "-", "mathjax"],
-                input=latex, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
-                cwd=settings.TMP, env=env)
+            res = subprocess.run(args, input=latex, stdout=subprocess.PIPE,
+                                 stderr=subprocess.STDOUT, cwd=settings.TMP,
+                                 env=env)
             if res.returncode != 0:
                 raise RenderException("failed to render", res.stdout)
             css = (settings.TMP / f"{name}.css").read_text()
