@@ -2,6 +2,7 @@ import hashlib
 import html
 import mimetypes
 import os
+import pathlib
 import re
 import struct
 import subprocess
@@ -11,6 +12,11 @@ from django.core.cache import cache
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
+
+
+PKG_DIR = pathlib.Path(__file__).resolve().parent
+CONFIGS = PKG_DIR / "configs"
+TEXINPUTS = PKG_DIR / "texinputs"
 
 
 def random_name(base):
@@ -71,7 +77,7 @@ def doc(request, file):
     """Handle the rendering of a LaTeX document."""
     name = random_name("output")
     latex = (settings.TEX_ROOT / f"{file}.tex").read_bytes()
-    configpath = settings.TEX_ROOT / "latex.cfg"
+    configpath = CONFIGS / "latex.cfg"
     config = configpath.read_bytes()
     version = subprocess.run(["make4ht", "-v"], capture_output=True).stdout
     key = generate_key(latex, config, version)
@@ -83,7 +89,7 @@ def doc(request, file):
                 args += ["-m", "draft"]
             args += ["-", "mathjax"]
             env = os.environ.copy()
-            env["TEXINPUTS"] = f"{settings.TEX_ROOT}:"
+            env["TEXINPUTS"] = f"{TEXINPUTS}:"
             res = subprocess.run(args, input=latex, stdout=subprocess.PIPE,
                                  stderr=subprocess.STDOUT, cwd=settings.TMP,
                                  env=env)
