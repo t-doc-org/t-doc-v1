@@ -1,37 +1,37 @@
 /* Embedded elements */
-.td_geogebra, .td_video {
-  aspect-ratio: 16 / 9;
-  max-width: 100%;
+.tdoc-geogebra, .tdoc-video {
   min-width: 50%;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
 }
 
 /* Code blocks */
 .hljs-ln-numbers {
-  text-align: center;
-  color: #ccc;
-  border-right: 1px solid #CCC;
-  vertical-align: top;
   padding-right: 5px;
+  border-right: 1px solid #CCC;
+  text-align: center;
+  vertical-align: top;
+  color: #ccc;
 }
 .hljs-ln-code {
   padding-left: 10px;
 }
 
 /* Solution buttons */
-.solution {
+.tdoc-solution {
   display: inline-block;
   margin-top: 20px;
-  font-size: 15px;
-  cursor: pointer;
+  padding: 6px;
   border: none;
   border-radius: 4px;
-  padding: 6px;
+  font-size: 15px;
+  cursor: pointer;
   background-color: #CCC;
 }
-.response {
+.tdoc-answer {
   width: 100%;
   padding: 20px 0;
 }
-.hide {
+.tdoc-hidden {
   display: none;
 }
