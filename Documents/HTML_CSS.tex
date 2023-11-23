@@ -1,12 +1,10 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage{commonpackages}
 
-
 \usepackage{xcolor}
 \definecolor{mybackcolor}{rgb}{0.98,0.98,0.98}
 
 \lstset{language=HTML, basicstyle={\small\ttfamily}, keywordstyle=\color{blue}, identifierstyle=\color{darkgray}, stringstyle=\color{brown}, backgroundcolor=\color{mybackcolor}, numbers=left}
-
 
 \begin{document}
 \title{HTML et CSS}
@@ -28,7 +26,7 @@ Le Web est basé sur un modèle client-serveur. Le navigateur est un client qui 
 \item Lorsque le serveur Web reçoit la requête, il transmet le fichier HTML correspondant à la demande au client via internet.
 \item Le navigateur va lire et interpréter le fichier HTML pour pouvoir l'afficher sur l'écran de l'utilisateur.
 \end{enumerate}
-\video{dYgNvn98Nag}
+\video[100]{dYgNvn98Nag}
 
 \section{Fichiers d'une page Web}
 Une page Web est typiquement composée de 3 types de fichiers:
@@ -47,7 +45,7 @@ Une page Web est typiquement composée de 3 types de fichiers:
   \item Permet de rendre la page Web dynamique (la page change en fonction des actions effectuées)
 \end{itemize}
 \end{enumerate}
-\video{-7pJ45oXuvE}
+\video[100]{-7pJ45oXuvE}
 
 \section{HTML}
 Le format \textbf{HTML} (HyperText Markup Language) est un format qui permet de décrire le contenu et la structure d'une page Web. HTML n'est pas un langage de programmation, il ne contient ni fonction, ni boucle, ni instruction conditionnelle, mais c'est un ensemble de balises qui permettent de mettre un document en page, afin que le navigateur puisse l'afficher correctement.
@@ -62,7 +60,6 @@ Les balises ont la forme suivante:
 \subsection{Balise <!DOCTYPE html>}
 Tous documents qui décrivent une page Web doivent débuter par:  <!DOCTYPE html>
 Ce n'est pas une balise HTML, mais une information qui permet au navigateur de savoir le type de document.
-
 
 \subsection{Balise <html> \dots <html>}
 Tout le code HTML doit être inséré dans une balise nommée html: <html> … </html>
@@ -212,13 +209,12 @@ Vous voyez maintenant le code HTML et ce que la page affiche.
     Site internet du collège du Sud</a>
     <p/>
     <h2>Mes cours</h2> <!-- Sous-titre -->
-      <ul> <!-- liste non numérotée -->
-        <li>Français</li>
-        <li>Allemand</li>
-        <li>Anglais</li>
-        <li>Maths</li>
-      </ul>
-
+    <ul> <!-- liste non numérotée -->
+      <li>Français</li>
+      <li>Allemand</li>
+      <li>Anglais</li>
+      <li>Maths</li>
+    </ul>
     </body>
 </html>
 \end{verbatim}
@@ -257,12 +253,12 @@ Vous voyez maintenant le code HTML et ce que la page affiche.
     <p>
     Je fais partie de la classe 1F... qui est une classe qui ...
     <p/>
-    <img src = "images/STX.jpg" width ="600" height ="400"><br/>
+    <img src="images/STX.jpg" width="600" height="400"><br/>
     Source:
     <a href="https://new.cscfr.ch/index.php/fr/notre-college/nos-batiments/">
     https://new.cscfr.ch/index.php/fr/notre-college/nos-batiments/</a>
   </body>
-</html>\end{verbatim}
+</html>
+\end{verbatim}
+
 \end{document}
-
-

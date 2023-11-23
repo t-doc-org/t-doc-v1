@@ -1,30 +1,5 @@
 \documentclass[a4paper,11pt]{article}
-\usepackage[french]{babel}
-\usepackage[T1]{fontenc}
-
-\usepackage{amssymb,amsmath,amsfonts, amsfonts}
-\usepackage{enumitem}
-\usepackage{multicol}
-
-\usepackage{media9}
-
-\newcommand\video[3]{%
-\includemedia[%
-src=#1,
-width=#2,
-height=#3,
-activate=pageopen
-]{}{VPlayer.swf}
-}
-
-\newcommand\geogebra[3]{%
-\includemedia[%
-src=#1,
-width=#2,
-height=#3,
-activate=pageopen
-]{}{VPlayer.swf}
-}
+\usepackage{commonpackages}
 
 \begin{document}
 \section{Équations du deuxième degré}
@@ -45,10 +20,10 @@ $\begin{array}{|l | l |}
 
 \subsection{vidéo}
 Ici j'ajoute un lien vers une vidéo youtube:\par
-\video{tc9wvbYuZts}{560}{315}
+\video[100]{tc9wvbYuZts}
 
 \subsection{geogebra}
 Ici j'ajoute un lien vers un document geogebra:\par
-\geogebra{cpmbrfxg}{800}{600}
+\geogebra[100]{cpmbrfxg}
 
 \end{document}
