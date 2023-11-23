@@ -1,24 +1,23 @@
-.td_geogebra,
-.td_video {
-    aspect-ratio: 16 / 9;
-    max-width: 100%;
-    min-width: 50%;
+/* Embedded elements */
+.td_geogebra, .td_video {
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+  min-width: 50%;
 }
 
-/* blocs de code */
+/* Code blocks */
 .hljs-ln-numbers {
-    text-align: center;
-    color: #ccc;
-    border-right: 1px solid #CCC;
-    vertical-align: top;
-    padding-right: 5px;
+  text-align: center;
+  color: #ccc;
+  border-right: 1px solid #CCC;
+  vertical-align: top;
+  padding-right: 5px;
 }
-
 .hljs-ln-code {
-    padding-left: 10px;
+  padding-left: 10px;
 }
 
-/*Bouton de la solution*/
+/* Solution buttons */
 .solution {
   display: inline-block;
   margin-top: 20px;
@@ -29,13 +28,10 @@
   padding: 6px;
   background-color: #CCC;
 }
-
 .response {
   width: 100%;
   padding: 20px 0;
 }
-
 .hide {
   display: none;
 }
-

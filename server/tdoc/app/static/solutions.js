@@ -1,21 +1,14 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  console.log("Load");
-
+  // Add buttons to all solution sections.
   document.querySelectorAll('div.response').forEach((el) => {
-    console.log("each");
+    // Add a button before each solution section. The button toggles the
+    // visibility of the section.
     const btn = document.createElement("button");
     btn.className = "solution";
     btn.textContent = "Solution";
+    btn.addEventListener("click", function () {
+      el.classList.toggle("hide");
+    });
     el.before(btn);
-
-    const clickBtn = function () {
-      console.log("onclick");
-       el.classList.toggle("hide");
-    };
-
-    btn.addEventListener("click", clickBtn);
-
   });
-
 });
-
