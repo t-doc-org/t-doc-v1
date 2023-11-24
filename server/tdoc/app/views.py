@@ -86,11 +86,10 @@ def render_latex(request, doc_path):
     """Handle the rendering of a LaTeX document."""
     latex = doc_path.read_bytes()
     config = LATEX_CFG.read_bytes()
-    version = subprocess.run(["make4ht", "-v"], capture_output=True).stdout
     mode = ("" if "final" in request.GET else "draft" if "draft" in request.GET
             else settings.RENDER_MODE)
-    key = generate_key("latex", latex=latex, config=config, version=version,
-                       mode=mode)
+    key = generate_key("latex", seed=settings.CACHE_HASH_SEED, latex=latex,
+                       config=config, mode=mode)
 
     def render():
         with output_directory(doc_path) as output:

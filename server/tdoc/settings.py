@@ -78,3 +78,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Application settings
 DOC_ROOT = BASE_DIR.parent / "Documents"
 RENDER_MODE = "draft"
+CACHE_HASH_SEED = b"1"
