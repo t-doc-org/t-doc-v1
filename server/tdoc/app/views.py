@@ -10,7 +10,7 @@ import tempfile
 
 from django.conf import settings
 from django.core.cache import cache
-from django.http import HttpResponse
+from django.http import Http404, HttpResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
 
@@ -24,10 +24,13 @@ TEXINPUTS = PKG_DIR / "texinputs"
 # Match ANSI escape codes.
 ansi_re = re.compile(rb"\x1b\[[\x30-\x3f]*[\x20-\x2f]*[\x40-\x7e]")
 
+# Match content that should be removed from make4ht (error) output.
+sanitize_re = re.compile(rb"(?m)^\[STATUS\].*$\n")
 
-def remove_ansi_escapes(s):
-    """Remove ANSI escape codes from the given string."""
-    return ansi_re.sub(b"", s)
+
+def sanitize_stdout(output):
+    """Sanitize the stdout of make4ht, for display as plain text to the user."""
+    return sanitize_re.sub(b"", ansi_re.sub(b"", output))
 
 
 def hash_varint(h, value):
@@ -84,7 +87,10 @@ def doc(request, path):
 
 def render_latex(request, doc_path):
     """Handle the rendering of a LaTeX document."""
-    latex = doc_path.read_bytes()
+    try:
+        latex = doc_path.read_bytes()
+    except FileNotFoundError:
+        raise Http404("Document not found")
     config = LATEX_CFG.read_bytes()
     mode = ("" if "final" in request.GET else "draft" if "draft" in request.GET
             else settings.RENDER_MODE)
@@ -112,7 +118,7 @@ def render_latex(request, doc_path):
         htmlresp = cache.get_or_set(key, render)
         return HttpResponse(htmlresp, content_type="text/html")
     except RenderException as e:
-        return HttpResponse(remove_ansi_escapes(e.output), status=400,
+        return HttpResponse(sanitize_stdout(e.output), status=500,
                             content_type="text/plain")
 
 
@@ -140,5 +146,5 @@ def send_file(request, doc_path):
     content_type = mimetypes.guess_type(doc_path, strict=False)[0]
     try:
         return HttpResponse(doc_path.read_bytes(), content_type=content_type)
-    except IOError as e:
-        return HttpResponse(str(e), status=400, content_type="text/plain")
+    except FileNotFoundError:
+        raise Http404("File not found")
