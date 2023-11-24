@@ -1,14 +1,18 @@
 document.addEventListener('DOMContentLoaded', (event) => {
-  // Add buttons to all solution sections.
-  document.querySelectorAll('div.tdoc-answer').forEach((el) => {
-    // Add a button before each solution section. The button toggles the
-    // visibility of the section.
-    const btn = document.createElement("button");
-    btn.className = "tdoc-solution";
-    btn.textContent = "Solution";
-    btn.addEventListener("click", function () {
-      el.classList.toggle("tdoc-hidden");
-    });
-    el.before(btn);
+  // Wrap solution sections.
+  let id = 0;
+  document.querySelectorAll('div.tdoc-solution').forEach((el) => {
+    // Wrap each solution section in a collapsible block. Collapsing is based on
+    // a hidden checkbox, triggered by clicking on the label, and CSS selectors
+    // that use the "checked" attribute of the checkbox.
+    ++id;
+    const div = document.createElement("div");
+    div.className = "tdoc-solution-wrap";
+    div.innerHTML = `
+      <input id="tdoc-solution-${id}" class="toggle" type="checkbox">
+      <label for="tdoc-solution-${id}">Solution</label>
+    `;
+    el.replaceWith(div);
+    div.appendChild(el);
   });
 });

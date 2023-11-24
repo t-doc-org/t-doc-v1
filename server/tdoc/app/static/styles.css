@@ -25,20 +25,42 @@ dd.enumerate-enumitem {
   padding-left: 5px;
 }
 
-/* Solution buttons */
+/* Solution sections */
 .tdoc-solution {
-  display: inline-block;
+  display: none;
+  padding: 5px;
+}
+.tdoc-solution-wrap {
   margin-top: 5px;
-  padding: 6px;
-  border: 1px solid buttonborder;
-  border-radius: 4px;
+  border: 1px solid #aaa;
   font-size: 15px;
   cursor: pointer;
-  background-color: #ccc;
+  content: "\25b6";
 }
-.tdoc-answer {
-  padding: 10px 0;
-}
-.tdoc-hidden {
+.tdoc-solution-wrap > input {
   display: none;
+}
+.tdoc-solution-wrap > label:before {
+  display: inline-block;
+  width: 1.5em;
+  text-align: center;
+  content: "\276f";
+  transition: transform 0.5s ease-in-out;
+}
+.tdoc-solution-wrap > label {
+  display: block;
+  padding-bottom: 2px;
+  cursor: pointer;
+}
+.tdoc-solution-wrap > label:hover {
+  background-color: #eee;
+}
+.tdoc-solution-wrap > input[type="checkbox"]:checked ~ label:before {
+  transform: rotate(90deg);
+}
+.tdoc-solution-wrap > input[type="checkbox"]:checked ~ label {
+  border-bottom: 1px solid #aaa;
+}
+.tdoc-solution-wrap > input[type="checkbox"]:checked ~ .tdoc-solution {
+  display: block;
 }
