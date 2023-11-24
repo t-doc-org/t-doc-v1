@@ -1,11 +1,12 @@
+import contextlib
 import hashlib
 import html
 import mimetypes
 import os
 import pathlib
 import re
-import struct
 import subprocess
+import tempfile
 
 from django.conf import settings
 from django.core.cache import cache
@@ -18,12 +19,6 @@ PKG_DIR = pathlib.Path(__file__).resolve().parent
 CONFIGS = PKG_DIR / "configs"
 LATEX_CFG = CONFIGS / "latex.cfg"
 TEXINPUTS = PKG_DIR / "texinputs"
-
-
-def random_name(base):
-    """Generate a random base name for the rendering output."""
-    num = struct.unpack("I", os.urandom(4))[0]
-    return f"{base}-{num}"
 
 
 # Match ANSI escape codes.
@@ -94,25 +89,22 @@ def render_tex(request, doc_path):
     key = generate_key(latex, config, version)
 
     def render():
-        name = random_name("output")
-        try:
-            args = ["make4ht", "-j", name, "-x", "-c", LATEX_CFG]
+        with output_directory(doc_path) as output:
+            args = ["make4ht", "--xetex", "--config", LATEX_CFG,
+                    "--jobname", "output"]
             if settings.RENDER_DRAFT:
                 args += ["-m", "draft"]
             args += ["-", "mathjax"]
             env = os.environ.copy()
             env["TEXINPUTS"] = f"{TEXINPUTS}:"
             res = subprocess.run(args, input=latex, stdout=subprocess.PIPE,
-                                 stderr=subprocess.STDOUT, cwd=settings.TMP,
+                                 stderr=subprocess.STDOUT, cwd=output,
                                  env=env)
             if res.returncode != 0:
                 raise RenderException("failed to render", res.stdout)
-            content = (settings.TMP / f"{name}.html").read_text()
-            css = (settings.TMP / f"{name}.css").read_text()
-            return inline_css_link(content, name, css)
-        finally:
-            for path in settings.TMP.glob(f"{name}*"):
-                path.unlink()
+            content = (output / "output.html").read_text()
+            css = (output / "output.css").read_text()
+            return inline_css_link(content, "output", css)
 
     try:
         htmlresp = cache.get_or_set(key, render)
@@ -120,6 +112,25 @@ def render_tex(request, doc_path):
     except RenderException as e:
         return HttpResponse(remove_ansi_escapes(e.output), status=400,
                             content_type="text/plain")
+
+
+@contextlib.contextmanager
+def output_directory(doc_path):
+    """Create an output directory for LaTeX rendering.
+
+    make4ht resolves relative paths in the input file relative to the current
+    working directory, not the input file. But we don't want to set the CWD to
+    the directory containing the input file, because make4ht writes to it.
+
+    So instead, we create a temporary directory, set it as CWD, and create
+    symlinks to all the sub-directories that exist next to the input files.
+    """
+    with tempfile.TemporaryDirectory(prefix="tdoc-") as name:
+        output = pathlib.Path(name)
+        for p in doc_path.parent.iterdir():
+            if p.is_dir():
+                (output / p.name).symlink_to(p, target_is_directory=True)
+        yield output
 
 
 def send_file(request, doc_path):

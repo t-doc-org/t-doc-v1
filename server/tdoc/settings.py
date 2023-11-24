@@ -77,5 +77,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Application settings
 DOC_ROOT = BASE_DIR.parent / "Documents"
-TMP = BASE_DIR / "tmp"
 RENDER_DRAFT = True
