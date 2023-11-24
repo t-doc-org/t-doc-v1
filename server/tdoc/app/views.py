@@ -38,16 +38,17 @@ def hash_varint(h, value):
         if value == 0: break
 
 
-def generate_key(latex, config, version):
-    """Generate a hash key for an input file and the rendering config."""
+def generate_key(prefix, /, **kwargs):
+    """Generate a hash key for a set of key / value pairs."""
     m = hashlib.sha256()
-    hash_varint(m, len(latex))
-    m.update(latex)
-    hash_varint(m, len(config))
-    m.update(config)
-    hash_varint(m, len(version))
-    m.update(version)
-    return f"latex:{m.hexdigest()}"
+    for k, v in sorted(kwargs.items()):
+        if isinstance(k, str): k = k.encode('utf-8')
+        hash_varint(m, len(k))
+        m.update(k)
+        if isinstance(v, str): v = v.encode('utf-8')
+        hash_varint(m, len(v))
+        m.update(v)
+    return f"{prefix}:{m.hexdigest()}"
 
 
 class RenderException(Exception):
@@ -77,23 +78,25 @@ def doc(request, path):
     if not doc_path.suffix:
         doc_path = doc_path.with_suffix(".tex")
     if doc_path.suffix == ".tex":
-        return render_tex(request, doc_path)
+        return render_latex(request, doc_path)
     return send_file(request, doc_path)
 
 
-def render_tex(request, doc_path):
+def render_latex(request, doc_path):
     """Handle the rendering of a LaTeX document."""
     latex = doc_path.read_bytes()
     config = LATEX_CFG.read_bytes()
     version = subprocess.run(["make4ht", "-v"], capture_output=True).stdout
-    key = generate_key(latex, config, version)
+    mode = ("" if "final" in request.GET else "draft" if "draft" in request.GET
+            else settings.RENDER_MODE)
+    key = generate_key("latex", latex=latex, config=config, version=version,
+                       mode=mode)
 
     def render():
         with output_directory(doc_path) as output:
             args = ["make4ht", "--xetex", "--config", LATEX_CFG,
                     "--jobname", "output"]
-            if settings.RENDER_DRAFT:
-                args += ["-m", "draft"]
+            if mode: args += ["-m", mode]
             args += ["-", "mathjax"]
             env = os.environ.copy()
             env["TEXINPUTS"] = f"{TEXINPUTS}:"
