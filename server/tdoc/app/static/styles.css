@@ -1,36 +1,43 @@
+/* Enumerations */
+dd.enumerate-enumitem {
+  margin-inline-start: 0;
+}
+
 /* Embedded elements */
-.tdoc-geogebra, .tdoc-video {
+.tdoc-geogebra,
+.tdoc-video {
   min-width: 50%;
   max-width: 100%;
   aspect-ratio: 16 / 9;
 }
 
 /* Code blocks */
-.hljs-ln-numbers {
+.hljs-ln td.hljs-ln-numbers {
+  padding-left: 3px;
   padding-right: 5px;
-  border-right: 1px solid #CCC;
-  text-align: center;
-  vertical-align: top;
-  color: #ccc;
+  border-right: 1px solid #aaa;
 }
-.hljs-ln-code {
-  padding-left: 10px;
+.hljs-ln .hljs-ln-n {
+  text-align: right;
+  color: #aaa;
+}
+.hljs-ln td.hljs-ln-code {
+  padding-left: 5px;
 }
 
 /* Solution buttons */
 .tdoc-solution {
   display: inline-block;
-  margin-top: 20px;
+  margin-top: 5px;
   padding: 6px;
-  border: none;
+  border: 1px solid buttonborder;
   border-radius: 4px;
   font-size: 15px;
   cursor: pointer;
-  background-color: #CCC;
+  background-color: #ccc;
 }
 .tdoc-answer {
-  width: 100%;
-  padding: 20px 0;
+  padding: 10px 0;
 }
 .tdoc-hidden {
   display: none;
