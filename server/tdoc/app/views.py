@@ -16,6 +16,7 @@ from django.views.decorators.csrf import csrf_exempt
 
 PKG_DIR = pathlib.Path(__file__).resolve().parent
 CONFIGS = PKG_DIR / "configs"
+LATEX_CFG = CONFIGS / "latex.cfg"
 TEXINPUTS = PKG_DIR / "texinputs"
 
 
@@ -73,18 +74,29 @@ def inline_css_link(doc, name, css):
                   doc)
 
 
-def doc(request, file):
+def doc(request, path):
+    """Handle requests to the /doc/ endpoint."""
+    doc_path = settings.DOC_ROOT
+    for part in path.split("/"):
+        doc_path /= part
+    if not doc_path.suffix:
+        doc_path = doc_path.with_suffix(".tex")
+    if doc_path.suffix == ".tex":
+        return render_tex(request, doc_path)
+    return send_file(request, doc_path)
+
+
+def render_tex(request, doc_path):
     """Handle the rendering of a LaTeX document."""
-    name = random_name("output")
-    latex = (settings.TEX_ROOT / f"{file}.tex").read_bytes()
-    configpath = CONFIGS / "latex.cfg"
-    config = configpath.read_bytes()
+    latex = doc_path.read_bytes()
+    config = LATEX_CFG.read_bytes()
     version = subprocess.run(["make4ht", "-v"], capture_output=True).stdout
     key = generate_key(latex, config, version)
 
     def render():
+        name = random_name("output")
         try:
-            args = ["make4ht", "-j", name, "-x", "-c", configpath]
+            args = ["make4ht", "-j", name, "-x", "-c", LATEX_CFG]
             if settings.RENDER_DRAFT:
                 args += ["-m", "draft"]
             args += ["-", "mathjax"]
@@ -110,10 +122,10 @@ def doc(request, file):
                             content_type="text/plain")
 
 
-def image(request, image):
-    """Handle the retrieval of images."""
+def send_file(request, doc_path):
+    """Send a file directly from the filesystem."""
+    content_type = mimetypes.guess_type(doc_path, strict=False)[0]
     try:
-        img = (settings.IMG_ROOT / f"{image}").read_bytes()
-        return HttpResponse(img, content_type=mimetypes.guess_type(image)[0])
+        return HttpResponse(doc_path.read_bytes(), content_type=content_type)
     except IOError as e:
         return HttpResponse(str(e), status=400, content_type="text/plain")

@@ -76,7 +76,6 @@ STATIC_URL = 'static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # Application settings
-TEX_ROOT = BASE_DIR / ".." / "Documents"
-IMG_ROOT = TEX_ROOT / "images"
+DOC_ROOT = BASE_DIR.parent / "Documents"
 TMP = BASE_DIR / "tmp"
 RENDER_DRAFT = True
