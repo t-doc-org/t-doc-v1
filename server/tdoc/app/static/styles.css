@@ -34,8 +34,6 @@ dd.enumerate-enumitem {
   margin-top: 5px;
   border: 1px solid #aaa;
   font-size: 15px;
-  cursor: pointer;
-  content: "\25b6";
 }
 .tdoc-solution-wrap > input {
   display: none;
