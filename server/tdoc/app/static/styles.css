@@ -12,6 +12,10 @@ dd.enumerate-enumitem {
 }
 
 /* Code blocks */
+.verbatim {
+  overflow: auto;
+}
+
 .hljs-ln td.hljs-ln-numbers {
   padding-left: 3px;
   padding-right: 5px;
