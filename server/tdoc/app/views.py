@@ -45,7 +45,7 @@ def generate_key(prefix, /, **kwargs):
     """Generate a hash key for a set of key / value pairs."""
     m = hashlib.sha256()
     for k, v in sorted(kwargs.items()):
-        if isinstance(k, str): k = k.encode('utf-8')
+        k = k.encode('utf-8')
         hash_varint(m, len(k))
         m.update(k)
         if isinstance(v, str): v = v.encode('utf-8')
