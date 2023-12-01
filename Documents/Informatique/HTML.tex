@@ -7,7 +7,7 @@
 \lstset{language=HTML, basicstyle={\small\ttfamily}, keywordstyle=\color{blue}, identifierstyle=\color{darkgray}, stringstyle=\color{brown}, backgroundcolor=\color{mybackcolor}, numbers=left}
 
 \begin{document}
-\title{HTML et CSS}
+\title{HTML}
 \date{}
 \maketitle
 
@@ -47,7 +47,7 @@ Une page Web est typiquement composée de 3 types de fichiers:
 \end{enumerate}
 \video[100]{-7pJ45oXuvE}
 
-\section{HTML}
+\section{Définition du format HTML}
 Le format \textbf{HTML} (HyperText Markup Language) est un format qui permet de décrire le contenu et la structure d'une page Web. HTML n'est pas un langage de programmation, il ne contient ni fonction, ni boucle, ni instruction conditionnelle, mais c'est un ensemble de balises qui permettent de mettre un document en page, afin que le navigateur puisse l'afficher correctement.
 
 \subsection{Balises}
@@ -215,7 +215,7 @@ Vous voyez maintenant le code HTML et ce que la page affiche.
       <li>Anglais</li>
       <li>Maths</li>
     </ul>
-    </body>
+  </body>
 </html>
 \end{verbatim}
 2) Fichier index.html modifié
@@ -255,10 +255,82 @@ Vous voyez maintenant le code HTML et ce que la page affiche.
     <p/>
     <img src="images/STX.jpg" width="600" height="400"><br/>
     Source:
-    <a href="https://new.cscfr.ch/index.php/fr/notre-college/nos-batiments/">
-    https://new.cscfr.ch/index.php/fr/notre-college/nos-batiments/</a>
+    <a href="https://new.cscfr.ch/index.php/fr/notre-college/">
+    https://new.cscfr.ch/index.php/fr/notre-college/</a>
   </body>
 </html>
 \end{verbatim}
 
+\subsection{Hyperlien <a href="\dots">}
+La balise a permet de créer un  hyperlien, c'est-à-dire un texte sur lequel il faut cliquer pour accéder à une autre page. Il faut indiquer le lien dans l'attribut href:
+<a href="lien">Texte</a>
+\begin{verbatim}{html}
+<p>
+  Pour accéder au site du collège,
+  cliquez <a href="https://www.cscfr.ch/index.php/fr/">ici</a>
+</p>
+\end{verbatim}
+Pour ouvrir la nouvelle page dans un nouvel onglet, il faut ajouter l'attribut target avec la valeur \_blank:
+\begin{verbatim}{html}
+<a href="lien" target="_blank">Texte</a>
+\end{verbatim}
+Tuto: \href{https://developer.mozilla.org/fr/docs/Web/HTML/Element/a}{MDN - hyperliens}
+
+\subsection{Listes}
+Il existe deux types de listes:
+\subsubsection{Listes numérotées (ordered) <ol>}
+\begin{verbatim}{html}
+<ol>
+  <li>Mettre 1L d'eau dans un casserole</li>
+  <li>Porter à ébullition</li>
+  <li>...<\li>
+</ol>
+\end{verbatim}
+
+\subsubsection{Listes à puces (unordered) <ul>}
+\begin{verbatim}{html}
+<ul>
+  <li>Tomates</li>
+  <li>Courgettes</li>
+  <li>...<\li>
+</ul>
+\end{verbatim}
+Tuto: \href{https://developer.mozilla.org/fr/docs/Web/HTML/Element/li}{MDN - listes}
+
+\subsection{Image <img \dots>}
+La balise img permet d'insérer une image sur une page Web. Dans l'attribut src, il faut indiquer le lien vers l'image, soit une URL, soit le chemin local.
+\begin{verbatim}{html}
+<img src = "mon_image.png"> (dans le même répertoire)
+<img src= "images/mon_image.png"> (dans un sous-répertoire)
+\end{verbatim}
+Cette balise peut contenir aussi les attributs height ou width qui permettent de déterminer la hauteur et/ou la largeur de l'image en pixels.
+\begin{verbatim}{html}
+<img src= "images/mon_image.png" width="300" height="200">
+\end{verbatim}
+Tuto: \href{https://developer.mozilla.org/fr/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML}{MDN - images}
+
+\subsection{Saut de ligne <br/>}
+La balise br permet de faire un saut de ligne (break). Comme cette balise ne contient pas de contenu, c'est une balise unique (pas de balise ouvrante et fermante).
+
+\subsection{Tables ou tableaux}
+La balise <table> permet de représenter des tableaux de données (tableaux en deux dimensions). Les tableaux peuvent aussi être utilisés pour la mise en page, par exemple mettre du texte à côté d'une image ou mettre plusieurs images l'une à côté de l'autre.
+\begin{verbatim}{html}
+<table>
+  <tr>
+    <td>Ingrédients</td>
+    <td>Quantité</td>
+  </tr>
+  <tr>
+    <td>Pommes de terre</td>
+    <td>1 kg</td>
+  </tr>
+  <tr>
+    <td>lait</td>
+    <td>0.5l</td>
+  </tr>
+</table>
+\end{verbatim}
+Tuto: \href{https://developer.mozilla.org/fr/docs/Web/HTML/Element/table}{MDN - tables}\par
+
+Suite du cours: \href{http://127.0.0.1:8000/doc/Informatique/HTML}{CSS}
 \end{document}
