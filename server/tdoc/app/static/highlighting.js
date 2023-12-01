@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     const css = document.createElement('link');
     css.rel = 'stylesheet'
     css.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js' +
-               '/11.9.0/styles/default.min.css';
+               '/11.9.0/styles/stackoverflow-light.min.css';
     css.async = true;
     document.head.appendChild(css);
 
