@@ -11,6 +11,11 @@ dd.enumerate-enumitem {
   aspect-ratio: 16 / 9;
 }
 
+/* Change tabular default alignement */
+div.tabular > table.tabular {
+    margin-left: 0px;
+}
+
 /* Code blocks */
 .verbatim {
   overflow: auto;
