@@ -82,3 +82,9 @@ div.tabular > table.tabular {
   overflow: auto;
   max-height: 200px;
 }
+
+.tdoc-turtle {
+  display: none;
+  height: 500px;
+  border-style: solid;
+}

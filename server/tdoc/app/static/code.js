@@ -53,13 +53,21 @@ document.addEventListener('DOMContentLoaded', async (event) => {
             el.classList.add(`language-${lang}`);  // Set class for hljs
             // Add a button to execute code.
             if (lang == "python" && inter == "interactive") {
+                // Convert code in HTML to text.
+                const code_text = code.replaceAll('&nbsp;', ' ')
+                                      .replaceAll('&lt;', '<')
+                                      .replaceAll('&gt;', '>')
+                                      .replaceAll('&amp;', '&');
                 const button = document.createElement("button");
                 button.innerHTML = "Exécuter";
                 el.after(button);
                 // Add a pre to display the result.
                 const pre = document.createElement("pre");
                 pre.className = "tdoc-execution";
-                button.after(pre);
+                //button.after(pre);
+                const turtle = document.createElement("div");
+                turtle.className = "tdoc-turtle";
+                button.after(pre, turtle);
 
                 button.addEventListener('click', async (event) => {
                     // Code execution
@@ -72,19 +80,23 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                             output: (text) => { pre.innerHTML += text },
                             read: builtinRead
                         });
+
                         await Sk.misceval.asyncToPromise(() => {
-                            // Convert code in HTML to text.
-                            const c = code.replaceAll('&nbsp;', ' ')
-                                          .replaceAll('&lt;', '<')
-                                          .replaceAll('&gt;', '>')
-                                          .replaceAll('&amp;', '&');
-                            return Sk.importMainWithBody("<stdin>", false, c,
-                                                         true);
+                            if (code_text.startsWith("from turtle")) {
+                                console.log("test1");
+                                turtle.style.display = 'block';
+                                Sk.TurtleGraphics = {target: turtle};
+                                // (Sk.TurtleGraphics ||
+                                // (Sk.TurtleGraphics = {})).target = turtle;
+                            }
+                            return Sk.importMainWithBody("<stdin>", false,
+                                                         code_text, true);
                        });
                     } else {  // Clear
                         button.innerHTML = "Exécuter";
                         pre.innerHTML = "";
                         pre.style.display = 'none';
+                        turtle.style.display = 'none';
                     }
                 });
             }
