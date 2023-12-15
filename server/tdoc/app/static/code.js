@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
         const re = /^\{([a-zA-Z0-9_,-]+)\}( *\n)?/;
         const m = re.exec(text);
         if (m) {
-            const [lang, inter] = m[1].split(",");
+            const [lang, inter, turt] = m[1].split(",");
             // Display code.
             const code = text.substr(m[0].length);  // Remove the prefix
             el.innerHTML = code;
@@ -62,41 +62,47 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                 button.innerHTML = "Exécuter";
                 el.after(button);
                 // Add a pre to display the result.
-                const pre = document.createElement("pre");
-                pre.className = "tdoc-execution";
-                //button.after(pre);
-                const turtle = document.createElement("div");
-                turtle.className = "tdoc-turtle";
-                button.after(pre, turtle);
+                let pre;
+                let turtle;
 
                 button.addEventListener('click', async (event) => {
                     // Code execution
                     if (button.innerHTML == "Exécuter") {
                         button.innerHTML = "Effacer";
-                        pre.style.display = 'block';
+                        if (turt == "turtle") {
+                            turtle = document.createElement("div");
+                            turtle.className = "tdoc-turtle";
+                            button.after(turtle);
+                            Sk.TurtleGraphics = {target: turtle};
+                        }
+
                         Sk.configure({
                             inputfun: (prompt) => window.prompt(prompt),
                             inputfunTakesPrompt: true,
-                            output: (text) => { pre.innerHTML += text },
+                            output: (text) => {
+                                if (!pre && text != "") {
+                                    pre = document.createElement("pre");
+                                    pre.className = "tdoc-execution";
+                                    button.after(pre);
+                                }
+                                pre.innerHTML += text;
+                            },
                             read: builtinRead
                         });
-
                         await Sk.misceval.asyncToPromise(() => {
-                            if (code_text.startsWith("from turtle")) {
-                                console.log("test1");
-                                turtle.style.display = 'block';
-                                Sk.TurtleGraphics = {target: turtle};
-                                // (Sk.TurtleGraphics ||
-                                // (Sk.TurtleGraphics = {})).target = turtle;
-                            }
                             return Sk.importMainWithBody("<stdin>", false,
                                                          code_text, true);
                        });
                     } else {  // Clear
                         button.innerHTML = "Exécuter";
-                        pre.innerHTML = "";
-                        pre.style.display = 'none';
-                        turtle.style.display = 'none';
+                        if (pre) {
+                            pre.remove();
+                            pre = undefined;
+                        }
+                        if (turtle) {
+                            turtle.remove();
+                            turtle = undefined;
+                        }
                     }
                 });
             }

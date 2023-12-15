@@ -74,7 +74,6 @@ div.tabular > table.tabular {
 
 /* Execution section */
 .tdoc-execution {
-  display: none;
   margin-top: 5px;
   padding: 5px;
   border: 1px solid #aaa;
@@ -84,7 +83,6 @@ div.tabular > table.tabular {
 }
 
 .tdoc-turtle {
-  display: none;
   height: 500px;
   border-style: solid;
 }
