@@ -1,0 +1,41 @@
+\documentclass[a4paper,11pt]{article}
+\usepackage{commonpackages}
+
+\usepackage{xcolor}
+\definecolor{mybackcolor}{rgb}{0.98,0.98,0.98}
+
+\begin{document}
+\title{Exercices avec Python}
+\date{}
+\maketitle
+
+\section{Exercice}
+Tu as reçu une punition et tu dois écrire "J'aime l'informatique" 100 fois.
+Écrire un progamme qui permet de faire cela en une seule ligne.
+\begin{solution}
+\begin{verbatim}{python,interactive}
+print("J'aime l'informatique! \n" * 100)
+\end{verbatim}
+\end{solution}
+
+
+\section{Exercice}
+Écrire un programme qui demande son nom et son âge à l'utilisateur et qui lui répond:\\
+Bonjour \textbf{...}\\
+Dans 15 ans, vous aurez \textbf{...} ans.\\
+\begin{solution}
+\begin{verbatim}{python,interactive}
+nom = input("Quel est ton nom? ")
+print("Bonjour " + nom)
+\end{verbatim}
+\end{solution}
+
+\begin{solution}
+\begin{verbatim}{python,interactive}
+age = int(input("Quel est ton âge? "))
+print ("Dans 15 ans, tu auras %s" % age)
+\end{verbatim}
+\end{solution}
+
+
+\end{document}
