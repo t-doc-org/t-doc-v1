@@ -20,22 +20,47 @@ print("J'aime l'informatique! \n" * 100)
 
 
 \section{Exercice}
-Écrire un programme qui demande son nom et son âge à l'utilisateur et qui lui répond:\\
+Écrire un programme qui demande son prénom à l'utilisateur et qui répond:\\
 Bonjour \textbf{...}\\
-Dans 15 ans, vous aurez \textbf{...} ans.\\
 \begin{solution}
 \begin{verbatim}{python,interactive}
-nom = input("Quel est ton nom? ")
+nom = input("Quel est ton prénom? ")
 print("Bonjour " + nom)
 \end{verbatim}
 \end{solution}
 
+\section{Exercice}
+Écrire un programme qui demande un nombre à l'utilisateur et qui retourne le carré de ce nombre:\\
 \begin{solution}
 \begin{verbatim}{python,interactive}
-age = int(input("Quel est ton âge? "))
-print ("Dans 15 ans, tu auras %s" % age)
+n = int(input("Choisir un nombre: "))
+print(n**2)
 \end{verbatim}
 \end{solution}
+
+\section{Exercice}
+Écrire un programme qui son âge à l'utilisteur et retourne s'il est mineur ou majeur:\\
+\begin{solution}
+\begin{verbatim}{python,interactive}
+age = int(input("Quel est votre age? "))
+if (age < 18):
+  print("Tu es mineur.")
+else:
+  print("Tu es majeur.")
+\end{verbatim}
+\end{solution}
+
+\section{Exercice}
+Écrire un programme qui demande un nombre à l'utilisteur et écrit la table de multiplication de ce nombre:\\
+\begin{solution}
+\begin{verbatim}{python,interactive}
+n = int(input("Choisir un nombre. "))
+for i in range(1, 13):
+  print(i * n)
+\end{verbatim}
+\end{solution}
+
+
 
 
 \end{document}
