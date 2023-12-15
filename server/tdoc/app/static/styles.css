@@ -71,3 +71,14 @@ div.tabular > table.tabular {
 .tdoc-solution-wrap > input[type="checkbox"]:checked ~ .tdoc-solution {
   display: block;
 }
+
+/* Execution section */
+.tdoc-execution {
+  display: none;
+  margin-top: 5px;
+  padding: 5px;
+  border: 1px solid #aaa;
+  font-size: 15px;
+  overflow: auto;
+  max-height: 200px;
+}

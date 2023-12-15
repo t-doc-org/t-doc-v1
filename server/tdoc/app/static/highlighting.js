@@ -49,11 +49,11 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                 el.after(button);
                 // Add a pre to display the result
                 const pre = document.createElement("pre");
-                pre.innerHTML = "Le résultat de l'exécution sera affiché ici.";
+                pre.innerHTML = "";
+                pre.className = "tdoc-execution";
                 button.after(pre);
 
                 button.addEventListener('click', async (event) => {
-                    pre.innerHTML = "";
                     function outf(text) {
                         pre.innerHTML += text;
                     }
@@ -62,15 +62,31 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                                 throw "File not found: '" + x + "'";
                         return Sk.builtinFiles["files"][x];
                     }
-                    Sk.configure({output: outf, read: builtinRead});
-                    await Sk.misceval.asyncToPromise(function() {
-                        // convert code in html to text
-                        const c = code.replaceAll('&nbsp;', ' ')
-                                      .replaceAll('&lt;', '<')
-                                      .replaceAll('&gt;', '>')
-                                      .replaceAll('&amp;', '&');
-                        return Sk.importMainWithBody("<stdin>", false, c, true);
-                   });
+                    if (button.innerHTML == "Exécuter") {
+                        button.innerHTML = "Effacer";
+                        pre.style.display = 'block';
+                        Sk.configure({
+                            inputfun: function (prompt) {
+                                return window.prompt(prompt);
+                            },
+                            inputfunTakesPrompt: true,
+                            output: outf,
+                            read: builtinRead
+                        });
+                        //Sk.configure({output: outf, read: builtinRead});
+                        await Sk.misceval.asyncToPromise(function() {
+                            // convert code in html to text
+                            const c = code.replaceAll('&nbsp;', ' ')
+                                          .replaceAll('&lt;', '<')
+                                          .replaceAll('&gt;', '>')
+                                          .replaceAll('&amp;', '&');
+                            return Sk.importMainWithBody("<stdin>", false, c, true);
+                       });
+                    } else {
+                        button.innerHTML = "Exécuter";
+                        pre.innerHTML = "";
+                        pre.style.display = 'none';
+                    }
                 });
             }
         }
