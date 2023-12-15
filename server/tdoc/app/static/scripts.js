@@ -1,2 +1,2 @@
-import './highlighting.js';
+import './code.js';
 import './solutions.js';
