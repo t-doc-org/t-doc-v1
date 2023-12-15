@@ -83,6 +83,7 @@ div.tabular > table.tabular {
 }
 
 .tdoc-turtle {
-  height: 500px;
+  max-height: 500px;
   border-style: solid;
+  overflow: auto;
 }

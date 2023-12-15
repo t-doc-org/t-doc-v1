@@ -74,6 +74,8 @@ document.addEventListener('DOMContentLoaded', async (event) => {
                             turtle.className = "tdoc-turtle";
                             button.after(turtle);
                             Sk.TurtleGraphics = {target: turtle};
+                            Sk.TurtleGraphics.width = 800;
+                            Sk.TurtleGraphics.height = 500;
                         }
 
                         Sk.configure({
