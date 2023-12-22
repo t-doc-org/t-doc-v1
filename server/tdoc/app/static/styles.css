@@ -11,9 +11,24 @@ dd.enumerate-enumitem {
   aspect-ratio: 16 / 9;
 }
 
-/* Change tabular default alignement */
+/* Change default settings */
 div.tabular > table.tabular {
     margin-left: 0px;
+}
+
+div.maketitle {
+  margin-bottom: 0em;
+}
+
+h2.titleHead,
+h3.sectionHead,
+h4.subsectionHead {
+  margin-block-start: 0.8em;
+  margin-block-end: 0.2em;
+}
+
+h2.titleHead {
+  font-size: 30px;
 }
 
 /* Code blocks */
