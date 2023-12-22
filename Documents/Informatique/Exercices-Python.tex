@@ -5,21 +5,37 @@
 \definecolor{mybackcolor}{rgb}{0.98,0.98,0.98}
 
 \begin{document}
-\title{Exercices avec Python}
+\title{Exercices avec Python - Console}
 \date{}
 \maketitle
 
-\section{Exercice}
+\section{print() et input()}
+
+\subsection{Exercice}
+Écrire un programme qui affiche exactement ce texte:\\
+Salut\\
+Je suis élève au collège Sainte-Croix\\
+J'ai 16 ans\\
+J'aime bien jouer au volley\\
+\begin{solution}
+\begin{verbatim}{python,interactive}
+print("Salut")
+print("Je suis élève au collège Sainte-Croix")
+print("J'ai 16 ans")
+print("J'aime bien jouer au volley")
+\end{verbatim}
+\end{solution}
+
+\subsection{Exercice}
 Tu as reçu une punition et tu dois écrire "J'aime l'informatique" 100 fois.
-Écrire un progamme qui permet de faire cela en une seule ligne.
+Écrire un programme qui permet de faire cela en une seule ligne.
 \begin{solution}
 \begin{verbatim}{python,interactive}
 print("J'aime l'informatique! \n" * 100)
 \end{verbatim}
 \end{solution}
 
-
-\section{Exercice}
+\subsection{Exercice}
 Écrire un programme qui demande son prénom à l'utilisateur et qui répond:\\
 Bonjour \textbf{...}\\
 \begin{solution}
@@ -29,7 +45,7 @@ print("Bonjour " + nom)
 \end{verbatim}
 \end{solution}
 
-\section{Exercice}
+\subsection{Exercice}
 Écrire un programme qui demande un nombre à l'utilisateur et qui retourne le carré de ce nombre:\\
 \begin{solution}
 \begin{verbatim}{python,interactive}
@@ -38,8 +54,54 @@ print(n**2)
 \end{verbatim}
 \end{solution}
 
-\section{Exercice}
-Écrire un programme qui son âge à l'utilisteur et retourne s'il est mineur ou majeur:\\
+\section{Variables}
+
+\subsection{Exercice}
+Qu'affiche le programme suivant?
+\begin{verbatim}{python,interactive}
+a = 3
+a = a - 1
+print(a)
+\end{verbatim}
+
+\subsection{Exercice}
+Qu'affiche le programme suivant?
+\begin{verbatim}{python,interactive}
+a = 7
+b = a - 3
+print(a*b)
+\end{verbatim}
+
+\subsection{Exercice}
+Qu'affiche le programme suivant?
+\begin{verbatim}{python,interactive}
+a = 5
+a += 2
+a = a * a - 9
+print(a)
+\end{verbatim}
+
+\subsection{Exercice}
+Qu'affiche le programme suivant?
+\begin{verbatim}{python,interactive}
+a = 20
+a += 1
+print((a/3)**2)
+\end{verbatim}
+
+\subsection{Exercice}
+Qu'affiche le programme suivant?
+\begin{verbatim}{python,interactive}
+a = 22
+b = 5
+print((a//b) + (a%b))
+\end{verbatim}
+
+
+\section{Instruction conditionnelle}
+
+\subsection{Exercice}
+Écrire un programme qui demande son âge à l'utilisteur et retourne s'il est mineur ou majeur:\\
 \begin{solution}
 \begin{verbatim}{python,interactive}
 age = int(input("Quel est votre âge? "))
@@ -50,7 +112,169 @@ else:
 \end{verbatim}
 \end{solution}
 
-\section{Exercice}
+\subsection{Exercice}
+Que retourne le programme suivant?
+\begin{verbatim}{python,interactive}
+a = 2
+if a != 2:
+    print("a n'est pas égal à 2")
+elif a > 2 :
+    print("a est plus grand que 2")
+else:
+    print("aucun cas n'est vérifié")
+\end{verbatim}
+
+\subsection{Exercice}
+Dans le programme suivant, quel bloc d'instructions va s'exécuter? Préciser la valeur affichée sur la console.
+\begin{verbatim}{python,interactive}
+y = 3
+if y <= -1:
+    print(3 * y + 5)
+elif y <= 3 :
+    print(y + 4)
+else:
+    print(y**2 - 1)
+\end{verbatim}
+
+\subsection{Exercice}
+Un zoo pratique les tarifs suivants.\\
+\begin{itemize}
+    \item Les enfants jusqu'à 16 ans révolus payent 15 francs.
+    \item Les jeunes entre 16 et 20 payent 22 francs.
+    \item Les adules à partir de 21 ans payent 28 francs.
+\end{itemize}
+Écrire un programme qui demande l'âge d'une personne et affiche le prix à payer.
+\begin{solution}
+\begin{verbatim}{python,interactive}
+age = int(input("Quel est votre âge? "))
+if age < 16:
+    prix = 15
+elif age <= 20:
+    prix = 22
+else:
+    prix = 28
+print("Pour une personne de " + str(age) + " ans, le prix à payer est de " + str(prix) + " francs.")
+\end{verbatim}
+\end{solution}
+
+\subsection{Exercice}
+Une salle de trampoline pratique les tarifs suivants pour deux personnes.\\
+\begin{itemize}
+    \item Si les deux personnes sont mineures, elle payent chacune 7 francs.
+    \item Si l'une seulement est mineure, elles payent un tarif de groupe se 15 francs.
+    \item Si les deux personnes sont majeures, elles payent au total 28 francs.
+\end{itemize}
+Écrire un programme qui demande l'âge des deux personnes et affiche le prix total à payer.
+\begin{solution}
+\begin{verbatim}{python,interactive}
+age1 = int(input("Quel est l'âge de la première personne? "))
+age2 = int(input("Quel est l'âge de la deuxième personne? "))
+if (age1 < 18) and (age2 < 18):
+    prix = 2 * 7
+elif age1 < 18 or age2 < 18:
+    prix = 15
+else:
+    prix = 28
+print("Le prix total à payer est de " + str(prix) + " francs.")
+\end{verbatim}
+\end{solution}
+
+\subsection{Exercice}
+Julien souhaite s'inscrire à des séances d'équitation.\\
+Le club propose deux types de tarification:
+\begin{itemize}
+    \item Tarif A: Avec un abonnement annuel de 185 francs, la séance coûte 11 francs.
+    \item Tarif B: Sans abonnement, la séance coûte 17 francs.
+\end{itemize}
+Écrire un programme qui demande à Julien le nombre de séances qu'il voudrait suivre pendant l'année et afficher le tarif le plus avantageux dans ce cas.
+\begin{solution}
+\begin{verbatim}{python,interactive}
+n = int(input("Nombre de séances: "))
+prixA = 11 *n + 185
+prixB = 17 * n
+if prixA < prixB:
+    print("Le tarif A est le plus avantageux.")
+elif prixB < prixA:
+    print("Le tarif B est le plus avantageux.")
+else:
+    print("Les deux tarifs sont équivalents.")
+\end{verbatim}
+\end{solution}
+
+\subsection{Exercice}
+Écrire un programme qui demande 3 nombres à l'utilisateur et lui retourne le maximum (le plus grand).
+\begin{solution}
+\begin{verbatim}{python,interactive}
+n1 = int(input("Choisir un premier nombre: "))
+n2 = int(input("Choisir un deuxième nombre: "))
+n3 = int(input("Choisir un troisième nombre: "))
+max = n1
+if n2 > max:
+    max = n2
+if n3 > max:
+    max = n3
+print("Le plus grand nombre est " + str(max))
+\end{verbatim}
+\end{solution}
+
+\subsection{Exercice}
+Écrire un programme qui demande un nombre à l'utilisateur et vérifie s'il est pair ou impair.
+\begin{solution}
+\begin{verbatim}{python,interactive}
+n = int(input("Choisir un nombre: "))
+if n % 2 == 0:
+    print(str(n) + " est pair.")
+else:
+    print(str(n) + " est impair.")
+\end{verbatim}
+\end{solution}
+
+\subsection{Exercice}
+Écrire un programme qui demande un nombre à l'utilisateur et vérifie s'il est divisible par 3 et 13.
+\begin{solution}
+\begin{verbatim}{python,interactive}
+n = int(input("Choisir un nombre: "))
+if n % 3 == 0 and n % 13 == 0:
+    print(str(n) + " est divisible par 3 et 13.")
+elif n % 3 == 0:
+    print(str(n) + " est divisible par 3.")
+elif n % 13 == 0:
+    print(str(n) + " est divisible par 13.")
+else:
+    print(str(n) + " n'est divisible ni par 3 et ni par 13.")
+\end{verbatim}
+\end{solution}
+
+\section{Boucles}
+
+\subsection{Exercice}
+Tu as à nouveau reçu une punition et tu dois écrire "J'aime l'informatique" 100 fois.
+\begin{enumerate}
+\item Écrire un programme qui permet de faire cela en utilisant une boucle.
+\begin{solution}
+\begin{verbatim}{python,interactive}
+for i in range(100):
+    print("J'aime l'informatique")
+\end{verbatim}
+\end{solution}
+\item Tu dois en plus numéroter les lignes
+\begin{solution}
+\begin{verbatim}{python,interactive}
+for i in range(100):
+    print(str(i + 1) + ". J'aime l'informatique")
+\end{verbatim}
+\end{solution}
+\item À la fin, tu dois encore afficher: Ouf, j'ai enfin terminé!
+\begin{solution}
+\begin{verbatim}{python,interactive}
+for i in range(100):
+    print(str(i + 1) + ". J'aime l'informatique")
+print("Ouf, j'ai enfin terminé!")
+\end{verbatim}
+\end{solution}
+\end{enumerate}
+
+\subsection{Exercice}
 Écrire un programme qui demande un nombre à l'utilisteur et écrit la table de multiplication de ce nombre:\\
 \begin{solution}
 \begin{verbatim}{python,interactive}
@@ -60,105 +284,10 @@ for i in range(1, 13):
 \end{verbatim}
 \end{solution}
 
-\section{Exercice}
-Test avec turtle:\\
-\begin{solution}
-\begin{verbatim}{python,interactive,turtle}
-from turtle import *
-
-for i in range(4):
-    forward(20)
-    penup()
-    forward(20)
-    pendown()
-\end{verbatim}
-\end{solution}
-
-\begin{solution}
-\begin{verbatim}{python,interactive,turtle}
-from turtle import *
-
-def carre100():
-    forward(100)
-    left(90)
-    forward(100)
-    left(90)
-    forward(100)
-    left(90)
-    forward(100)
-    left(90)
-
-pensize(4)
-carre100()
-pencolor("red")
-penup()
-goto(0,200)
-pendown()
-carre100()
-pencolor("green")
-penup()
-goto(-200,200)
-pendown()
-carre100()
-pencolor("blue")
-penup()
-goto(-200,0)
-pendown()
-carre100()
-\end{verbatim}
-\end{solution}
-
-\begin{solution}
-\begin{verbatim}{python,interactive,turtle}
-from turtle import *
-from random import randint
-
-nb_cote_max = int(input("Combien de côtés voulez-vous au maximum? "))
-colormode(255)
-pensize(3)
-for i in range(3, nb_cote_max):
-    for j in range(i):
-        forward(100)
-        left(360/i)
-    pencolor(randint(0,255), randint(0, 255), randint(0,255))
-\end{verbatim}
-\end{solution}
-
-\begin{solution}
-\begin{verbatim}{python,interactive,turtle}
-from turtle import *
-
-nb_cote = int(input("Combien de côtés doit avoir le polygone? " ))
-
-def polygone():
-    for i in range(nb_cote):
-        forward(100)
-        left(360/nb_cote)
-
-while nb_cote < 3:
-    nb_cote = int(input("Cette valeur n'est pas valide. Combien de côtés doit avoir le polygone (une valeure supérieure ou égale à 3)? " ))
-
-pensize(3)
-polygone()
-\end{verbatim}
-\end{solution}
-
-\begin{solution}
-\begin{verbatim}{python,interactive,turtle}
-from turtle import *
-
-i = 1
-speed(0)
-while i <= 400:
-    forward(i)
-    left(90)
-    i += 4
-    print(i)
-\end{verbatim}
-\end{solution}
-
-
-
-
+\vfill
+\renewcommand{\refname}{Références}
+\begin{thebibliography}{9}
+\bibitem{py} O.DEFOREST, François: \emph{Python pour le lycée}
+\end{thebibliography}
 
 \end{document}
