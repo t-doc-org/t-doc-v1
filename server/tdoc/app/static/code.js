@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     document.querySelectorAll('pre.verbatim').forEach((el) => {
         // Extract an optional language identifier prefix of the form
         // "{python}" or "{python,interactive}.
-        const text = el.innerHTML;
+        const text = el.innerHTML.replaceAll(' ', '');
         const re = /^\{([a-zA-Z0-9_,-]+)\}( *\n)?/;
         const m = re.exec(text);
         if (m) {
