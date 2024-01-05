@@ -10,16 +10,26 @@
 \section{Python}
 Ici j'ajoute du code python directement dans le document:\par
 
-\begin{code}{python,interactive}
+\begin{code}{python}
 print("Hello World!"*10)
 \end{code}
 
 
-\begin{code}{python,interactive}
+\begin{code}[interactive]{python}
 from math import *
 for i in range(4):
     for j in range(5):
         print(i, sqrt(j))
+\end{code}
+
+\begin{code}[interactive_turtle]{python}
+from turtle import *
+
+for i in range(4):
+    forward(20)
+    penup()
+    forward(20)
+    pendown()
 \end{code}
 
 
@@ -27,23 +37,73 @@ for i in range(4):
 Tu as à nouveau reçu une punition et tu dois écrire "J'aime l'informatique" 100 fois.
 \begin{enumerate}
 \item Écrire un programme qui permet de faire cela en utilisant une boucle.
-\begin{code}{python,interactive}
+\begin{solution}
+\begin{code}[interactive]{python}
 for i in range(100):
     print("J'aime l'informatique")
 \end{code}
+\end{solution}
+\item Tu dois en plus numéroter les lignes
+\begin{solution}
+\begin{code}[interactive]{python}
+for i in range(100):
+    print(str(i + 1) + ". J'aime l'informatique")
+\end{code}
+\end{solution}
+\item À la fin, tu dois encore afficher: Ouf, j'ai enfin terminé!
+\begin{solution}
+\begin{code}[interactive]{python}
+for i in range(100):
+    print(str(i + 1) + ". J'aime l'informatique")
+print("Ouf, j'ai enfin terminé!")
+\end{code}
+\end{solution}
 \end{enumerate}
 
-% \begin{verbatim}{python,interactive}
-% print("Hello World!"*10)
-% \end{verbatim}
 
-% \begin{verbatim}{python}
-% import turtle
+\begin{code}{javascript}
+import hljs from 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/es/highlight.min.js';
 
-% t = turtle.Turtle()
-% t.forward(100)
+document.addEventListener('DOMContentLoaded', async (event) => {
+    // Add the highlight.js stylesheet.
+    const css = document.createElement('link');
+    css.rel = 'stylesheet'
+    css.href = 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js' +
+               '/11.9.0/styles/stackoverflow-light.min.css';
+    css.async = true;
+    document.head.appendChild(css);
 
-% print "Hello World"
-% \end{verbatim}
+    // Add hljs as a global variable, because highlightjs-line-numbers.js
+    // patches it on import, and expects it to be there. We need to use a
+    // dynamic import to ensure it happens after setting the global.
+    window.hljs = hljs;
+    await import('https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js' +
+                 '@2.8.0/dist/highlightjs-line-numbers.min.js');
+
+    // Highlight all verbatim sections.
+    document.querySelectorAll('pre.verbatim').forEach((el) => {
+        // Extract an optional language identifier prefix of the form
+        // "{python}".
+        const text = el.innerHTML;
+        const re = /^\{([a-zA-Z0-9_-]+)\}( *\n)?/;
+        const m = re.exec(text);
+        if (m) {  // Found, remove the prefix and add the relevant CSS class
+            const lang = m[1];
+            el.innerHTML = text.substr(m[0].length);
+            el.classList.add(`language-${lang}`);
+        }
+        hljs.highlightElement(el);
+        hljs.lineNumbersBlock(el);
+    });
+});
+\end{code}
+
+\begin{code}{html}
+<ul>
+  <li>Tomates</li>
+  <li>Courgettes</li>
+  <li>...</li>
+</ul>
+\end{code}
 
 \end{document}
