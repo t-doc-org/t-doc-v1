@@ -1,11 +1,6 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage{commonpackages}
 
-\usepackage{xcolor}
-\definecolor{mybackcolor}{rgb}{0.98,0.98,0.98}
-
-\lstset{language=HTML, basicstyle={\small\ttfamily}, keywordstyle=\color{blue}, identifierstyle=\color{darkgray}, stringstyle=\color{brown}, backgroundcolor=\color{mybackcolor}, numbers=left}
-
 \begin{document}
 \title{CSS}
 \date{}
@@ -25,12 +20,12 @@ sélecteur \{ & La règle commence par un sélecteur\\
 
 \begin{tabular}{ll}
 \begin{minipage}{1\textwidth}
-\begin{verbatim}{css}
+\begin{code}{css}
 h1 {
   color: green;
   text-align: center;
 }
-\end{verbatim}
+\end{code}
 \end{minipage}&
 \begin{minipage}{1\textwidth}
 Défini le style du titre principal\\
@@ -41,12 +36,12 @@ L'alignement du texte est centré\\
 
 \begin{tabular}{cc}
 \begin{minipage}{1\textwidth}
-\begin{verbatim}{css}
+\begin{code}{css}
 p {
   font-family: verdana;
   font-size: 20px;
 }
-\end{verbatim}
+\end{code}
 \end{minipage}&
 \begin{minipage}{1\textwidth}
 Défini le style des paragraphes\\
@@ -59,9 +54,9 @@ La taille de la police est 20 pixels\\
 \subsection{Référencement - Balise <link \dots>}
 Comme le ficher HTML (.html) et le fichier CSS (.css) sont deux fichiers distincts, il faut ajouter au document HTML une référence au fichier CSS. Cela se fait dans le <head> du document HTML avec la balise <link>.
 La balise <link> a deux attributs: rel (précise à quoi sert le fichier référencé) et href (chemin d'accès au document):
-\begin{verbatim}{html}
+\begin{code}{html}
 <link href="style.css" rel="stylesheet" type="text/css" />
-\end{verbatim}
+\end{code}
 
 \subsection{Sélecteurs}
 Dans ce cours, nous allons travailler sur 3 types de sélecteurs:
@@ -74,12 +69,12 @@ Dans ce cours, nous allons travailler sur 3 types de sélecteurs:
 \subsubsection{Sélecteur de type}
 Le sélecteur de type permet d'appliquer un style à toutes les balises de même type (h1, h2, p, \dots).
 Il est de la forme: \par
-\begin{verbatim}{css}
+\begin{code}{css}
 h1 {
   color: green;
   text-align: center;
 }
-\end{verbatim}\par
+\end{code}\par
 Ce style s'appliquera au contenu de toutes les balises <h1>…</h1>
 
 \subsubsection{Sélecteur d'identifiant}
@@ -90,19 +85,19 @@ Le sélecteur d'identifiant permet d'appliquer un style à un élément précis.
 \centering Fichier HTML & Fichier CSS\tabularnewline
 \hline
 \begin{minipage}{1\textwidth}
-\begin{verbatim}{html}
+\begin{code}{html}
 <p id = "intro">
   Dans ce paragraphe ...
 </p>
-\end{verbatim}
+\end{code}
 \end{minipage}&
 \begin{minipage}{1\textwidth}
-\begin{verbatim}{css}
+\begin{code}{css}
 #intro{
   text-align: justify;
   color: green;
 }
-\end{verbatim}
+\end{code}
 \end{minipage}\tabularnewline
 \hline
 \end{tabular}\par
@@ -116,18 +111,18 @@ Le sélecteur de classe permet d'appliquer un style à plusieurs éléments qui 
 \centering Fichier HTML & Fichier CSS\tabularnewline
 \hline
 \begin{minipage}{1\textwidth}
-\begin{verbatim}{html}
+\begin{code}{html}
 <p class = "centre">
   Dans ce paragraphe ...
 </p>
-\end{verbatim}
+\end{code}
 \end{minipage}&
 \begin{minipage}{1\textwidth}
-\begin{verbatim}{css}
+\begin{code}{css}
 .centre{
   text-align: center;
 }
-\end{verbatim}
+\end{code}
 \end{minipage}\tabularnewline
 \hline
 \end{tabular}\par
@@ -150,15 +145,15 @@ Il est défini en HTML par la balise <div> \dots </div>. Dans le fichier CSS, il
 \centering Fichier HTML & Fichier CSS\tabularnewline
 \hline
 \begin{minipage}{1\textwidth}
-\begin{verbatim}{html}
+\begin{code}{html}
 <div id="mon_conteneur">
   <h2>Mon sous-titre<h2/>
   <p> Lorem ipsum dolo sit amet.</p>
 </div>
-\end{verbatim}
+\end{code}
 \end{minipage}&
 \begin{minipage}{1\textwidth}
-\begin{verbatim}{css}
+\begin{code}{css}
 #mon_conteneur{
   background-color: red;
   width: 100%;
@@ -166,7 +161,7 @@ Il est défini en HTML par la balise <div> \dots </div>. Dans le fichier CSS, il
   border: 2px solid;
   padding: 1em;
 }
-\end{verbatim}
+\end{code}
 \end{minipage}\tabularnewline
 \hline
 \end{tabular}\par

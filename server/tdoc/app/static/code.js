@@ -38,11 +38,11 @@ document.addEventListener('DOMContentLoaded', async (event) => {
     });
 
     // Manage code (display or add possibility to execute) and highlight all
-    // verbatim sections.
-    document.querySelectorAll('pre.verbatim').forEach((el) => {
+    // code sections.
+    document.querySelectorAll('div.tdoc-code > span').forEach((el) => {
         // Extract an optional language identifier prefix of the form
         // "{python}" or "{python,interactive}.
-        const text = el.innerHTML.replaceAll(' ', '');
+        const text = el.innerHTML.replaceAll(' ', ''); // à corriger
         const re = /^\{([a-zA-Z0-9_,-]+)\}( *\n)?/;
         const m = re.exec(text);
         if (m) {

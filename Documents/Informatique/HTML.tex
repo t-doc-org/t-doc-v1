@@ -1,11 +1,6 @@
 \documentclass[a4paper,11pt]{article}
 \usepackage{commonpackages}
 
-\usepackage{xcolor}
-\definecolor{mybackcolor}{rgb}{0.98,0.98,0.98}
-
-\lstset{language=HTML, basicstyle={\small\ttfamily}, keywordstyle=\color{blue}, identifierstyle=\color{darkgray}, stringstyle=\color{brown}, backgroundcolor=\color{mybackcolor}, numbers=left}
-
 \begin{document}
 \title{HTML}
 \date{}
@@ -52,9 +47,9 @@ Le format \textbf{HTML} (HyperText Markup Language) est un format qui permet de 
 
 \subsection{Balises}
 Les balises ont la forme suivante:
-\begin{verbatim}{html}
+\begin{code}{html}
 <h1>Bienvenue sur notre site Web</h1>
-\end{verbatim}
+\end{code}
 <h1> est une balise ouvrante et </h2> est une balise fermante. À chaque balise ouvrante correspond une balise fermante à l'exception des balises qui n'ont pas de contenu.
 
 \subsection{Balise <!DOCTYPE html>}
@@ -72,7 +67,7 @@ Ces informations ne seront pas affichées à l'écran à l'exception du titre af
 contient le contenu (corps) de la page. Tout ce qui sera dans cette partie sera affiché.
 \end{itemize}
 \begin{multicols}{2}
-\begin{verbatim}{html}
+\begin{code}{html}
 <!DOCTYPE html>
 <html>
   <head>
@@ -82,7 +77,7 @@ contient le contenu (corps) de la page. Tout ce qui sera dans cette partie sera 
    ...
   </body>
 </html>
-\end{verbatim}
+\end{code}
 \includegraphics[width=0.6\textwidth]{images/balise-html.png} \\
 \end{multicols}
 
@@ -98,7 +93,7 @@ Dans la balise body, nous allons structurer le contenu de la page. Nous allons v
 \item  <p> \dots </p>  permet de définir un paragraphe
 \end{itemize}
 \begin{multicols}{2}
-\begin{verbatim}{html}
+\begin{code}{html}
 <!DOCTYPE html>
 <html>
   <head> ... </head>
@@ -107,7 +102,7 @@ Dans la balise body, nous allons structurer le contenu de la page. Nous allons v
     <p>Le paragraphe</p>
   </body>
 </html>
-\end{verbatim}
+\end{code}
 \includegraphics[width=0.5\textwidth]{images/balise-body.png} \\
 \end{multicols}
 
@@ -116,16 +111,16 @@ La balise head contient différentes informations sur le document, notamment le 
 
 \subsubsection{Balise <title> \dots <title>}
 La balise title permet de définir le titre de la page qui s'affichera sur l'onglet du navigateur web.
-\begin{verbatim}{html}
+\begin{code}{html}
 <title>Ma page</title>
-\end{verbatim}
+\end{code}
 \includegraphics[width=1.0\textwidth]{images/barre-titre.png}
 
 \subsubsection{Balise <meta>}
 La balise meta permet d'indiquer le type d'encodage (ASCII, Unicode, UTF-8). Nous souhaitons que les accents s'écrire correctement sur notre page, nous allons donc utiliser de l'utf-8 que nous allons indiquer dans l'attribut charset:
-\begin{verbatim}{html}
+\begin{code}{html}
 <meta charset="utf-8">
-\end{verbatim}
+\end{code}
 Comme cette balise ne contient pas de contenu, c'est une balise unique (pas de balise ouvrante et fermante).
 
 \section{Exercices}
@@ -179,11 +174,9 @@ Vous voyez maintenant le code HTML et ce que la page affiche.
 
 \section{Solution}
 
-\lstset{identifierstyle=\color{black}, commentstyle=\color{gray}}
-
 \subsection{Exercice 3}
 1) Fichier index.htlm
-\begin{verbatim}{html}
+\begin{code}{html}
 <!DOCTYPE html> <!-- indique le genre de document au browser -->
 <html>
   <head> <!-- métadonnées de la page et le titre de l'onglet -->
@@ -217,9 +210,9 @@ Vous voyez maintenant le code HTML et ce que la page affiche.
     </ul>
   </body>
 </html>
-\end{verbatim}
+\end{code}
 2) Fichier index.html modifié
-\begin{verbatim}{html}
+\begin{code}{html}
 <!DOCTYPE html>
 <html>
   <head>
@@ -259,54 +252,54 @@ Vous voyez maintenant le code HTML et ce que la page affiche.
     https://new.cscfr.ch/index.php/fr/notre-college/</a>
   </body>
 </html>
-\end{verbatim}
+\end{code}
 
 \subsection{Hyperlien <a href="\dots">}
 La balise a permet de créer un  hyperlien, c'est-à-dire un texte sur lequel il faut cliquer pour accéder à une autre page. Il faut indiquer le lien dans l'attribut href:
 <a href="lien">Texte</a>
-\begin{verbatim}{html}
+\begin{code}{html}
 <p>
   Pour accéder au site du collège,
   cliquez <a href="https://www.cscfr.ch/index.php/fr/">ici</a>
 </p>
-\end{verbatim}
+\end{code}
 Pour ouvrir la nouvelle page dans un nouvel onglet, il faut ajouter l'attribut target avec la valeur \_blank:
-\begin{verbatim}{html}
+\begin{code}{html}
 <a href="lien" target="_blank">Texte</a>
-\end{verbatim}
+\end{code}
 Tuto: \href{https://developer.mozilla.org/fr/docs/Web/HTML/Element/a}{MDN - hyperliens}
 
 \subsection{Listes}
 Il existe deux types de listes:
 \subsubsection{Listes numérotées (ordered) <ol>}
-\begin{verbatim}{html}
+\begin{code}{html}
 <ol>
   <li>Mettre 1L d'eau dans un casserole</li>
   <li>Porter à ébullition</li>
   <li>...<\li>
 </ol>
-\end{verbatim}
+\end{code}
 
 \subsubsection{Listes à puces (unordered) <ul>}
-\begin{verbatim}{html}
+\begin{code}{html}
 <ul>
   <li>Tomates</li>
   <li>Courgettes</li>
   <li>...<\li>
 </ul>
-\end{verbatim}
+\end{code}
 Tuto: \href{https://developer.mozilla.org/fr/docs/Web/HTML/Element/li}{MDN - listes}
 
 \subsection{Image <img \dots>}
 La balise img permet d'insérer une image sur une page Web. Dans l'attribut src, il faut indiquer le lien vers l'image, soit une URL, soit le chemin local.
-\begin{verbatim}{html}
+\begin{code}{html}
 <img src = "mon_image.png"> (dans le même répertoire)
 <img src= "images/mon_image.png"> (dans un sous-répertoire)
-\end{verbatim}
+\end{code}
 Cette balise peut contenir aussi les attributs height ou width qui permettent de déterminer la hauteur et/ou la largeur de l'image en pixels.
-\begin{verbatim}{html}
+\begin{code}{html}
 <img src= "images/mon_image.png" width="300" height="200">
-\end{verbatim}
+\end{code}
 Tuto: \href{https://developer.mozilla.org/fr/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML}{MDN - images}
 
 \subsection{Saut de ligne <br/>}
@@ -314,7 +307,7 @@ La balise br permet de faire un saut de ligne (break). Comme cette balise ne con
 
 \subsection{Tables ou tableaux}
 La balise <table> permet de représenter des tableaux de données (tableaux en deux dimensions). Les tableaux peuvent aussi être utilisés pour la mise en page, par exemple mettre du texte à côté d'une image ou mettre plusieurs images l'une à côté de l'autre.
-\begin{verbatim}{html}
+\begin{code}{html}
 <table>
   <tr>
     <td>Ingrédients</td>
@@ -329,7 +322,7 @@ La balise <table> permet de représenter des tableaux de données (tableaux en d
     <td>0.5l</td>
   </tr>
 </table>
-\end{verbatim}
+\end{code}
 Tuto: \href{https://developer.mozilla.org/fr/docs/Web/HTML/Element/table}{MDN - tables}\par
 
 Suite du cours: \href{http://127.0.0.1:8000/doc/Informatique/CSS}{CSS}

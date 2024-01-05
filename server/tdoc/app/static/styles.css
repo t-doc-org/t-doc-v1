@@ -32,10 +32,15 @@ h2.titleHead {
 }
 
 /* Code blocks */
-.verbatim {
-  overflow: auto;
+.tdoc-code {
+  margin-top: 1em;
 }
-
+.tdoc-code > span {
+  display:  block;
+  white-space: pre;
+  overflow: auto;
+  margin-bottom: 1em;
+}
 .hljs-ln td.hljs-ln-numbers {
   padding-left: 3px;
   padding-right: 5px;

@@ -9,24 +9,41 @@
 
 \section{Python}
 Ici j'ajoute du code python directement dans le document:\par
-\begin{verbatim}{python,interactive}
+
+\begin{code}{python,interactive}
+print("Hello World!"*10)
+\end{code}
+
+
+\begin{code}{python,interactive}
 from math import *
 for i in range(4):
     for j in range(5):
         print(i, sqrt(j))
-\end{verbatim}
+\end{code}
 
-\begin{verbatim}{python,interactive}
-print("Hello World!"*10)
-\end{verbatim}
 
-\begin{verbatim}{python}
-import turtle
+\subsection{Exercice}
+Tu as à nouveau reçu une punition et tu dois écrire "J'aime l'informatique" 100 fois.
+\begin{enumerate}
+\item Écrire un programme qui permet de faire cela en utilisant une boucle.
+\begin{code}{python,interactive}
+for i in range(100):
+    print("J'aime l'informatique")
+\end{code}
+\end{enumerate}
 
-t = turtle.Turtle()
-t.forward(100)
+% \begin{verbatim}{python,interactive}
+% print("Hello World!"*10)
+% \end{verbatim}
 
-print "Hello World"
-\end{verbatim}
+% \begin{verbatim}{python}
+% import turtle
+
+% t = turtle.Turtle()
+% t.forward(100)
+
+% print "Hello World"
+% \end{verbatim}
 
 \end{document}
