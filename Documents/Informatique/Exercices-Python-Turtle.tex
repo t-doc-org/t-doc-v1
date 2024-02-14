@@ -7,8 +7,11 @@
 \date{}
 \maketitle
 
+\section{Introduction}
+Le module turtle permet de faire des dessins. Nous allons l'utiliser pour comprendre et apprendre à utiliser différents concepts de programmation. Comme le résultat est visuel, c'est facile de savoir si ce que nous avons programmé fait ce qu'il faut.
+
 \section{Exercice}
-Test avec turtle:\\
+Dessiner une ligne traitillée en utilisant les fonctions penup() et pendown(). Ne pas oublier de les importer du module turtle.
 \begin{solution}
 \begin{code}[interactive_turtle]{python}
 from turtle import *
@@ -20,6 +23,37 @@ for i in range(4):
     pendown()
 \end{code}
 \end{solution}
+
+\section{Exercice}
+Dessiner un carré de 100 pixels en utilisant forward() et left() du module turtle.
+\begin{solution}
+\begin{code}[interactive_turtle]{python}
+from turtle import *
+
+forward(100)
+left(90)
+forward(100)
+left(90)
+forward(100)
+left(90)
+forward(100)
+left(90)
+\end{code}
+\end{solution}
+
+\section{Exercice}
+Dessiner 2 carrés, de couleurs différentes et à des positions différentes, comme sur l'image ci-dessous.
+\begin{multicols}{2}
+\begin{enumerate}
+\item Définir une fonction carre100() qui dessine un carré de 100 pixels de côté.
+\item Utiliser la fonction goto(x,y) pour vous déplacer.
+\item Utiliser 4 pixels pour l'épaisseur du trait.
+\item Les couleurs du stylo sont noir (par défaut) et "blue".
+\end{enumerate}
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/TurtleCarres.png}\\
+\end{center}
+\end{multicols}
 
 \begin{solution}
 \begin{code}[interactive_turtle]{python}
@@ -37,16 +71,6 @@ def carre100():
 
 pensize(4)
 carre100()
-pencolor("red")
-penup()
-goto(0,200)
-pendown()
-carre100()
-pencolor("green")
-penup()
-goto(-200,200)
-pendown()
-carre100()
 pencolor("blue")
 penup()
 goto(-200,0)
@@ -55,57 +79,31 @@ carre100()
 \end{code}
 \end{solution}
 
-\begin{solution}
-\begin{code}[interactive_turtle]{python}
-from turtle import *
-from random import randint
-
-nb_cote_max = int(input("Combien de côtés voulez-vous au maximum? "))
-colormode(255)
-pensize(3)
-for i in range(3, nb_cote_max):
-    for j in range(i):
-        forward(100)
-        left(360/i)
-    pencolor(randint(0,255), randint(0, 255), randint(0,255))
-\end{code}
-\end{solution}
+\section{Exercice}
+\begin{multicols}{2}
+Dessiner la forme ci-contre en utilisant une fonction tiangle100() qui dessine un triangle équilatéral de 100 pixels de côté.
+\begin{center}
+\includegraphics[width=0.8\textwidth]{images/Hexagone.png}\\
+\end{center}
+\end{multicols}
 
 \begin{solution}
 \begin{code}[interactive_turtle]{python}
 from turtle import *
 
-nb_cote = int(input("Combien de côtés doit avoir le polygone? " ))
+def triangle100():
+    forward(100)
+    left(120)
+    forward(100)
+    left(120)
+    forward(100)
+    left(120)
 
-def polygone():
-    for i in range(nb_cote):
-        forward(100)
-        left(360/nb_cote)
-
-while nb_cote < 3:
-    nb_cote = int(input("Cette valeur n'est pas valide. Combien de côtés doit avoir le polygone (une valeure supérieure ou égale à 3)? " ))
-
-pensize(3)
-polygone()
+pensize(2)
+for i in range(6):
+    triangle100()
+    left(60)
 \end{code}
 \end{solution}
-
-\begin{solution}
-\begin{code}[interactive_turtle]{python}
-from turtle import *
-
-i = 1
-speed(0)
-while i <= 400:
-    forward(i)
-    left(90)
-    i += 4
-    print(i)
-\end{code}
-\end{solution}
-
-
-
-
 
 \end{document}
