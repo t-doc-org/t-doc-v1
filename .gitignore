@@ -1,0 +1,10 @@
+*.orig
+*.sqlite3
+*.sublime-project
+*.sublime-workspace
+__pycache__
+
+/*.egg-info/
+/build/
+/dist/
+/tmp/
