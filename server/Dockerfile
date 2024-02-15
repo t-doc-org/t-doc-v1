@@ -1,12 +1,8 @@
-FROM ubuntu:latest
+# TODO: Utiliser :latest lorsque le bug suivant sera corrigé:
+#       https://gitlab.alpinelinux.org/alpine/aports/-/issues/15742
+FROM alpine:3.18
 
-ARG DEBIAN_FRONTEND=noninteractive
-
-RUN apt-get update && apt-get install -y \
-    python3 \
-    git-all \
-    texlive-full \
-    python3-django
+RUN apk add --no-cache python3 py3-django texlive-full
 
 EXPOSE 8000
 
