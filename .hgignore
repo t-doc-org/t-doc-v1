@@ -10,3 +10,4 @@ syntax: regexp
 ^(.*/)?build/
 ^(.*/)?dist/
 ^(.*/)?tmp/
+^server/cache/

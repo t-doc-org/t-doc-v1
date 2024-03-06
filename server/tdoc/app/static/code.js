@@ -1,4 +1,6 @@
 import hljs from 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/es/highlight.min.js';
+import latex from 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/es/languages/latex.min.js';
+hljs.registerLanguage('latex', latex);
 
 function builtinRead(x) {
     if (Sk.builtinFiles === undefined ||
