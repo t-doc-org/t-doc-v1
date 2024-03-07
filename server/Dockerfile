@@ -21,6 +21,7 @@
 
 # L'image texlive/texlive a une version récente de texlive.
 FROM texlive/texlive:latest
+WORKDIR /
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get install -y python3 python3-django \
@@ -29,6 +30,9 @@ RUN apt-get update \
 # Préparation du mountpoint pour les fichiers externes.
 RUN mkdir /repo
 VOLUME /repo
+
+# Préparation du cache.
+RUN mkdir /var/cache/t-doc
 
 # Définition du port du serveur web.
 EXPOSE 8000
