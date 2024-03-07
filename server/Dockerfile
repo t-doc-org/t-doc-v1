@@ -32,7 +32,7 @@ RUN mkdir /repo
 VOLUME /repo
 
 # Préparation du cache.
-RUN mkdir /var/cache/t-doc
+RUN mkdir -m 1777 /var/cache/t-doc
 
 # Définition du port du serveur web.
 EXPOSE 8000
