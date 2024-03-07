@@ -4,7 +4,9 @@
 *.sublime-workspace
 __pycache__
 
-/*.egg-info/
-/build/
-/dist/
-/tmp/
+*.egg-info/
+build/
+dist/
+tmp/
+server/cache/
+server/prod/
