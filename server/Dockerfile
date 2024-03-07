@@ -1,9 +1,11 @@
 # Création d'une image:
-# $ docker build -t t-doc .
+# $ docker build -t t-doc --network=host .
 #
-# Démarrage d'un conteneur:
-# $ docker run --it --mount type=bind,source=${REPO},target=/repo,readonly \
-#       --publish 8000:8000 t-doc
+# Création d'un conteneur:
+# $ docker create --name=t-doc --cap-drop=ALL --network=host \
+#       --user="$(id -u ${USER}):$(id -g ${USER})" \
+#       --mount type=bind,source="$(realpath ..)",target=/repo,readonly \
+#       t-doc
 
 # Alpine Linux a une version récente de texlive, mais le binaire tex4ht manque.
 # De plus, dans la version 3.19, luatex est compilé pour la mauvaise version de
