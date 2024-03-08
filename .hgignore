@@ -6,8 +6,9 @@ syntax: glob
 __pycache__
 
 syntax: regexp
-^[^/]+\.egg-info/
 ^(.*/)?build/
 ^(.*/)?dist/
 ^(.*/)?tmp/
+^server/[^/]+\.egg-info/
 ^server/cache/
+^server/prod/
