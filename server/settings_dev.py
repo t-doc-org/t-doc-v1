@@ -7,7 +7,7 @@ _cache_marker = Path(CACHES['default']['LOCATION']) / 't-doc.marker-658629873'
 try:
     _cache_marker.unlink(missing_ok=True)
     _cache_marker.touch()
-except PermissionError:
+except Exception:
     CACHES['default']['LOCATION'] = BASE_DIR / 'cache'
 
 RENDER_MODE = "draft"
