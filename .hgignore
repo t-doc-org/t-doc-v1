@@ -9,6 +9,7 @@ syntax: regexp
 ^(.*/)?build/
 ^(.*/)?dist/
 ^(.*/)?tmp/
+^Rapport/[^/]+\.(aux|log|out|toc)
 ^server/[^/]+\.egg-info/
 ^server/cache/
 ^server/prod/

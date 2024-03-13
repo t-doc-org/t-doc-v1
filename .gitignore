@@ -8,5 +8,9 @@ __pycache__
 build/
 dist/
 tmp/
+Rapport/*.aux
+Rapport/*.log
+Rapport/*.out
+Rapport/*.toc
 server/cache/
 server/prod/
