@@ -239,9 +239,8 @@ Comme j'enseigne le Python à mes élèves, je souhaitais l'utiliser pour ce pro
 \item Il fournit une fonctionnalité de cache flexible.
 \end{itemize}
 
-
-\subsection{Côté client versus côté serveur}
-Lors du développement d'une application Web, la question du rendu côté client ou côté serveur se pose. Chacun ayant ses avantages et inconvénients. L'avantage majeur du rendu côté client est la sécurité. En effet, comme l'exécution de code se fait directement dans le navigateur et reste dans le navigateur, les risques sont moindres, d'autant plus que les navigateurs sont développés pour assurer un maximum de sécurité. L'avantage du rendu côté serveur est la facilité, car le rendu se fait en une fois. Mais cela engendre plus de travail pour le déploiement, car il faut installer et maintenir un serveur. Cette question se posera fréquemment lorsqu'il faudra prendre des décisions, car il est généralement possible de développer l'une ou l'autre option, avec des niveaux de complexité variables en fonction des outils sélectionnés.
+\subsection{Traitement côté client ou côté serveur}
+Dans une application Web, le traitement peut généralement être librement placé du côté du client ou du côté du serveur, voire même être réparti entre les deux. Le client possède un avantage majeur de sécurité, grâce au bac à sable sécurisé du navigateur. Mais de manière générale, il est difficile d'exécuter des logiciels arbitraires dans le navigateur, et une réimplémentation est souvent nécessaire. À l'opposé, le serveur permet de facilement exécuter n'importe quel logiciel, mais une faille dans celui-ci peut facilement compromettre tout le serveur, et donc tous ses utilisateurs. Dans la mesure du possible, ce projet effectuera le traitement du côté client autant que possible, et du côté du serveur si nécessaire.
 
 \subsection{Format du document d'origine}
 L'application doit générer du HTML à partir d'un document pouvant contenir du LaTeX, par conséquent, choisir HTML ou LaTeX comme format du document source semble une évidence. Dans un premier temps, HTML a été privilégié, car il s'agit d'un format plus cohérent et activement développé, mais cette option a été abandonnée par la suite\footnote{voir \nameref{AlternativesConsidérées}}.\par
@@ -311,7 +310,9 @@ Pour permettre aux élèves de travailler en autonomie, il est nécessaire d'y i
 L'affichage ou non des solutions se fait au moyen de CSS. Le principe pour l'affichage des solutions est le suivant: chaque solution a une checkbox invisible associée, si celle-ci est cochée, la solution sera affichée. Par défaut, les solutions ne sont pas affichées.
 
 \subsection{Sécurité}
-L'utilisation de LaTeX comme format d'origine et le choix de faire le rendu du côté serveur amène la question de la sécurité. Le navigateur transmet au serveur du code LaTeX et celui-ci peut contenir des macros, par exemple \textbackslash input\{mon\_fichier\} ou \textbackslash lstinputlisting\{code\_source.py\},  qui peuvent lire et écrire des fichiers arbitraires. Cela ouvre un accès au serveur et pose un problème de sécurité. En effet une personne pourrait rédiger un document LaTeX contenant une macro qui renvoie à un code malveillant et lors de la génération ce code pourrait s'exécuter. La résolution de ce problème est intéressante et représente un vrai défi. Cependant en raison des contraintes de temps pour ce projet, cette partie sera réalisée plus tard. En attendant l'enseignant assurera la gestion du serveur et la génération de ses propres documents, offrant ainsi une solution temporaire à ce problème.
+La compilation de documents LaTeX sur le serveur présente des aspects de sécurité non-négligeables. Le compilateur date d'une époque où la sécurité n'était pas primordiale, et il n'a pas été conçu pour traiter des documents de sources non-fiables. Par exemple, il est trivial d'écrire un document qui expose des fichiers arbitraires du serveur, ou qui modifie des fichiers existants. Pire encore, bon nombre de failles ont été découvertes qui permettent l'exécution de code arbitraire à travers un document TeX.\footnote{Par exemple \url{https://nvd.nist.gov/vuln/detail/CVE-2016-10243}, \url{https://nvd.nist.gov/vuln/detail/CVE-2018-17407}} Il est même possible d'écrire un virus en TeX.\footnote{\url{https://www.usenix.org/system/files/login/articles/73506-checkoway.pdf}}\par
+
+Ces problèmes peuvent être atténués par des technologies comme l'isolation des processus correspondants dans des conteneurs. Pour des raisons de simplicité et de contraintes de temps, ce projet considère que les documents LaTeX proviennent d'une source fiable, et chaque enseignant aura donc un déploiement séparé pour ses propres documents. Un déploiement partagé sera réalisé plus tard.
 
 \subsection{Cache}
 La génération de code HTML avec make4ht, même de documents simples, prend plus de 10 secondes. En effet, make4ht effectue le rendu trois fois, car certaines informations dépendent du rendu final, comme la table des matières d'un document, le nombre de pages total ou les références croisées. Malheureusement une latence de plusieurs secondes n'est pas acceptable pour les utilisateurs d'un site Web. Deux solutions sont implémentées pour y remédier:
@@ -345,18 +346,25 @@ Pour créer le serveur Web dans un conteneur Docker\footnote{\url{https://docs.d
 \begin{enumerate}
   \item Installer docker: \url{https://docs.docker.com/desktop/}
   \item Cloner le projet: \url{https://github.com/t-docs/t-doc.git}
-  \item Se déplacer dans le répertoire t-doc/server
-  \item Lancer la commande:\\
-  \$ docker build -t t-doc-image .\\
-  Cette commande crée une image pour le conteneur avec tous les packages nécessaires (Python3, Texlive, Django).
-  \item Créer une image à partir du Dockerfile:\\
-  \$ docker run -it --rm --mount type=bind,source='CheminAccèsProjet',target=/repo,readonly --publish 8000:8000 t-doc-image\\
-  Cette commande démarre un conteneur Docker à partir de l'image créée précédemment. Elle construit un pont entre le répertoire dans lequel le projet a été cloné et le conteneur, cela permet d'ajouter et d'éditer des documents localement, c'est-à-dire  l'extérieur du conteneur.\\
-  Le serveur Web démarre automatiquement.
-  \item Pour accéder localement aux pages d'exemples, utiliser l'adresse suivante:\\
-  http://localhost:8000/doc/Informatique/Exercices-Python\\
-  http://localhost:8000/doc/Algèbre/Fonctions
-  \item Déployer le serveur pour permettre l'accès depuis l'extérieur.
+  \item Se déplacer dans le répertoire t-doc/server.
+  \item Créer une image à partir du Dockerfile. Celle-ci contiendra les packages nécessaires (Python3, Django, Texlive).\\
+  \$ \texttt{docker build -t t-doc .}
+  \item Créer un conteneur basé sur l'image ci-dessus (remplacer REPO par le chemin d'accès du projet cloné ci-dessus).\\
+  \$ \texttt{docker create --name=t-doc --publish=8000:8000 \textbackslash\\
+  --mount=type=bind,source=REPO,target=/repo,readonly t-doc}\\
+  Le code de l'application Web et les documents sont exposés au conteneur en lecture seule. Cela permet d'ajouter et d'éditer les documents normalement, à l'extérieur du conteneur.
+  \item Démarrer le conteneur.\\
+  \$ \texttt{docker start t-doc}
+  \item Pour accéder aux documents, utiliser l'adresse suivante (remplacer DOCUMENT par le chemin d'accès du document, relatif au répertoire Documents, sans l'extension ".tex"):\\
+  http://localhost:8000/doc/DOCUMENT
+\end{enumerate}
+
+\newpage
+Le conteneur ci-dessus est configuré en mode "développement". Pour une mise en production, les pas suivants doivent être effectués:
+\begin{enumerate}
+  \item Créer un fichier de configuration settings.py dans le répertoire du projet, pour un environnement de production. Entre-autres, les variables Django DEBUG, ALLOWED\_HOSTS et SECRET\_KEY doivent y être surchargées.
+  \item Ajouter l'option suivante lors de la création du conteneur:\\
+  \texttt{--env=DJANGO\_SETTINGS\_PATH=/repo/settings.py}
 \end{enumerate}
 
 \subsection{Édition et création de documents}
