@@ -210,7 +210,8 @@ L'élève aura à disposition des séquences d'enseignement en autonomie sous fo
 
 \subsection{LaTeX}
 LaTeX est un langage qui permet de structurer un document et son contenu. La rédaction des documents se fait sous forme de texte pur avec des balises pour définir la structure, ainsi n'importe quel éditeur peut être utilisé. Ensuite, le code source est traité par un compilateur, par exemple xelatex ou luatex, qui va générer, en général, un document PDF dont la mise en page est effectuée automatiquement. Il est beaucoup utilisé par les enseignants de mathématiques, car il permet un très bon rendu des formules mathématiques. En effet, TeX, le précurseur de LaTeX, a été créé dans les années 70 par Donald Knuth dans ce but.\par
-Les enseignants de mathématiques du collège rédigent leurs documents de cours en LaTeX, car il permet d'écrire "facilement" du contenu mathématique. Il est donc essentiel que ce projet intègre LaTeX. Toutefois, son développement, par ajouts successifs d'extensions, le rend certes puissant, mais aussi difficile à rendre compatible avec toutes les commandes possibles. C'est pourquoi, ce projet se focalise, dans un premier temps, sur la compatibilité des commandes standards utilisées pour l'enseignement des mathématiques, c'est-à-dire les formules (environnement mathématique), les symboles, les listes ordonnées ou non-ordonnées (enumerate et itemize), l'affichage avec des colonnes multiples (multicols), les tableaux (array et tabular) et les images.
+
+Les enseignants de mathématiques du collège rédigent leurs documents de cours en LaTeX, car il permet d'écrire "facilement" du contenu mathématique. Il est donc essentiel que ce projet intègre LaTeX. Il se focalise, dans un premier temps, sur la compatibilité des commandes standards utilisées pour l'enseignement des mathématiques, c'est-à-dire les formules (environnement mathématique), les symboles, les listes ordonnées ou non-ordonnées (enumerate et itemize), l'affichage avec des colonnes multiples (multicols), les tableaux (array et tabular) et les images. Le support pour des commandes moins utilisées sera ajouté par la suite.
 
 \subsection{Multimédia}
 Depuis plusieurs années, l'apprentissage au moyen de vidéos est très apprécié, notamment par les adolescents. Cela ne remplace pas un enseignement en classe par un professeur qui est disponible et pourra répondre aux questions, mais cela permet d'apprendre à son rythme, seul et à n'importe quel moment du jour ou de la nuit. Il est souvent plus simple pour les élèves de regarder une vidéo que de lire un polycopié. Pour ces raisons, l'ajout de vidéo était une nécessité. Comme il existe beaucoup de vidéos de qualité d'enseignants de mathématiques sur Youtube, notamment celles d'Yvan Monka\footnote{\url{https://www.youtube.com/@YMONKA}}, le projet n'intégrera, dans un premier temps, que des vidéos Youtube.\par
@@ -228,17 +229,15 @@ Lors de l'enseignement de la programmation, il y a plusieurs contraintes à suiv
 \end{itemize}
 
 \section{Design et réalisation}
-Dans cette partie, les différents outils utilisés et les choix effectués seront présentés et expliqués. Le code source de ce projet est disponible sur GitHub: \url{https://github.com/t-docs/t-doc}.
+Dans cette partie, les différents outils utilisés et les choix effectués seront présentés et expliqués. Le code source de ce projet est disponible sur GitHub: <\url{https://github.com/t-docs/t-doc}>.
 
 \subsection{Framework Web}
-Comme j'enseigne le Python à mes élèves, je souhaitais l'utiliser pour ce projet et peut-être l'utiliser avec les élèves dans le cadre de l'option complémentaire d'informatique, afin qu'ils développent eux-mêmes une application Web. Parmi les nombreux outils pour développer une application Web, mon choix s'est porté sur Django\footnote{\url{https://www.djangoproject.com/}}, un framework Web en Python, parce que je l'ai déjà utilisé dans un autre projer et qu'il a de nombreux avantages:
+Comme j'enseigne le Python à mes élèves, je souhaitais l'utiliser pour ce projet et peut-être l'utiliser avec les élèves dans le cadre de l'option complémentaire d'informatique, afin qu'ils développent eux-mêmes une application Web. Parmi les nombreux outils pour développer une application Web, mon choix s'est porté sur Django\footnote{\url{https://www.djangoproject.com/}}, un framework Web en Python, parce que je l'ai déjà utilisé dans un autre projet et qu'il a de nombreux avantages, entre-autres:
 \begin{itemize}
 \item Il est gratuit et open source.
-\item Il est inspirée du principe MTV\footnote{Modèle-Vue-Template}, dont la structure, action $\rightarrow$ mise à jour $\rightarrow$ affichage, est bien adaptée aux applications Web.
 \item Il intègre un serveur Web qui permet de développer et tester une application en temps réel sans déploiement.
 \item Il fournit une fonctionnalité de cache flexible.
 \end{itemize}
-Django répondant aux besoins de ce projet et l'ayant déjà utilisé pour un autre projet, il m'a semblé judicieux de faire ce choix.
 
 
 \subsection{Côté client versus côté serveur}
@@ -259,7 +258,7 @@ Lors de mes recherches, deux outils ont particulièrement retenu mon attention:
 \item Make4ht\footnote{\url{https://ctan.org/pkg/make4ht?lang=en}}, un package contenu dans la plupart des distributions LaTeX.
 \end{enumerate}
 Le premier outil a été testé, mais finalement abandonné\footnote{voir \nameref{AlternativesConsidérées}}, car il ne permettait pas le rendu de toutes les fonctionnalités LaTeX souhaitées.\par
-Make4ht est un système de construction simpllifié pour TEX4ht\footnote{voir \url{https://tug.org/tex4ht/}} lui-même, un convertisseur de TeX en HTML. Make4ht contient un outil en ligne de commande qui gère le processus de conversion configurable. L'avantage de TEX4ht est qu'il ne se contente pas de transformer directement le balisage TeX ou LaTeX en balisage HTML, mais il génère, à partir du document source, un fichier DVI\footnote{DeVice-Independent} qui est un format de composition typographique. Le document HTML sera ensuite généré depuis le fichier DVI. Ce procédé permet de bien contrôler les nombreuses "spécialités" de LaTeX, notamment les commandes créées par l'utilisateur lui-même.\par
+Make4ht est un système de construction simplifié pour TeX4ht\footnote{voir \url{https://tug.org/tex4ht/}} lui-même, un convertisseur de TeX en HTML. Make4ht contient un outil en ligne de commande qui gère le processus de conversion configurable. Contrairement à d'autres convertisseurs comme LaTeX2HTML, qui convertissent le document TeX en HTML directement, TeX4ht utilise le fichier DVI\footnote{DeVice-Independent} résultant de la compilation "normale" en entrée. Cela permet une reproduction plus fidèle du document.\par
 
 Pour générer le rendu depuis Django, la commande suivante est exécutée:
 \begin{lstlisting}[style=MyHTML, caption = Ligne de commande pour le rendu]
@@ -623,7 +622,6 @@ Voici ses principales caractéristiques:
 \item Il peut être intégré sur un site Web à l'aide du composant Web fourni.
 \item Il permet de modifier la DOM\footnote{Document Object Model - représentation de la page HTML (structure et contenu) par un arbre } du document HTML.
 \item Il peut être utilisé pour des documents LaTeX complets ou des fragments de LaTeX, c'est-à-dire sans préambule.
-\item Il est composé d'un parseur et d'un générateur, il serait donc possible de générer autre chose que du HTML en sortie.
 \item Le rendu HTML est très proche du rendu attendu avec LaTeX, cela grâce au CSS.
 \item De nouvelles macros peuvent être ajoutées en JavaScript.
 \item Le rendu est rapide, car LaTeX.js n'a pas besoin de parser le document plusieurs fois.
@@ -669,7 +667,6 @@ Améliorations pour l'élève:
 \item pouvoir cliquer sur les images et les agrandir,
 \item ajouter un bouton stop, afin de pouvoir arrêter l'exécution du code lors de boucles infinies,
 \item pouvoir éditer du code source directement dans le navigateur et ensuite l'exécuter,
-\item ajouter un environnement de test sous forme de bac à sable,
 \item pouvoir résoudre et valider des exercices de maths et de programmation directement en ligne,
 \item pouvoir se connecter à une session pour enregistrer la progression.
 \end{itemize}
