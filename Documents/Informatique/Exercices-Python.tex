@@ -102,7 +102,7 @@ print((a//b) + (a%b))
 \begin{solution}
 \begin{code}[interactive]{python}
 age = int(input("Quel est votre âge? "))
-if (age < 18):
+if age < 18:
   print("Tu es mineur.")
 else:
   print("Tu es majeur.")
@@ -166,7 +166,7 @@ Une salle de trampoline pratique les tarifs suivants pour deux personnes.\\
 \begin{code}[interactive]{python}
 age1 = int(input("Quel est l'âge de la première personne? "))
 age2 = int(input("Quel est l'âge de la deuxième personne? "))
-if (age1 < 18) and (age2 < 18):
+if age1 < 18 and age2 < 18:
     prix = 2 * 7
 elif age1 < 18 or age2 < 18:
     prix = 15
@@ -205,11 +205,11 @@ else:
 n1 = int(input("Choisir un premier nombre: "))
 n2 = int(input("Choisir un deuxième nombre: "))
 n3 = int(input("Choisir un troisième nombre: "))
-max = n1
-if n2 > max:
-    max = n2
-if n3 > max:
-    max = n3
+n_max = n1
+if n2 > n_max:
+    n_max = n2
+if n3 > n_max:
+    n_max = n3
 print("Le plus grand nombre est " + str(max))
 \end{code}
 \end{solution}

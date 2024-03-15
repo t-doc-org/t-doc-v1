@@ -41,7 +41,7 @@ $\begin{array}{|c|c|c|c|}
 \hline
 / & \text{division} & 11 / 2 & 5.5\\
 \hline
-\% & \text{modulo (reste de la divison entière)} & 26 \text{mod} 6 & 2\\
+\% & \text{modulo (reste de la division entière)} & 26 \text{mod} 6 & 2\\
 \hline
 ** & \text{puissance} & 2**3 & 8\\
 \hline
@@ -131,7 +131,7 @@ else:
 
 \subsection{Définition}
 Un module est comme une boîte à outils. Il contient plein de fonctions déjà programmées que nous pouvons utiliser.
-Par exemple, dans le module « math », il y a la fonctions « sqrt » qui te permet de calculer la racine carrée d’un nombre.
+Par exemple, dans le module « math », il y a la fonctions « sqrt » qui permet de calculer la racine carrée d’un nombre.
 
 \subsection{Importer un module}
 Avant de pouvoir utiliser les fonctions d’un module, il faut les importer.
@@ -144,63 +144,63 @@ from math import sqrt
 \subsection{Fonctions sans modules}
 Nous n'avons pas besoin d'importer de module pour utiliser les fonctions suivantes:\par
 \begin{tabular}{l l}
-print(x) & afficher x sur la console\\
-input() & demander à l'utilisateur d'entrer une donnée\\
+print(x) & affiche x sur la console\\
+input() & demande à l'utilisateur d'entrer une donnée\\
   & exemple: input("Quel âge avez-vous? ")\\
-abs(x) & donner la valeur absolue d'un nombre |a| \\
-round(x) & arrondir le nombre x à l'entier le plus proche\\
-round(x, n) & arrondir le nombre x à n chiffres après la virgule\\
-float(x) & convertir x en nombre à virgule\\
-int(x) & convertir x en nombre entier\\
-str(x) & convertir x en une chaîne de caractères\\
+abs(x) & donne la valeur absolue d'un nombre |a| \\
+round(x) & arrondit le nombre x à l'entier le plus proche\\
+round(x, n) & arrondit le nombre x à n chiffres après la virgule\\
+float(x) & convertit x en nombre à virgule\\
+int(x) & convertit x en nombre entier\\
+str(x) & convertit x en une chaîne de caractères\\
 \end{tabular}
 
 \subsection{Module math}
 Nous devons importer le module math avant d'utiliser les fonctions suivantes:\par
 \begin{tabular}{l l}
-sqrt(x) & calculer la racine carrée de x: $\sqrt{x}$\\
+sqrt(x) & calcule la racine carrée de x: $\sqrt{x}$\\
 pi & valeur de $\pi$\\
-floor(x) & entier juste en dessous de x\\
-ceil(x) & entier juste en dessus de x\\
-gcd(a,b) & pgdc de a et b\\
+floor(x) & retourne l'entier juste en dessous de x\\
+ceil(x) & retourne l'entier juste en dessus de x\\
+gcd(a,b) & calcule le pgdc de $a$ et $b$\\
 \end{tabular}
 
 \subsection{Module turtle}
 Nous devons importer le module turtle avant d'utiliser les fonctions suivantes:\par
 \subsubsection{Déplacements}
 \begin{tabular}{l l}
-forward(n) & avancer de n pixels\\
-backward(n) & reculer de n pixels\\
-goto(x, y) & déplacer la tortue de sa position courante au point (x;y)\\
+forward(n) & avance de n pixels\\
+backward(n) & recule de n pixels\\
+goto(x, y) & déplace la tortue de sa position courante au point (x;y)\\
 & (0;0) est le milieu de la page\\
-left(n) & tourner de n degrés vers la gauche\\
-right(n) & tourner de n degrés vers la droite\\
-speed(n) & changer la vitesse de la tortue (1 = lent, 10 = rapide, 0 = le plus rapide)\\
-circle(r) & tracer un cercle de rayon r\\
+left(n) & tourne de n degrés vers la gauche\\
+right(n) & tourne de n degrés vers la droite\\
+speed(n) & change la vitesse de la tortue (1 = lent, 10 = rapide, 0 = le plus rapide)\\
+circle(r) & trace un cercle de rayon r\\
 \end{tabular}
 
 
 \subsubsection{Stylo}
 \begin{tabular}{l l}
-penup() & lever le stylo\\
-pendown() & abaisser le stylo\\
-pencolor(n) & changer la couleur du stylo ("black", "white", "grey", "blue",  "red", "yellow", …)\\
-pensize(n)  & changer l'épaisseur du stylo à n pixels\\
-colormode(255) & définir une couleur à l'aide de pencolor en mode RGB\\
-pencolor(…, …, …) & changer la couleur du stylo en mode RGB \\
+penup() & lève le stylo\\
+pendown() & abaisse le stylo\\
+pencolor(n) & change la couleur du stylo ("black", "white", "grey", "blue",  "red", "yellow", …)\\
+pensize(n)  & change l'épaisseur du stylo à n pixels\\
+colormode(255) & définit une couleur à l'aide de pencolor en mode RGB\\
+pencolor(…, …, …) & change la couleur du stylo en mode RGB \\
 \end{tabular}
 
 \subsubsection{Tortue}
 \begin{tabular}{l l}
-hideturtle() & cacher la tortue\\
-showturtle() & montrer la tortue\\
+hideturtle() & cache la tortue\\
+showturtle() & montre la tortue\\
 \end{tabular}
 
 \subsection{Module random}
 Nous devons importer le module random avant d'utiliser les fonctions suivantes:\par
 \begin{tabular}{l l}
-randint(a, b) & obtenir un entier aléatoire n tel que a≤n≤b avec a<b\\
-uniform(a, b) & obtenir un nombre aléatoire à virgule flottante compris entre a et b\\
+randint(a, b) & retourne un entier aléatoire n tel que a≤n≤b avec a<b\\
+uniform(a, b) & retourne un nombre aléatoire à virgule flottante compris entre a et b\\
 \end{tabular}
 
 
