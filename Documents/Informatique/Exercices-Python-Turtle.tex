@@ -45,7 +45,7 @@ left(90)
 Dessiner 2 carrés, de couleurs différentes et à des positions différentes, comme sur l'image ci-dessous.
 \begin{multicols}{2}
 \begin{enumerate}
-\item Définir une fonction carre100() qui dessine un carré de 100 pixels de côté.
+\item Définir une fonction carre(nb_pixels) qui dessine un carré de 100 pixels de côté.
 \item Utiliser la fonction goto(x,y) pour vous déplacer.
 \item Utiliser 4 pixels pour l'épaisseur du trait.
 \item Les couleurs du stylo sont noir (par défaut) et "blue".
@@ -59,29 +59,24 @@ Dessiner 2 carrés, de couleurs différentes et à des positions différentes, c
 \begin{code}[interactive_turtle]{python}
 from turtle import *
 
-def carre100():
-    forward(100)
-    left(90)
-    forward(100)
-    left(90)
-    forward(100)
-    left(90)
-    forward(100)
-    left(90)
+def carre(nb_pixels):
+    for i in range(4):
+        forward(nb_pixels)
+        left(90)
 
 pensize(4)
-carre100()
+carre(100)
 pencolor("blue")
 penup()
 goto(-200,0)
 pendown()
-carre100()
+carre(100)
 \end{code}
 \end{solution}
 
 \section{Exercice}
 \begin{multicols}{2}
-Dessiner la forme ci-contre en utilisant une fonction tiangle100() qui dessine un triangle équilatéral de 100 pixels de côté.
+Dessiner la forme ci-contre en utilisant une fonction tiangle(nb_pixels) qui dessine un triangle équilatéral de 100 pixels de côté.
 \begin{center}
 \includegraphics[width=0.8\textwidth]{images/Hexagone.png}\\
 \end{center}
@@ -91,17 +86,14 @@ Dessiner la forme ci-contre en utilisant une fonction tiangle100() qui dessine u
 \begin{code}[interactive_turtle]{python}
 from turtle import *
 
-def triangle100():
-    forward(100)
-    left(120)
-    forward(100)
-    left(120)
-    forward(100)
-    left(120)
+def triangle(nb_pixels):
+    for i in range(3):
+        forward(nb_pixels)
+        left(120)
 
 pensize(2)
 for i in range(6):
-    triangle100()
+    triangle(100)
     left(60)
 \end{code}
 \end{solution}

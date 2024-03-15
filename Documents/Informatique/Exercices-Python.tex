@@ -34,7 +34,7 @@ print("J'aime l'informatique! \n" * 100)
 
 \subsection{Exercice}
 Écrire un programme qui demande son prénom à l'utilisateur et qui répond:\\
-Bonjour \textbf{...}\\
+Bonjour \textbf{...} (Afficher le prénom de la personne)\\
 \begin{solution}
 \begin{code}[interactive]{python}
 nom = input("Quel est ton prénom? ")
@@ -91,7 +91,7 @@ Qu'affiche le programme suivant?
 \begin{code}[interactive]{python}
 a = 22
 b = 5
-print((a//b) + (a%b))
+print(a//b + a%b)
 \end{code}
 
 
@@ -157,8 +157,8 @@ print("Pour une personne de " + str(age) + " ans, le prix à payer est de " + st
 \subsection{Exercice}
 Une salle de trampoline pratique les tarifs suivants pour deux personnes.\\
 \begin{itemize}
-    \item Si les deux personnes sont mineures, elle payent chacune 7 francs.
-    \item Si l'une seulement est mineure, elles payent un tarif de groupe se 15 francs.
+    \item Si les deux personnes sont mineures, elles payent chacune 7 francs.
+    \item Si l'une seulement est mineure, elles payent un tarif de groupe de 15 francs.
     \item Si les deux personnes sont majeures, elles payent au total 28 francs.
 \end{itemize}
 Écrire un programme qui demande l'âge des deux personnes et affiche le prix total à payer.
@@ -210,7 +210,7 @@ if n2 > n_max:
     n_max = n2
 if n3 > n_max:
     n_max = n3
-print("Le plus grand nombre est " + str(max))
+print("Le plus grand nombre est " + str(n_max))
 \end{code}
 \end{solution}
 
@@ -272,7 +272,7 @@ print("Ouf, j'ai enfin terminé!")
 \end{enumerate}
 
 \subsection{Exercice}
-Écrire un programme qui demande un nombre à l'utilisteur et écrit la table de multiplication de ce nombre:\\
+Écrire un programme qui demande un nombre à l'utilisateur et écrit la table de multiplication de ce nombre:\\
 \begin{solution}
 \begin{code}[interactive]{python}
 n = int(input("Choisir un nombre. "))
