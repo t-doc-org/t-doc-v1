@@ -622,7 +622,7 @@ Tout au long du projet, des décisions ont été prises, dont certaines, bien qu
 Afin de faire le maximum du rendu côté client, il semblait logique d'utiliser le HTML comme format d'origine. Il a l'avantage de pouvoir directement intégrer des images, des vidéos et des fenêtres Geogebra. Il restait donc à trouver une solution pour le contenu mathématique. Écrire des formules mathématiques en HTML peut être compliqué, prend du temps et l'affichage n'est pas toujours acceptable. De plus, en gardant en tête l'idée de pouvoir réutiliser des documents déjà crées, il faut donc pouvoir intégrer du LaTeX dans le HTML. Le choix suivant a été fait: le document complet est écrit en HTML, à l'exception des parties de contenu mathématique qui sont rédigées en LaTeX. Celles-ci seront délimitées par des balises HTML personnalisées <latex> et </latex>. La conversion se fera dans l'idéal directement par le navigateur, si ce n'est pas possible, un serveur pourrait répondre à des sous-requêtes afin de faire les transformations nécessaires.
 
 \subsection{Transformation de LaTeX en HTML}
-Il faut donc trouver un outil qui permet de transformer des bouts de LaTeX en HTML, directement dans le navigateur. Latex.js\footnote{\url{https://latex.js.org/}} est un traducteur de LaTeX en HTML qui répond à ces critères.\par
+Il faut donc trouver un outil qui permet de transformer des fragments de LaTeX en HTML, directement dans le navigateur. Latex.js\footnote{\url{https://latex.js.org/}} est un traducteur de LaTeX en HTML qui répond à ces critères.\par
 Voici ses principales caractéristiques:
 \begin{itemize}
 \item Il est open source et développé par Michael Brade.
@@ -637,16 +637,12 @@ Voici ses principales caractéristiques:
 En testant cet outil avec des documents de cours, je constate que plusieurs fonctionnalités essentielles de LaTeX ne sont pas supportées\footnote{voir \nameref{Comparatif}}, par exemple les images inclues directement dans le LaTeX ne s'affichent pas. Cela signifie qu'il faut le faire manuellement en HTML. De plus, certains symboles mathématiques comme $\ne$ n'apparaissent pas correctement. Le problème semble provenir du fait que KaTeX, une bibliothèque de composition mathématique pour le Web, n'a pas été mise à jour. Malheureusement, ce projet, comme beaucoup d'autres, n'est plus développé ou mis à jour depuis 2021. N'ayant pas la possibilité de résoudre ce problème par moi-même dans un temps raisonnable, l'utilisation de cet outil a été abandonnée.\par
 Une autre solution intéressante est MathJax\footnote{\url{https://docs.mathjax.org/en/latest/}}, un moteur d'affichage JavaScript open source pour les notations LaTeX. Il permet d'écrire du LaTeX directement dans la partie <body> du HTML. Mais, dans ce cas, il ne prend en charge qu'une partie des commandes LaTeX, c'est-à-dire l'écriture mathématique, les formules ou les symboles, mais pas les tableaux ou les listes écrites en LaTeX. Cela signifie que la réutilisation de documents déjà crées est difficile. De plus, le fait d'écrire directement dans le <body> pose certains problèmes comme l'utilisation des signes mathématiques < ou >.\par
 
-\subsection{Sous-requêtes}
-Pour éviter les problèmes cités ci-dessus, il est possible d'utiliser des composants Web MathJax. Ainsi le navigateur sait, à quelles parties de la page HTML il doit appliquer MathJax, et de quelle manière. Mais la syntaxe relativement compliquée ne peut pas être utilisée directement par un utilisateur lambda, il faut donc automatiser ce processus.\par
-Fonctionnement des sous-requête en utilisant MathJax:
-\begin{enumerate}
-\item L'utilisateur place le contenu LaTeX dans la balise HTML personnalisée <latex> </latex>.
-\item Lorsque le navigateur parcourt le document HTML et rencontre une telle balise, il envoie une sous-requête au serveur avec le contenu LaTeX.
-\item Le serveur crée un composant Web MathJax et y place le contenu LaTeX, ensuite il le renvoie au navigateur.
-\item MathJax affiche correctement le contenu du composant Web MathJax.
-\end{enumerate}
-Cette solution permet de paralléliser les rendus et donc d'optimiser la vitesse du rendu. Malheureusement lorsqu'il y a plusieurs composants Web, MathJax n'affiche correctement qu'un seul des composants et pas les autres. L'utilisation de MathJax avec des sous-requêtes a donc été abandonnée.
+\subsection{Requêtes secondaires}
+Puisque le rendu LaTeX purement côté client a échoué, une stratégie de rendu partiel côté serveur a été testée. L'idée était de délimiter des fragments de LaTeX dans le document HTML par des balises HTML spéciales (par exemple <t-latex> </t-latex>), et d'envoyer leur contenu au serveur pour le rendu, en utilisant des requêtes secondaires programmées en JavaScript. Les fragments de HTML retournés étaient ensuite insérés dans la DOM.\par
+
+Cette approche a été implémentée sous forme d'un Web Component, et aurait permis d'optimiser la latence du rendu, puisqu'au lieu d'un long document, le rendu de plus petits fragments pouvait être effectué en parallèle. Malheureusement, elle a échoué à cause d'interactions entre les fragments dues à MathJax. En effet, le compilateur TeX utilise MathJax pour le rendu de formules mathématiques. MathJax devait donc être invoqué sur chaque fragment de HTML retourné, et cela ne fonctionnait qu'avec un seul fragment.\par
+
+Finalement, la seule approche viable a été d'effectuer le rendu du document complet entièrement du côté serveur.
 
 \section{Problèmes rencontrés}
 
