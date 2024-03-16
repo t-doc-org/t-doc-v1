@@ -9,8 +9,8 @@
 \date{}
 \maketitle
 
-Afin de pouvoir ajouter des vidéos Youtube, une fenêtre Geogeabra, des images, du code et des
-solutions, des balises personnalisées peuvent être ajoutée au document LaTeX. Voici leur fonctionnement.
+Afin de pouvoir ajouter des vidéos Youtube, une fenêtre Geogebra, des images, du code source et des
+solutions, des balises personnalisées peuvent être ajoutées au document LaTeX. Voici leur fonctionnement.
 
 \section{Vidéos Youtube}
 Pour ajouter une vidéo Youtube, il suffit de connaître sa référence et d’utiliser la balise vidéo.\par
@@ -23,7 +23,7 @@ Code LaTeX:
 Rendu Web:\par
 \video{U98Tk89SJ5M}
 
-Par défaut, la taille de la fenêtre de la vidéo est 50\% de la largeur de la page. Il est possible de
+Par défaut, la taille de la fenêtre de la vidéo est 50\% de la largeur du texte. Il est possible de
 changer la dimension en ajoutant un paramètre optionnel, celui-ci doit être noté entre crochets
 et avant la référence de la vidéo.\par
 
@@ -38,7 +38,7 @@ Rendu Web:\par
 Les vidéos peuvent être visionnées en plein écran.
 
 \section{Fenêtre Geogebra}
-Pour ajouter une fenêtre Geogebra, il faut tout d’abord créer le document Geogebra et le sauvegarder en ligne sur \href{https://www.geogebra.org/}{site de Geogebra}. Ensuite, il pourra être intégré au document LaTeX au moyen de la balise geogebra.\par
+Pour ajouter une fenêtre Geogebra, il faut tout d’abord créer le document Geogebra et le sauvegarder en ligne sur \href{https://www.geogebra.org/}{site de Geogebra}. Ensuite, il pourra être intégré au document LaTeX au moyen de la balise Geogebra.\par
 
 Code LaTeX:
 \begin{lstlisting}
@@ -48,7 +48,7 @@ Code LaTeX:
 Rendu Web:\par
 \geogebra{esdhdhzd}
 
-Par défaut, la taille de la fenêtre Geogebra est 100\% de la largeur de la page, afin d’optimiser l’utilisation pour l’élève. Il est possible de changer la dimension en ajoutant un paramètre optionnel, celui-ci doit être noté entre crochets et avant la référence du document Geogebra.\par
+Par défaut, la taille de la fenêtre Geogebra est 100\% de la largeur du texte, afin d’optimiser l’utilisation pour l’élève. Il est possible de changer la dimension en ajoutant un paramètre optionnel, celui-ci doit être noté entre crochets et avant la référence du document Geogebra.\par
 
 Code LaTeX:
 \begin{lstlisting}
@@ -71,9 +71,9 @@ Code LaTeX:
 Rendu Web:\par
 \includegraphics[width=0.5\textwidth]{images/pythagore.png}
 
-\section{Code}
+\section{Code source}
 \subsection{Code surligné}
-Pour afficher du code source, celui-ci sera simplement inclus dans un environnement code. Afin que le surlignement se fasse correctement, il est obligatoire de définir le langage comme paramètre.\par
+Pour afficher du code source, celui-ci sera simplement inclus dans un environnement code. Afin que le surlignement se fasse correctement, il est obligatoire de définir le langage comme paramètre, par exemple python, html, css.\par
 
 Code LaTeX:
 \begin{lstlisting}
@@ -92,7 +92,7 @@ for i in range(10):
 Le code est affiché avec une numérotation des lignes et surligné grâce à highlight.js.
 
 \subsection{Code exécutable}
-Actuellement, seul le langage Python peut être exécuté dans le navigateur. Pour cela, il faut ajouter le paramètre optionnel ”interactive”.\par
+Actuellement, seul le langage Python peut être exécuté dans le navigateur. Pour cela, il faut ajouter le paramètre optionnel ”interactive”. En cliquant sur le bouton "Exécuter", le résultat s'affiche.\par
 
 Code LaTeX:
 \begin{lstlisting}
@@ -122,7 +122,7 @@ else:
     print("Il fait trop chaud!")
 \end{code}
 
-\subsection{Code avec le module Turtle}
+\subsection{Code source avec le module Turtle}
 L’affichage de code contenant le module Turtle est fait dans un environnement graphique, il est
 donc nécessaire de spécifier, quand il est utilisé. Cela se fait au moyen du paramètre optionnel
 ”interactive_turtle”.\par
@@ -139,7 +139,7 @@ pendown()
 nb_cote_max = int(input("Combien de côtés voulez-vous au maximum? "))
 colormode(255)
 pensize(3)
-for i in range(3, nb_cote_max):
+for i in range(3, nb_cote_max + 1):
     for j in range(i):
         forward(100)
         left(360/i)
@@ -158,7 +158,7 @@ pendown()
 nb_cote_max = int(input("Combien de côtés voulez-vous au maximum? "))
 colormode(255)
 pensize(3)
-for i in range(3, nb_cote_max):
+for i in range(3, nb_cote_max + 1):
     for j in range(i):
         forward(100)
         left(360/i)
