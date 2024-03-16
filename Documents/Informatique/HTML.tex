@@ -53,11 +53,11 @@ Les balises ont la forme suivante:
 <h1> est une balise ouvrante et </h2> est une balise fermante. À chaque balise ouvrante correspond une balise fermante à l'exception des balises qui n'ont pas de contenu.
 
 \subsection{Balise <!DOCTYPE html>}
-Tous documents qui décrivent une page Web doivent débuter par:  <!DOCTYPE html>
+Tous documents qui décrivent une page Web doivent débuter par:  <!DOCTYPE html>.\\
 Ce n'est pas une balise HTML, mais une information qui permet au navigateur de savoir le type de document.
 
 \subsection{Balise <html> \dots <html>}
-Tout le code HTML doit être inséré dans une balise nommée html: <html> … </html>
+Tout le code HTML doit être inséré dans une balise nommée html: <html> … </html.\\
 La balise html contient en général deux autres balises:
 \begin{itemize}
 \item <head> … </head>\\
@@ -86,7 +86,7 @@ contient le contenu (corps) de la page. Tout ce qui sera dans cette partie sera 
 \subsection{Balise <body> \dots <body>}
 Dans la balise body, nous allons structurer le contenu de la page. Nous allons voir les balises les plus simples qui permettent de définir des titres, sous-titres et paragraphes:
 \begin{itemize}
-\item <h1> \dots </h1>  permet de définir un titre principale
+\item <h1> \dots </h1>  permet de définir un titre principal
 \item <h2> \dots </h2>  permet de définir un sous-titre
 \item <h3> \dots </h3>  permet de définir un sous-sous-titre
 \item <h\dots> \dots </h\dots>  permet de définir  sous-\dots-sous-titre
@@ -146,7 +146,7 @@ But: Ouvrir un document HTML sur replit.com.
 \item Il faut remplacer le fichier index.html par celui que vous avez téléchargé:
 \begin{enumerate}
   \item Effacer le fichier « index.html » déjà présent.
-  \item Télécharger votre fichier en cliquant sur les 3 points verticaux et en séléctionnant \textbf{Upload file}. Choisir le fichier textbf{index.html} que vous avez sauvergarder sur votre OneDrive.
+  \item Télécharger votre fichier en cliquant sur les 3 points verticaux et en sélectionnant \textbf{Upload file}. Choisir le fichier \textbf{index.html} que vous avez sauvegardé sur votre OneDrive.
 \end{enumerate}
 \item Appuyer sur le bouton \textbf{Run}.
 \end{enumerate}
@@ -155,104 +155,22 @@ But: Ouvrir un document HTML sur replit.com.
 Vous voyez maintenant le code HTML et ce que la page affiche.
 \begin{enumerate}[label=\arabic*)]
 \item Qu'est-ce que vous comprenez de cette page?
-\item Vous allez maintenant modifier cette page (pour valider une modification, appuyer sur \textbf{Run}:
+\item Vous allez maintenant modifier cette page (pour valider une modification, appuyer sur \textbf{Run}):
 \begin{enumerate}
   \item Modifier le titre et le premier paragraphe pour remplacer Collège du Sud par Collège Sainte-Croix.
-  \item Modifier la partie présentation pour avoir les informations qui correspondent au Collège Sainte-Croix. Changer aussi le lien vers le site de l'école. (cf. 3.6)
+  \item Modifier la partie présentation pour avoir les informations qui correspondent au Collège Sainte-Croix. Changer aussi le lien vers le site de l'école.
   \item Compléter la liste de vos cours avec: Économie et droit, Biologie, \dots
-  \item Changer la liste de vos cours par une liste numérotée. (cf. 3.7.1)
+  \item Changer la liste de vos cours par une liste numérotée.
   \item Ajouter un sous-titre \textbf{Ma classe} et un paragraphe avec quelques informations.
   \item Ajouter une image du Collège Sainte-Croix:
 \begin{enumerate}[label=\roman*.]
     \item Télécharger l'image que vous avez choisie.
     \item Importer l'image sur replit.com dans un répertoire nommé \textbf{images}.
-    \item Noter le code HTML nécessaire. (cf. 3.8)
+    \item Noter le code HTML nécessaire.
   \item Ne pas oublier d'indiquer la source.
 \end{enumerate}
 \end{enumerate}
 \end{enumerate}
-
-\section{Solution}
-
-\subsection{Exercice 3}
-1) Fichier index.htlm
-\begin{code}{html}
-<!DOCTYPE html> <!-- indique le genre de document au browser -->
-<html>
-  <head> <!-- métadonnées de la page et le titre de l'onglet -->
-    <meta charset="utf-8">
-    <title>Nom de la page</title>
-  </head>
-  <body> <!-- partie qui sera affichée -->
-    <h1>Le collège du Sud</h1> <!-- titre principal -->
-    <!-- 1er paragraphe -->
-    <p>Voici ma première page Web sur le collège du Sud!</p>
-    <h2>Présentation</h2> <!-- Sous-titre -->
-    <!-- 2e paragraphe -->
-    <p>
-    Le Collège du Sud est un établissement fribourgeois du
-    secondaire du 2e degré. Il offre actuellement 3 filières
-    d’études : un gymnase, une école de commerce et une école
-    de culture générale. Il reçoit des étudiant-e-s de 16 à 20 ans,
-    qui proviennent essentiellement des districts de la Gruyère
-    et de la Veveyse, mais aussi de la Glâne.</p>
-    <!-- Ajout d'une image -->
-    <p id="source">Source:
-    <a href="https://collegedusud.ch/presentation/" target="_blank">
-    Site internet du collège du Sud</a>
-    <p/>
-    <h2>Mes cours</h2> <!-- Sous-titre -->
-    <ul> <!-- liste non numérotée -->
-      <li>Français</li>
-      <li>Allemand</li>
-      <li>Anglais</li>
-      <li>Maths</li>
-    </ul>
-  </body>
-</html>
-\end{code}
-2) Fichier index.html modifié
-\begin{code}{html}
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <title>Nom de la page</title>
-  </head>
-  <body>
-    <h1>Le collège Sainte-Croix</h1>
-    <p>Voici ma première page Web sur le collège Sainte-Croix!</p>
-    <h2>Présentation</h2>
-    <p>
-    Le Collège Sainte-Croix est un établissement fribourgeois
-    du secondaire du 2e degré. C'est un gymnase en ville de Fribourg
-    qui permet de faire une maturité en français, en allemand ou un
-    mixte des deux langues. Il reçoit des étudiant-e-s de 16 à 20 ans.
-    </p>
-    <p id="source">Source:
-    <a href="https://new.cscfr.ch/index.php/fr/" target="_blank">
-    Site internet du collège Sainte-Croix</a><p/>
-    <h2>Mes cours</h2>
-    <ol>
-      <li>Français</li>
-      <li>Allemand</li>
-      <li>Anglais</li>
-      <li>Maths</li>
-      <li>Économie et droit</li>
-      <li>Biologie</li>
-      <li>...</li>
-    </ol>
-    <h2>Ma classe</h2>
-    <p>
-    Je fais partie de la classe 1F... qui est une classe qui ...
-    <p/>
-    <img src="images/STX.jpg" width="600" height="400"><br/>
-    Source:
-    <a href="https://new.cscfr.ch/index.php/fr/notre-college/">
-    https://new.cscfr.ch/index.php/fr/notre-college/</a>
-  </body>
-</html>
-\end{code}
 
 \subsection{Hyperlien <a href="\dots">}
 La balise a permet de créer un  hyperlien, c'est-à-dire un texte sur lequel il faut cliquer pour accéder à une autre page. Il faut indiquer le lien dans l'attribut href:
@@ -325,5 +243,5 @@ La balise <table> permet de représenter des tableaux de données (tableaux en d
 \end{code}
 Tuto: \href{https://developer.mozilla.org/fr/docs/Web/HTML/Element/table}{MDN - tables}\par
 
-Suite du cours: \href{http://127.0.0.1:8000/doc/Informatique/CSS}{CSS}
+Suite du cours: \href{../Informatique/CSS}{CSS}
 \end{document}
