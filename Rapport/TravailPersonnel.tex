@@ -181,14 +181,17 @@ Le coeur du projet est constitué d'un moteur de rendu qui transforme le documen
 \addcontentsline{toc}{section}{Introduction}
 T-doc (teaching docs) constitue une mise en pratique des connaissances acquises lors de la formation universitaire en informatique. Le projet a été choisi de manière à répondre à un besoin constaté depuis quelques années et pourra être utilisé dans mon enseignement.\par
 
-En tant qu'enseignante au collège, la préparation des supports de cours prend un temps considérable, notamment la rédaction de document LaTeX. Depuis la rentrée 2022-2023, les élèves des collèges fribourgeois sont passés en mode BYOD\footnote{Bring Your Own Device}, ils ont donc un ordinateur à portée de main à chaque cours. Actuellement, beaucoup d'enseignants se limitent à transmettre leurs cours en format PDF par manque de temps et de motivation à faire mieux. Mais un polycopié en format PDF n'apporte rien de plus aux élèves que sa version papier. Le Web regorge de matériel pédagogique que ce soient des vidéos, des exercices en ligne, des outils pour faire de la géométrie interactive, etc. Malheureusement il est difficile pour les élèves de trouver les bonnes ressources adaptées à leur niveau. C'est ainsi qu'est apparue l'idée de créer un outil qui combine du LaTeX, du Python, des images, des vidéos et des figures Geogebra pour un rendu en une page HTML qui peut être visualisée et avec laquelle on peut interagir dans un navigateur. Les élèves profitent ainsi, en plus du polycopié, d'outils à disposition pour la découverte d'une nouvelle notion, la possibilité de revoir une notion pas bien comprise ou tout simplement de réviser pour un examen.\par
+En tant qu'enseignante au collège, la préparation des supports de cours prend un temps considérable, notamment la rédaction de document LaTeX. Depuis la rentrée 2022-2023, les élèves des collèges fribourgeois sont passés en mode BYOD \footnote{Bring Your Own Device}, ils ont donc un ordinateur à portée de main à chaque cours. Actuellement, beaucoup d'enseignants se limitent à transmettre leurs cours en format PDF par manque de temps et de motivation à faire mieux. Mais un polycopié en format PDF n'apporte rien de plus aux élèves que sa version papier. Le Web regorge de matériel pédagogique que ce soient des vidéos, des exercices en ligne, des outils pour faire de la géométrie interactive, etc. Malheureusement il est difficile pour les élèves de trouver les bonnes ressources adaptées à leur niveau. C'est ainsi qu'est apparue l'idée de créer un outil qui combine du LaTeX, du Python, des images, des vidéos et des figures Geogebra pour un rendu en une page HTML qui peut être visualisée et avec laquelle on peut interagir dans un navigateur. Les élèves profitent ainsi, en plus du polycopié, d'outils à disposition pour la découverte d'une nouvelle notion, la possibilité de revoir une notion pas bien comprise ou tout simplement de réviser pour un examen.\par
 
-Le coeur du projet est constitué d'un moteur de rendu qui transforme le document d'origine contenant du LaTeX en une page HTML. Pour le cours de mathématiques, l'élève pourra visionner dans un navigateur une page qui contient des parties de texte et de contenu mathématique, par exemple, de la théorie, des exercices ou des solutions, une illustration géométrique en utilisant une fenêtre Geogebra, ainsi que des compléments de théorie ou des exemples détaillés en format vidéo. Dans le cadre du cours d'informatique, les pages pourront, en plus, afficher du code surligné afin de faciliter la compréhension et exécuter ce code directement dans le navigateur. Cela donne des séquences d'enseignement en autonomie.
+Le coeur du projet est constitué d'un moteur de rendu qui transforme le document d'origine contenant du LaTeX en une page HTML. Pour le cours de mathématiques, l'élève pourra visionner dans un navigateur une page qui contient des parties de texte et de contenu mathématique, par exemple, de la théorie, des exercices ou des solutions, une illustration géométrique en utilisant une fenêtre Geogebra, ainsi que des compléments de théorie ou des exemples détaillés en format vidéo. Dans le cadre du cours d'informatique, les pages pourront, en plus, afficher du code surligné afin de faciliter la compréhension et exécuter ce code directement dans le navigateur. Cela donne des séquences d'enseignement en autonomie.\par
+
+Premièrement, je vais définir le cahier des charges précis des différentes fonctionnalités souhaitées. Deuxièmement, j’aborderai, dans une partie plus technique, les choix d’outils effectués pour réaliser ce projet. Puis, je présenterai t-doc d’un point de vue de l’utilisateur. Ensuite, j’expliquerai les alternatives considérées et les différents problèmes rencontrés lors du développement et je terminerai par présenter les idées pour la suite de ce projet, mais qui ne feront pas parties de ce travail.\par
+
 
 \newpage
 
 \section{Cahier des charges}
-Cette section définit un cahier des charges des fonctionnalités. Elle précise le profil des utilisateurs cibles. Ensuite, en se mettant à leur place, il faut déterminer les fonctionnalités nécessaires et celles qui sont plutôt optionnelles et qui seront développées plus tard.
+Cette section définit un cahier des charges des fonctionnalités. Elle précise le profil des utilisateurs cibles. Ensuite, en se mettant à leur place, il faut déterminer les fonctionnalités nécessaires et celles qui sont plutôt optionnelles et qui seront développées plus tard.\par
 
 \subsection{Personas}
 Pour ce projet, on considère deux personas: les enseignants et les élèves.\par
@@ -207,18 +210,18 @@ L'élève doit pouvoir:
 \item revoir une notion pas bien comprise en classe,
 \item réviser pour un examen.
 \end{itemize}
-L'élève aura à disposition des séquences d'enseignement en autonomie sous forme de pages Web. Il aura donc besoin d'un navigateur et de l'URL pour accéder à la page.
+L'élève aura à disposition des séquences d'enseignement en autonomie sous forme de pages Web. Il aura donc besoin d'un navigateur et de l'URL pour accéder à la page.\par
 
 \newpage
 
 \subsection{LaTeX}
 LaTeX est un langage qui permet de structurer un document et son contenu. La rédaction des documents se fait sous forme de texte pur avec des balises pour définir la structure, ainsi n'importe quel éditeur peut être utilisé. Ensuite, le code source est traité par un compilateur, par exemple xelatex ou luatex, qui va générer, en général, un document PDF dont la mise en page est effectuée automatiquement. Il est beaucoup utilisé par les enseignants de mathématiques, car il permet un très bon rendu des formules mathématiques. En effet, TeX, le précurseur de LaTeX, a été créé dans les années 70 par Donald Knuth dans ce but.\par
 
-Les enseignants de mathématiques du collège rédigent leurs documents de cours en LaTeX, car il permet d'écrire "facilement" du contenu mathématique. Il est donc essentiel que ce projet intègre LaTeX. Il se focalise, dans un premier temps, sur la compatibilité des commandes standards utilisées pour l'enseignement des mathématiques, c'est-à-dire les formules (environnement mathématique), les symboles, les listes ordonnées ou non-ordonnées (enumerate et itemize), l'affichage avec des colonnes multiples (multicols), les tableaux (array et tabular) et les images. Le support pour des commandes moins utilisées sera ajouté par la suite.
+Les enseignants de mathématiques du collège rédigent leurs documents de cours en LaTeX, car il permet d'écrire "facilement" du contenu mathématique. Il est donc essentiel que ce projet intègre LaTeX. Il se focalise, dans un premier temps, sur la compatibilité des commandes standards utilisées pour l'enseignement des mathématiques, c'est-à-dire les formules (environnement mathématique), les symboles, les listes ordonnées ou non-ordonnées (enumerate et itemize), l'affichage avec des colonnes multiples (multicols), les tableaux (array et tabular) et les images. Le support pour des commandes moins utilisées sera ajouté par la suite.\par
 
 \subsection{Multimédia}
-Depuis plusieurs années, l'apprentissage au moyen de vidéos est très apprécié, notamment par les adolescents. Cela ne remplace pas un enseignement en classe par un professeur qui est disponible et pourra répondre aux questions, mais cela permet d'apprendre à son rythme, seul et à n'importe quel moment du jour ou de la nuit. Il est souvent plus simple pour les élèves de regarder une vidéo que de lire un polycopié. Pour ces raisons, l'ajout de vidéo était une nécessité. Comme il existe beaucoup de vidéos de qualité d'enseignants de mathématiques sur Youtube, notamment celles d'Yvan Monka\footnote{\url{https://www.youtube.com/@YMONKA}}, le projet n'intégrera, dans un premier temps, que des vidéos Youtube.\par
-Toucher et tester facilitent les apprentissages. Pour les mathématiques, Geogebra est un logiciel interactif de géométrie, d'analyse, de statistique et de calcul différentiel. En l'intégrant dans ce projet, les élèves peuvent expérimenter "en live" différentes approches.
+Depuis plusieurs années, l'apprentissage au moyen de vidéos est très apprécié, notamment par les adolescents. Cela ne remplace pas un enseignement en classe par un professeur qui est disponible et pourra répondre aux questions, mais cela permet d'apprendre à son rythme, seul et à n'importe quel moment du jour ou de la nuit. Il est souvent plus simple pour les élèves de regarder une vidéo que de lire un polycopié. Pour ces raisons, l'ajout de vidéo était une nécessité. Comme il existe beaucoup de vidéos de qualité d'enseignants de mathématiques sur Youtube, notamment celles d'Yvan Monka \footnote{\url{https://www.youtube.com/@YMONKA}}, le projet n'intégrera, dans un premier temps, que des vidéos Youtube.\par
+Toucher et tester facilitent les apprentissages. Pour les mathématiques, Geogebra est un logiciel interactif de géométrie, d'analyse, de statistique et de calcul différentiel. En l'intégrant dans ce projet, les élèves peuvent expérimenter "en live" différentes approches.\par
 
 \newpage
 
@@ -231,11 +234,13 @@ Lors de l'enseignement de la programmation, il y a plusieurs contraintes à suiv
 \item Le module Turtle permet de faire de la programmation visuelle. Le dessin lui-même permet de valider ou non la réussite de l'exercice. Ce module est très souvent utilisé par les enseignants du collège, il est donc nécessaire de pouvoir aussi exécuter du code qui utilise ce module.
 \end{itemize}
 
+\newpage
+
 \section{Design et réalisation}
-Dans cette partie, les différents outils utilisés et les choix effectués seront présentés et expliqués. Le code source de ce projet est disponible sur GitHub: <\url{https://github.com/t-docs/t-doc}>.
+Dans cette partie, les différents outils utilisés et les choix effectués seront présentés et expliqués. Le code source de ce projet est disponible sur GitHub: <\url{https://github.com/t-docs/t-doc}>.\par
 
 \subsection{Framework Web}
-Comme j'enseigne le Python à mes élèves, je souhaitais l'utiliser pour ce projet et peut-être l'utiliser avec les élèves dans le cadre de l'option complémentaire d'informatique, afin qu'ils développent eux-mêmes une application Web. Parmi les nombreux outils pour développer une application Web, mon choix s'est porté sur Django\footnote{\url{https://www.djangoproject.com/}}, un framework Web en Python, parce que je l'ai déjà utilisé dans un autre projet et qu'il a de nombreux avantages, entre-autres:
+Comme j'enseigne le Python à mes élèves, je souhaitais l'utiliser pour ce projet et peut-être l'utiliser avec les élèves dans le cadre de l'option complémentaire d'informatique, afin qu'ils développent eux-mêmes une application Web. Parmi les nombreux outils pour développer une application Web, mon choix s'est porté sur Django \cite{django}, un framework Web en Python, parce que je l'ai déjà utilisé dans un autre projet et qu'il a de nombreux avantages, entre-autres:
 \begin{itemize}
 \item Il est gratuit et open source.
 \item Il intègre un serveur Web qui permet de développer et tester une application en temps réel sans déploiement.
@@ -243,36 +248,36 @@ Comme j'enseigne le Python à mes élèves, je souhaitais l'utiliser pour ce pro
 \end{itemize}
 
 \subsection{Traitement côté client ou côté serveur}
-Dans une application Web, le traitement peut, en général, être librement placé du côté du client ou du côté du serveur, voire même être réparti entre les deux. Le client possède un avantage majeur de sécurité, grâce au bac à sable sécurisé du navigateur. Mais de manière générale, il est difficile d'exécuter des logiciels arbitraires dans le navigateur, et une réimplémentation est souvent nécessaire. À l'opposé, le serveur permet de facilement exécuter n'importe quel logiciel, mais une faille dans celui-ci peut compromettre tout le serveur, et donc tous ses utilisateurs. Dans la mesure du possible, ce projet effectuera le traitement du côté client autant que possible, et du côté du serveur si nécessaire.
-
-\subsection{Format du document d'origine}
-L'application doit générer du HTML à partir d'un document pouvant contenir du LaTeX, par conséquent, choisir HTML ou LaTeX comme format du document source semble une évidence. Dans un premier temps, HTML a été privilégié, car il s'agit d'un format plus cohérent et activement développé, mais cette option a été abandonnée par la suite\footnote{voir \nameref{AlternativesConsidérées}}.\par
-L'utilisation  de LaTeX comme format d'origine oblige à faire le rendu côté serveur, puisque le navigateur ne comprend pas le LaTeX. Même si cela implique de devoir gérer un serveur, ce choix à l'avantage de faciliter le travail de l'utilisateur. En effet, les enseignants pourront utiliser leurs documents rédigés en LaTeX moyennant quelques modifications, afin d'ajouter les fonctionnalités interactives.
+Dans une application Web, le traitement peut, en général, être librement placé du côté du client ou du côté du serveur, voire même être réparti entre les deux. Le client possède un avantage majeur de sécurité, grâce au bac à sable sécurisé du navigateur. Mais de manière générale, il est difficile d'exécuter des logiciels arbitraires dans le navigateur, et une réimplémentation est souvent nécessaire. À l'opposé, le serveur permet de facilement exécuter n'importe quel logiciel, mais une faille dans celui-ci peut compromettre tout le serveur, et donc tous ses utilisateurs. Dans la mesure du possible, ce projet effectuera le traitement du côté client autant que possible, et du côté du serveur si nécessaire.\par
 
 \newpage
+
+\subsection{Format du document d'origine}
+L'application doit générer du HTML à partir d'un document pouvant contenir du LaTeX, par conséquent, choisir HTML ou LaTeX comme format du document source semble une évidence. Dans un premier temps, HTML a été privilégié, car il s'agit d'un format plus cohérent et activement développé, mais cette option a été abandonnée par la suite \footnote{voir \nameref{AlternativesConsidérées}}.\par
+L'utilisation  de LaTeX comme format d'origine oblige à faire le rendu côté serveur, puisque le navigateur ne comprend pas le LaTeX. Même si cela implique de devoir gérer un serveur, ce choix à l'avantage de faciliter le travail de l'utilisateur. En effet, les enseignants pourront utiliser leurs documents rédigés en LaTeX moyennant quelques modifications, afin d'ajouter les fonctionnalités interactives.\par
 
 \subsection{Génération d'une page HTML à partir d'un document LaTeX}
 Il existe différents outils \footnote{voir \nameref{Outils}} qui permettent de convertir du LaTeX en HTML. La qualité du rendu, notamment des formules mathématiques, est très variable. Au niveau de l'utilisation, certains permettent de générer des fragments de LaTeX, mais la plupart requièrent la génération d'un document complet.\par
 
 Lors de mes recherches, deux outils ont particulièrement retenu mon attention:
 \begin{enumerate}
-\item LaTeX.js\footnote{\url{https://latex.js.org/}}, une librairie JavaScript.
-\item Make4ht\footnote{\url{https://ctan.org/pkg/make4ht?lang=en}}, un package contenu dans la plupart des distributions LaTeX.
+\item LaTeX.js \cite{latex.js}, une librairie JavaScript.
+\item Make4ht \cite{make4ht}, un package contenu dans la plupart des distributions LaTeX.
 \end{enumerate}
-Le premier outil a été testé, mais finalement abandonné\footnote{voir \nameref{AlternativesConsidérées}}, car il ne permettait pas le rendu de toutes les fonctionnalités LaTeX souhaitées.\par
-Make4ht est un système de construction simplifié pour TeX4ht\footnote{voir \url{https://tug.org/tex4ht/}} lui-même, un convertisseur de TeX en HTML. Make4ht contient un outil en ligne de commande qui gère le processus de conversion configurable. Contrairement à d'autres convertisseurs comme LaTeX2HTML, qui convertissent le document TeX directement en HTML, TeX4ht utilise le fichier DVI\footnote{DeVice-Independent} résultant de la compilation "normale" en entrée. Cela permet une reproduction plus fidèle du document.\par
+Le premier outil a été testé, mais finalement abandonné \footnote{voir \nameref{AlternativesConsidérées}}, car il ne permettait pas le rendu de toutes les fonctionnalités LaTeX souhaitées.\par
+Make4ht est un système de construction simplifié pour TeX4ht \cite{tex4ht} lui-même, un convertisseur de TeX en HTML. Make4ht contient un outil en ligne de commande qui gère le processus de conversion configurable. Contrairement à d'autres convertisseurs comme LaTeX2HTML, qui convertissent le document TeX directement en HTML, TeX4ht utilise le fichier DVI \footnote{DeVice-Independent} résultant de la compilation "normale" en entrée. Cela permet une reproduction plus fidèle du document.\par
 
 Pour générer le rendu depuis Django, la commande suivante est exécutée:
 \begin{lstlisting}[style=MyHTML, caption = Ligne de commande pour le rendu]
 $ make4ht -c latex.cfg -j "output" "monfichier.tex" "mathjax"
 \end{lstlisting}
 \vspace{-0.5cm}
-Cette commande génère deux documents: le fichier HTML (output.html) et le fichier CSS (output.css) qui définit la mise en page. Afin de simplifier le transfert au navigateur, le CSS est ensuite intégré directement dans l'entête du document HTML.
-
-\newpage
+Cette commande génère deux documents: le fichier HTML (output.html) et le fichier CSS (output.css) qui définit la mise en page. Afin de simplifier le transfert au navigateur, le CSS est ensuite intégré directement dans l'entête du document HTML.\par
 
 \subsection{Affichage de contenu mathématique}
-Make4ht permet de configurer le rendu de contenu mathématique. Par défaut, le rendu se fait en MathML, mais la qualité n'est pas acceptable. Il est aussi possible de générer des images SVG. Même si la qualité du rendu est très bonne, ces images ne sont pas stockées directement dans le HTML, mais dans des fichiers séparés. Cela complique le transfert au navigateur, car il faudrait soit garder toutes les références et transmettre plusieurs fichiers, soit inclure les images directement dans le fichier HTML. De plus, les formules sous forme d'image empêchent leur recherche. La solution retenue qui est la plus simple, est d'utiliser MathJax\footnote{\url{https://docs.mathjax.org/en/latest/index.html}}. MathJax est un moteur d'affichage JavaScript open source pour les notations LaTeX, MathML et AsciiMath qui fonctionne dans tous les navigateurs modernes. Il ne nécessite aucune installation.
+Make4ht permet de configurer le rendu de contenu mathématique. Par défaut, le rendu se fait en MathML, mais la qualité n'est pas acceptable. Il est aussi possible de générer des images SVG. Même si la qualité du rendu est très bonne, ces images ne sont pas stockées directement dans le HTML, mais dans des fichiers séparés. Cela complique le transfert au navigateur, car il faudrait soit garder toutes les références et transmettre plusieurs fichiers, soit inclure les images directement dans le fichier HTML. De plus, les formules sous forme d'image empêchent leur recherche. La solution retenue qui est la plus simple, est d'utiliser MathJax \cite{mathjax}. MathJax est un moteur d'affichage JavaScript open source pour les notations LaTeX, MathML et AsciiMath qui fonctionne dans tous les navigateurs modernes. Il ne nécessite aucune installation.\par
+
+\newpage
 
 \subsection{Ajout de balises personnalisées}
 LaTeX permet de créer ses propres macros afin de faciliter la rédaction de documents. Cette possibilité sera utilisée pour la définition de nouvelles balises personnalisées, ainsi l'enseignant pourra intégrer facilement les nouveaux éléments (vidéos, code, solutions, \dots) dans son document LaTeX.\par
@@ -291,31 +296,34 @@ Lors du rendu LaTeX, les balises sont remplacées par des balises HTML <div> ave
 LaTeX contient des packages pour ajouter des vidéos à un PDF, mais cela ne permet pas d'afficher et de pouvoir visionner des vidéos Youtube sur un site Web à partir de sa référence. Cette transformation se fait directement lors du rendu LaTeX, grâce à une balise personnalisée \textbackslash video\{référence\} qui est remplacée par le code HTML d'intégration de vidéos, en tenant compte de la référence passée en paramètre et de la taille de la vidéo. La taille est optionnelle et par défaut à 50\% de la largeur du texte.\par
 
 \subsubsection{Geogebra}
-L'affichage d'une fenêtre Geogebra\footnote{\url{https://www.geogebra.org/}} se fait exactement de la même manière que pour les vidéos. Le document doit être, au préalable, sauvegardé en ligne. Par défaut, la taille de la fenêtre est de 100\% de la largeur du texte.
+L'affichage d'une fenêtre Geogebra \cite{geogebra} se fait exactement de la même manière que pour les vidéos. Le document doit être, au préalable, sauvegardé en ligne. Par défaut, la taille de la fenêtre est de 100\% de la largeur du texte.
 
 \subsubsection{Code source}
 Le surlignement de blocs facilite la lecture et la compréhension. En LaTeX, le package lstlisting permet de le faire facilement, car les principaux langages sont prédéfinis. Toutefois, lors de la génération du document HTML, Make4ht ajoute des balises pour gérer l'indentation. Cela a pour conséquence que ce n'est plus un bloc de code et donc qu'il est impossible de le réutiliser, par exemple pour l'exécuter et afficher le résultat. La solution à ce problème est d'utiliser le package verbatim qui affiche exactement ce qui est écrit, c'est-à-dire qu'il garde l'indentation et les retours à la ligne, mais surtout il conserve le code dans une seule et même balise, ce qui permet de le réutiliser.\par
-Le problème de l'indentation étant réglé, il faut maintenant surligner le code. Pour cela, il existe différents outils utilisant du JavaScript. Highlight.js\footnote{\url{https://highlightjs.org/}} a été choisi pour sa simplicité d'utilisation. Il permet d'afficher 192 langages avec différents thèmes et fonctionne avec n'importe quel balisage HTML. Il a une fonctionnalité de détection automatique du langage, mais celle-ci ne fonctionne pas toujours correctement, particulièrement lorsque les blocs de code sont courts, comme c'est le cas, dans les exercices que je propose. Par conséquent, l'utilisateur devra toujours indiquer le langage utilisé dans le document LaTeX.\par
+Le problème de l'indentation étant réglé, il faut maintenant surligner le code. Pour cela, il existe différents outils utilisant du JavaScript. Highlight.js \cite{highlightjs} a été choisi pour sa simplicité d'utilisation. Il permet d'afficher 192 langages avec différents thèmes et fonctionne avec n'importe quel balisage HTML. Il a une fonctionnalité de détection automatique du langage, mais celle-ci ne fonctionne pas toujours correctement, particulièrement lorsque les blocs de code sont courts, comme c'est le cas, dans les exercices que je propose. Par conséquent, l'utilisateur devra toujours indiquer le langage utilisé dans le document LaTeX.\par
 Pour utiliser highlight.js, il faut que le code se trouve dans un conteneur HTML <div class="tdoc-code tdoc-lang-NomDuLangage">.\par
 
 \subsubsection{Exécution de code}
-Afin de s'assurer que l'élève a compris le code donné, il doit pouvoir l'exécuter dans le navigateur. Skulpt\footnote{\url{https://skulpt.org/}}, un outil qui compile du Python en utilisant Javascript, offre une solution simple. En réalité, Skulpt traduit le code écrit en Python en code JavaScript, cela s'effectue côté client, donc directement dans le navigateur. \par
+Afin de s'assurer que l'élève a compris le code donné, il doit pouvoir l'exécuter dans le navigateur. Skulpt \cite{skulpt}, un outil qui compile du Python en utilisant Javascript, offre une solution simple. En réalité, Skulpt traduit le code écrit en Python en code JavaScript, cela s'effectue côté client, donc directement dans le navigateur. \par
 Il y a deux types d'exécution:
 \begin{itemize}
 \item le résultat est affiché sur la console,
-\item le code qui utilise le module Turtle\footnote{\url{https://docs.python.org/3/library/turtle.html}} affiche un dessin dans un canevas graphique.
+\item le code qui utilise le module Turtle affiche un dessin dans un canevas graphique.
 \end{itemize}
-Skulpt permet de gérer les deux types d'exécution. L'enseignant détermine si le code pourra être exécuté grâce aux paramètres "interactive" ou "interactive\_turtle", s'il utilise le module Turtle.
+Skulpt permet de gérer les deux types d'exécution. L'enseignant détermine si le code pourra être exécuté grâce aux paramètres "interactive" ou "interactive\_turtle", s'il utilise le module Turtle.\par
 
+\newpage
 \subsubsection{Solution}
 Pour permettre aux élèves de travailler en autonomie, il est nécessaire d'y inclure les solutions. L'idée est d'intégrer ces solutions au document LaTeX et l'élève pourra les afficher sur demande. Les solutions sont placées dans des balises HTML <div class='tdoc-solution'>, ainsi elles pourront être manipulées par la suite par le navigateur.\par
 
-L'affichage ou non des solutions se fait au moyen de CSS. Le principe pour l'affichage des solutions est le suivant: chaque solution a une checkbox invisible associée, si celle-ci est cochée, la solution sera affichée. Par défaut, les solutions ne sont pas affichées.
+L'affichage ou non des solutions se fait au moyen de CSS. Le principe pour l'affichage des solutions est le suivant: chaque solution a une checkbox invisible associée, si celle-ci est cochée, la solution sera affichée. Par défaut, les solutions ne sont pas affichées.\par
 
 \subsection{Sécurité}
-La compilation de documents LaTeX sur le serveur présente des problèmes de sécurité non négligeables. Le compilateur date d'une époque où la sécurité n'était pas primordiale, et il n'a pas été conçu pour traiter des documents de sources non-fiables. Par exemple, il est facile d'écrire un document qui expose des fichiers arbitraires du serveur, ou qui modifie des fichiers existants. Pire encore, bon nombre de failles ont été découvertes qui permettent l'exécution de code arbitraire à travers un document TeX.\footnote{Exemples \url{https://nvd.nist.gov/vuln/detail/CVE-2016-10243}, \url{https://nvd.nist.gov/vuln/detail/CVE-2018-17407}} Il est même possible d'écrire un virus en TeX.\footnote{\url{https://www.usenix.org/system/files/login/articles/73506-checkoway.pdf}}\par
+La compilation de documents LaTeX sur le serveur présente des problèmes de sécurité non négligeables. Le compilateur date d'une époque où la sécurité n'était pas primordiale, et il n'a pas été conçu pour traiter des documents de sources non-fiables. Par exemple, il est facile d'écrire un document qui expose des fichiers arbitraires du serveur, ou qui modifie des fichiers existants. Pire encore, bon nombre de failles ont été découvertes qui permettent l'exécution de code arbitraire à travers un document TeX. \footnote{Exemples \url{https://nvd.nist.gov/vuln/detail/CVE-2016-10243}, \url{https://nvd.nist.gov/vuln/detail/CVE-2018-17407}} Il est même possible d'écrire un virus en TeX \cite{usenix}.\par
 
 Ces problèmes peuvent être atténués par des technologies comme l'isolation des processus correspondants dans des conteneurs. Pour des raisons de simplicité et de contraintes de temps, ce projet considère que les documents LaTeX proviennent d'une source fiable, et chaque enseignant aura donc un déploiement séparé pour ses propres documents. Un déploiement partagé sera réalisé plus tard.
+
+\newpage
 
 \subsection{Cache}
 La génération de code HTML avec Make4ht, même de documents simples, prend plus de 10 secondes. En effet, Make4ht effectue le rendu trois fois, car certaines informations dépendent du rendu final, comme la table des matières d'un document, le nombre de pages total ou les références croisées. Malheureusement une latence de plusieurs secondes n'est pas acceptable pour les utilisateurs d'un site Web. Deux solutions sont implémentées pour y remédier:
@@ -331,7 +339,7 @@ Django intègre un système de cache sur système de fichiers qui stocke les fic
 \item Le mode: normal ou draft.
 \end{enumerate}
 Lors du chargement de la page, le programme détermine la clé en fonction des différents éléments ci-dessus. Ensuite, il vérifie dans le cache si cette version de la page existe déjà. Si c'est le cas, il l'envoie directement au navigateur, sinon il génère la nouvelle page, la stocke et la transmet au navigateur.\par
-Ainsi l'affichage d'une page pour un élève ne prend que quelques millisecondes.
+Ainsi l'affichage d'une page pour un élève ne prend que quelques millisecondes.\par
 
 \newpage
 
@@ -345,7 +353,7 @@ L'enseignant qui souhaite utiliser cette application, doit pouvoir créer des do
 \end{itemize}
 
 \subsection{Serveur Web}
-Pour créer le serveur Web dans un conteneur Docker\footnote{\url{https://docs.docker.com/}}, il faut:
+Pour créer le serveur Web dans un conteneur Docker \cite{docker}, il faut:
 \begin{enumerate}
   \item Installer docker: \url{https://docs.docker.com/desktop/}
   \item Cloner le projet: \url{https://github.com/t-docs/t-doc.git}
@@ -462,7 +470,7 @@ Par défaut, la taille de la fenêtre de la vidéo est 50\% de la largeur du tex
 Les vidéos peuvent être visionnées en plein écran.
 
 \subsubsection{Fenêtres Geogebra}
-Pour ajouter une fenêtre Geogebra, il faut tout d'abord créer le document Geogebra et le sauvegarder en ligne\footnote{\url{https://www.geogebra.org/}}. Ensuite, il pourra être intégré au document LaTeX au moyen de la balise suivante: \textbackslash geogebra\{référence\}. La structure est la même que pour les vidéos Youtube.
+Pour ajouter une fenêtre Geogebra, il faut tout d'abord créer le document Geogebra et le sauvegarder en ligne \footnote{\url{https://www.geogebra.org/}}. Ensuite, il pourra être intégré au document LaTeX au moyen de la balise suivante: \textbackslash geogebra\{référence\}. La structure est la même que pour les vidéos Youtube.
 \begin{lstlisting}[style=MyHTML, caption = Code LaTeX avec ajout d'une fenêtre Geogebra]
 \documentclass[a4paper,11pt]{article}
 \usepackage{commonpackages}
@@ -630,6 +638,8 @@ Il est tout à fait possible d'ajouter du code exécutable dans les solutions.
 \subsection{Exemples}
 Des exemples de pages qui montrent l'utilisation des différentes fonctionnalités, sont mis à disposition sur le site suivant: \url{http://t-doc.org/}
 
+\newpage
+
 \section{Alternatives considérées}\label{AlternativesConsidérées}
 Tout au long du projet, des décisions ont été prises, dont certaines, bien qu'apparemment judicieuses au départ, ont conduit à une impasse. Face à des problèmes insolubles, il a fallu renoncer à certaines approches, malgré les nombreuses heures déjà investies dans leur développement.
 
@@ -637,27 +647,29 @@ Tout au long du projet, des décisions ont été prises, dont certaines, bien qu
 Afin de faire le maximum du rendu côté client, il semblait logique d'utiliser le HTML comme format d'origine. Il a l'avantage de pouvoir directement intégrer des images, des vidéos et des fenêtres Geogebra. Il restait donc à trouver une solution pour le contenu mathématique. Écrire des formules mathématiques en HTML peut être compliqué, prend du temps et l'affichage n'est pas toujours acceptable. De plus, en gardant en tête l'idée de pouvoir réutiliser des documents déjà créés, il faut donc pouvoir intégrer du LaTeX dans le HTML. Le choix suivant a été fait: le document complet est écrit en HTML, à l'exception des parties de contenu mathématique qui sont rédigées en LaTeX. Celles-ci seront délimitées par des balises HTML personnalisées <latex> et </latex>. La conversion se fera dans l'idéal directement par le navigateur, si ce n'est pas possible, un serveur pourrait répondre à des sous-requêtes afin de faire les transformations nécessaires.
 
 \subsection{Transformation de LaTeX en HTML}
-Il faut donc trouver un outil qui permet de transformer des fragments de LaTeX en HTML, directement dans le navigateur. Latex.js\footnote{\url{https://latex.js.org/}} est un traducteur de LaTeX en HTML qui répond à ces critères.\par
+Il faut donc trouver un outil qui permet de transformer des fragments de LaTeX en HTML, directement dans le navigateur. Latex.js \cite{latex.js} est un traducteur de LaTeX en HTML qui répond à ces critères.\par
 Voici ses principales caractéristiques:
 \begin{itemize}
 \item Il est open source et développé par Michael Brade.
 \item Il est écrit en JavaScript et s'exécute directement dans le navigateur, ainsi aucune dépendance externe ne doit être chargée.
 \item Il peut être intégré sur un site Web à l'aide du composant Web fourni.
-\item Il permet de modifier la DOM\footnote{Document Object Model - représentation de la page HTML (structure et contenu) par un arbre } du document HTML.
+\item Il permet de modifier la DOM \footnote{Document Object Model - représentation de la page HTML (structure et contenu) par un arbre } du document HTML.
 \item Il peut être utilisé pour des documents LaTeX complets ou des fragments de LaTeX, c'est-à-dire sans préambule.
 \item Le rendu HTML est très proche du rendu attendu avec LaTeX, cela grâce au CSS.
 \item De nouvelles macros peuvent être ajoutées en JavaScript.
 \item Le rendu est rapide, car LaTeX.js n'a pas besoin de parser le document plusieurs fois.
 \end{itemize}
-En testant cet outil avec des documents de cours, je constate que plusieurs fonctionnalités essentielles de LaTeX ne sont pas supportées\footnote{voir \nameref{Comparatif}}, par exemple les images incluses directement dans le LaTeX ne s'affichent pas. Cela signifie qu'il faut le faire manuellement en HTML. De plus, certains symboles mathématiques comme $\ne$ n'apparaissent pas correctement. Le problème semble provenir du fait que KaTeX, une bibliothèque de composition mathématique pour le Web, n'a pas été mise à jour. Malheureusement, ce projet, comme beaucoup d'autres, n'est plus développé ou mis à jour depuis 2021. N'ayant pas la possibilité de résoudre ce problème par moi-même dans un temps raisonnable, l'utilisation de cet outil a été abandonnée.\par
-Une autre solution intéressante est MathJax\footnote{\url{https://docs.mathjax.org/en/latest/}}, un moteur d'affichage JavaScript open source pour les notations LaTeX. Il permet d'écrire du LaTeX directement dans la partie <body> du HTML. Mais, dans ce cas, il ne prend en charge qu'une partie des commandes LaTeX, c'est-à-dire l'écriture mathématique, les formules ou les symboles, mais pas les tableaux ou les listes écrites en LaTeX. Cela signifie que la réutilisation de documents déjà créés est difficile. De plus, le fait d'écrire directement dans le <body> pose certains problèmes comme l'utilisation des signes mathématiques < ou >.\par
+En testant cet outil avec des documents de cours, je constate que plusieurs fonctionnalités essentielles de LaTeX ne sont pas supportées \footnote{voir \nameref{Comparatif}}, par exemple les images incluses directement dans le LaTeX ne s'affichent pas. Cela signifie qu'il faut le faire manuellement en HTML. De plus, certains symboles mathématiques comme $\ne$ n'apparaissent pas correctement. Le problème semble provenir du fait que KaTeX, une bibliothèque de composition mathématique pour le Web, n'a pas été mise à jour. Malheureusement, ce projet, comme beaucoup d'autres, n'est plus développé ou mis à jour depuis 2021. N'ayant pas la possibilité de résoudre ce problème par moi-même dans un temps raisonnable, l'utilisation de cet outil a été abandonnée.\par
+Une autre solution intéressante est MathJax \cite{mathjax}, un moteur d'affichage JavaScript open source pour les notations LaTeX. Il permet d'écrire du LaTeX directement dans la partie <body> du HTML. Mais, dans ce cas, il ne prend en charge qu'une partie des commandes LaTeX, c'est-à-dire l'écriture mathématique, les formules ou les symboles, mais pas les tableaux ou les listes écrites en LaTeX. Cela signifie que la réutilisation de documents déjà créés est difficile. De plus, le fait d'écrire directement dans le <body> pose certains problèmes comme l'utilisation des signes mathématiques < ou >.\par
 
 \subsection{Requêtes secondaires}
 Puisque le rendu LaTeX complètement côté client a échoué, une stratégie de rendu partiel côté serveur a été testée. L'idée était de délimiter des fragments de LaTeX dans le document HTML par des balises HTML spéciales (par exemple <latex> </latex>), et d'envoyer leur contenu au serveur pour le rendu, en utilisant des requêtes secondaires programmées en JavaScript. Les fragments de HTML retournés étaient ensuite insérés dans la DOM.\par
 
 Cette approche a été implémentée sous forme d'un Web Component, et aurait permis d'optimiser la latence du rendu, puisqu'au lieu d'un long document, le rendu de plus petits fragments pouvait être effectué en parallèle. Malheureusement, elle a échoué à cause d'interactions entre les fragments dues à MathJax. En effet, le compilateur TeX utilise MathJax pour le rendu de formules mathématiques. MathJax devait donc être invoqué sur chaque fragment de HTML retourné, mais cela ne fonctionnait qu'avec un seul fragment.\par
 
-Finalement, la seule approche viable a été d'effectuer le rendu du document complet entièrement du côté serveur.
+Finalement, la seule approche viable a été d'effectuer le rendu du document complet entièrement du côté serveur.\par
+
+\newpage
 
 \section{Problèmes rencontrés}
 
@@ -672,12 +684,14 @@ Le package Make4ht qui fait exactement ce qu'il faut pour ce projet, est très p
 \item Messages d'erreur de Make4ht:\\
 De manière générale, les messages d'erreur de LaTeX sont peu transparents. Mais comme la ligne où se trouve l'erreur est indiquée, il est possible de résoudre le problème. Malheureusement les messages d'erreur de Make4ht, à l'exception des erreurs de syntaxe dans le document d'origine en LaTeX, sont souvent incompréhensibles. Il faut donc procéder par tests successifs pour comprendre ce qui se passe et comment corriger la situation.
 \item Compatibilité de LaTeX:\\
-LaTeX est un langage qui permet de faire du formatage de nombreuses manières différentes, mais cela le rend très complexe et difficile à rendre compatible avec toutes les fonctionnalités. Make4ht fait appel à différents outils lors du processus de conversion, notamment TeX4ht. Lors de l'installation des packages TeX Live\footnote{\url{https://www.tug.org/texlive/}} pour la création du conteneur Docker, t-doc ne fonctionnait plus. Il a été compliqué de comprendre pourquoi. Les problèmes suivants ont été découverts:
+LaTeX est un langage qui permet de faire du formatage de nombreuses manières différentes, mais cela le rend très complexe et difficile à rendre compatible avec toutes les fonctionnalités. Make4ht fait appel à différents outils lors du processus de conversion, notamment TeX4ht. Lors de l'installation des packages TeX Live \cite{texlive} pour la création du conteneur Docker, t-doc ne fonctionnait plus. Il a été compliqué de comprendre pourquoi. Les problèmes suivants ont été découverts:
 \begin{itemize}
-  \item en utilisant l'image alpine linux\footnote{\url{https://www.alpinelinux.org/}}, il manquait le programme TeX4ht qui rendait impossible la génération des documents,
+  \item en utilisant l'image alpine linux \cite{alpine}, il manquait le programme TeX4ht qui rendait impossible la génération des documents,
   \item en utilisant l'image Ubuntu, la version de Make4ht n'était pas la bonne et renvoyait une erreur de dépassement de capacité.
 \end{itemize}
 \end{itemize}
+
+\newpage
 
 \section{Suite du projet}
 Le projet dans sa version actuelle est utilisable, mais il reste de nombreuses fonctionnalités à développer.\\
@@ -717,63 +731,69 @@ Pour des raisons de sécurité, et pour faciliter le déploiement du logiciel, l
 
 À la fin du projet, le cahier des charges est rempli. Dans sa forme actuelle, le projet est utilisable pour la création de documents contenant tous les contenus mentionnés ci-dessus, et pour leur consultation par les élèves. Il a été déployé en production à l'adresse <\url{http://t-doc.org/}>.\par
 
-La réalisation de t-doc a été pour moi l'occasion de développer un projet de l'émergence de l'idée au déploiement sur un serveur. Il m'a permis d'approfondir mes connaissances dans différentes technologies (LaTeX, Python, JavaScript, Django, Docker) qui me seront utiles pour mon enseignement. J'ai aussi pu apprendre par la pratique l'utilité d'un bon outil de contrôle de révision. Et même s'il reste de nombreuses fonctionnalités à développer pour améliorer le projet, je me réjouis de l'utiliser avec mes élèves.
+La réalisation de t-doc a été pour moi l'occasion de développer un projet de l'émergence de l'idée au déploiement sur un serveur. Il m'a permis d'approfondir mes connaissances dans différentes technologies (LaTeX, Python, JavaScript, Django, Docker) qui me seront utiles pour mon enseignement. J'ai aussi pu apprendre par la pratique l'utilité d'un bon outil de contrôle de révision. Et même s'il reste de nombreuses fonctionnalités à développer pour améliorer le projet, je me réjouis de l'utiliser avec mes élèves.\par
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \section*{Remerciements}
 \addcontentsline{toc}{section}{Remerciements}
-Mes remerciements vont tout d'abord au Prof. Dr. Jacques Pasquier qui m'a suivi tout au long de ce projet, en me permettant de réaliser une application qui me sera utile pour mon enseignement. Je souhaite aussi remercier mon mari qui m'a encouragée, soutenue et aidée sous différentes formes: le coaching dans la gestion de projets, les nombreuses heures passées à discuter pour trouver la meilleure approche, les bonnes solutions ou de nouvelles idées et surtout les bons conseils lorsque j'étais bloquée.
+Mes remerciements vont tout d'abord au Prof. Dr. Jacques Pasquier qui m'a suivi tout au long de ce projet, en me permettant de réaliser une application qui me sera utile pour mon enseignement. Je souhaite aussi remercier mon mari qui m'a encouragée, soutenue et aidée sous différentes formes: le coaching dans la gestion de projets, les nombreuses heures passées à discuter pour trouver la meilleure approche, les bonnes solutions ou de nouvelles idées et surtout les bons conseils lorsque j'étais bloquée.\par
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \clearpage
 \section*{Webographie}
 \addcontentsline{toc}{section}{Webographie}
 
-ALPINE LINUX DEVELOPMENT TEAM «Alpine Linux», 2024.\\
-<\url{https://www.alpinelinux.org/}>.
+\renewcommand{\refname}{}
+\begin{thebibliography}{9}
+\vspace{-1.5cm}
 
-BRADE MICHAEL «JavaScript LATEX to HTML5 translator», 2017-2021.\\
-<\url{https://latex.js.org/}>.
+\bibitem{alpine} ALPINE LINUX DEVELOPMENT TEAM «Alpine Linux». <\url{https://www.alpinelinux.org/}>\\
+(dernière consultation le 15 février 2024).
 
-DJANGO SOFTWARE FOUNDATION «django», 2005-2024.\\
-<\url{https://www.djangoproject.com/}>.
+\bibitem{latex.js} BRADE MICHAEL «JavaScript LATEX to HTML5 translator». <\url{https://latex.js.org/}>\\
+(dernière consultation le 3 septembre 2023).
 
-DOCKER INC. «docker docs», 2013-2024.\\
-<\url{https://docs.docker.com/}>.
+\bibitem{django} DJANGO SOFTWARE FOUNDATION «django». <\url{https://www.djangoproject.com/}>\\
+(dernière consultation le 1 mars 2024).
 
-GEOGEBRA «Applis Maths Geogebra», 2024.\\
-<\url{https://www.geogebra.org/}>.
+\bibitem{docker} DOCKER INC. «docker docs». <\url{https://docs.docker.com/}>\\
+(dernière consultation le 1 mars 2024).
 
-«highlight.js», 2024.\\
-<\url{https://highlightjs.org/}>.
+\bibitem{geogebra} GEOGEBRA «Applis Maths Geogebra». <\url{https://www.geogebra.org/}>\\
+(dernière consultation le 16 mars 2024).
 
-INTERNATIONAL GEOGEBRA INSTITUTE «Reference: GeoGebra Apps Embedding», 2024.\\
-<\url{https://wiki.geogebra.org/en/Reference:GeoGebra_Apps_Embedding}>.
+\bibitem{highlightjs} «highlight.js». <\url{https://highlightjs.org/}>\\
+(dernière consultation le 6 mars 2024).
 
-MICHAL HOFTICH «The Make4ht build system», 2023.\\
-<\url{https://ctan.org/pkg/make4ht?lang=en}>.
+\bibitem{geogebrawiki} INTERNATIONAL GEOGEBRA INSTITUTE «Reference: GeoGebra Apps Embedding». <\url{https://wiki.geogebra.org/en/Reference:GeoGebra_Apps_Embedding}>\\
+(dernière consultation le 16 octobre 2023).
 
-NIST «National Vulnerability Database», 2023.\\
-<\url{https://nvd.nist.gov/vuln/}>.
+\bibitem{make4ht} MICHAL HOFTICH «The Make4ht build system». <\url{https://ctan.org/pkg/make4ht?lang=en}>\\
+(dernière consultation le 11 mars 2024).
 
-PYTHON SOFTWARE FOUNDATION «Python», 2001-2024.\\
-<\url{https://www.python.org/}>.
+\bibitem{nvd} NIST «National Vulnerability Database». <\url{https://nvd.nist.gov/vuln/}>\\
+(dernière consultation le 16 mars 2024).
 
-SCOTT GRAHAM «Skulpt», 2015.\\
-<\url{https://skulpt.org/}>.
+\bibitem{python} PYTHON SOFTWARE FOUNDATION «Python». <\url{https://www.python.org/}>\\
+(dernière consultation le 8 mars 2024).
 
-STEPHEN CHECKOWAY; HOVAV SHACHAM; ERIC RESCORLA «Don't take LaTeX files from strangers», 2010.\\
-<\url{https://www.usenix.org/system/files/login/articles/73506-checkoway.pdf}>.
+\bibitem{skulpt} SCOTT GRAHAM «Skulpt». <\url{https://skulpt.org/}>\\
+(dernière consultation le 15 décembre 2023).
 
-TEX USERS GROUP «TeX Live», 2024.\\
-<\url{https://www.tug.org/texlive/}>.
+\bibitem{usenix} STEPHEN CHECKOWAY; HOVAV SHACHAM; ERIC RESCORLA «Don't take LaTeX files from strangers». <\url{https://www.usenix.org/system/files/login/articles/73506-checkoway.pdf}>\\
+(dernière consultation le 16 mars 2024).
 
-TEX USERS GROUP «TeX4ht», 2022.\\
-<\url{https://tug.org/tex4ht/}>.
+\bibitem{texlive} TEX USERS GROUP «TeX Live». <\url{https://www.tug.org/texlive/}>\\
+(dernière consultation le 16 mars 2024).
 
-THE MATHJAX CONSORTIUM «MathJax Documentation», 2024.\\
-<\url{https://docs.mathjax.org/en/latest/index.html}>.
+\bibitem{tex4ht}TEX USERS GROUP «TeX4ht». <\url{https://tug.org/tex4ht/}>\\
+(dernière consultation le 16 mars 2024).
+
+\bibitem{mathjax} THE MATHJAX CONSORTIUM «MathJax Documentation». <\url{https://docs.mathjax.org/en/latest/index.html}>\\
+(dernière consultation le 15 octobre 2023).
+
+\end{thebibliography}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -783,6 +803,7 @@ THE MATHJAX CONSORTIUM «MathJax Documentation», 2024.\\
 \addcontentsline{toc}{section}{Annexes}
 
 \subsection*{Annexe 1: Tableau comparatif de LaTeX.js et Make4ht}\label{Comparatif}
+\addcontentsline{toc}{subsection}{Annexe 1: Tableau comparatif de LaTeX.js et Make4ht}
 
 \begin{tabular}{ |  >{\centering} p{7cm}  |  >{\centering} p{4cm}  | >{\centering\arraybackslash} p{4cm} | }
 \hline
@@ -819,6 +840,7 @@ Array avec des espacements de colonnes définis  & pas possible & pas possible \
 \end{tabular}
 
 \subsection*{Annexe 2: Outils de rendu LaTeX en HTML}\label{Outils}
+\addcontentsline{toc}{subsection}{Annexe 2: Outils de rendu LaTeX en HTML}
 \begin{tabular}{ |  >{\centering} p{2cm}  |  >{\centering} p{5cm}  | >{\centering\arraybackslash} p{8cm} | }
 \hline
 Nom & Site & Description  \\
