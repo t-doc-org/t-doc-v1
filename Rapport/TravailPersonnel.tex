@@ -185,7 +185,7 @@ En tant qu'enseignante au collège, la préparation des supports de cours prend 
 
 Le coeur du projet est constitué d'un moteur de rendu qui transforme le document d'origine contenant du LaTeX en une page HTML. Pour le cours de mathématiques, l'élève pourra visionner dans un navigateur une page qui contient des parties de texte et de contenu mathématique, par exemple, de la théorie, des exercices ou des solutions, une illustration géométrique en utilisant une fenêtre Geogebra, ainsi que des compléments de théorie ou des exemples détaillés en format vidéo. Dans le cadre du cours d'informatique, les pages pourront, en plus, afficher du code surligné afin de faciliter la compréhension et exécuter ce code directement dans le navigateur. Cela donne des séquences d'enseignement en autonomie.\par
 
-Premièrement, je vais définir le cahier des charges précis des différentes fonctionnalités souhaitées. Deuxièmement, j’aborderai, dans une partie plus technique, les choix d’outils effectués pour réaliser ce projet. Puis, je présenterai t-doc d’un point de vue de l’utilisateur. Ensuite, j’expliquerai les alternatives considérées et les différents problèmes rencontrés lors du développement et je terminerai par présenter les idées pour la suite de ce projet, mais qui ne feront pas parties de ce travail.\par
+Afin d’illustrer au mieux le projet, le présent rapport est structuré comme suit. Le chapitre 1 présente le cahier des charges. Le chapitre 2 décrit son implémentation sous forme d'une application Web. Le chapitre 3 démontre les fonctionnalités disponibles et comment les utiliser. Le chapitre 4 présente les pistes suivies et rejetées. Le chapitre 5 illustre les difficultés rencontrées tout au long du projet. Et pour terminer, le chapitre 6 décrit les potentielles améliorations futures.\par
 
 
 \newpage
@@ -319,7 +319,7 @@ Pour permettre aux élèves de travailler en autonomie, il est nécessaire d'y i
 L'affichage ou non des solutions se fait au moyen de CSS. Le principe pour l'affichage des solutions est le suivant: chaque solution a une checkbox invisible associée, si celle-ci est cochée, la solution sera affichée. Par défaut, les solutions ne sont pas affichées.\par
 
 \subsection{Sécurité}
-La compilation de documents LaTeX sur le serveur présente des problèmes de sécurité non négligeables. Le compilateur date d'une époque où la sécurité n'était pas primordiale, et il n'a pas été conçu pour traiter des documents de sources non-fiables. Par exemple, il est facile d'écrire un document qui expose des fichiers arbitraires du serveur, ou qui modifie des fichiers existants. Pire encore, bon nombre de failles ont été découvertes qui permettent l'exécution de code arbitraire à travers un document TeX. \footnote{Exemples \url{https://nvd.nist.gov/vuln/detail/CVE-2016-10243}, \url{https://nvd.nist.gov/vuln/detail/CVE-2018-17407}} Il est même possible d'écrire un virus en TeX \cite{usenix}.\par
+La compilation de documents LaTeX sur le serveur présente des problèmes de sécurité non négligeables. Le compilateur date d'une époque où la sécurité n'était pas primordiale, et il n'a pas été conçu pour traiter des documents de sources non-fiables. Par exemple, il est facile d'écrire un document qui expose des fichiers arbitraires du serveur, ou qui modifie des fichiers existants. Pire encore, bon nombre de failles ont été découvertes qui permettent l'exécution de code arbitraire à travers un document TeX \cite{cve2016} \cite{cve2018}. Il est même possible d'écrire un virus en TeX \cite{usenix}.\par
 
 Ces problèmes peuvent être atténués par des technologies comme l'isolation des processus correspondants dans des conteneurs. Pour des raisons de simplicité et de contraintes de temps, ce projet considère que les documents LaTeX proviennent d'une source fiable, et chaque enseignant aura donc un déploiement séparé pour ses propres documents. Un déploiement partagé sera réalisé plus tard.
 
@@ -470,7 +470,7 @@ Par défaut, la taille de la fenêtre de la vidéo est 50\% de la largeur du tex
 Les vidéos peuvent être visionnées en plein écran.
 
 \subsubsection{Fenêtres Geogebra}
-Pour ajouter une fenêtre Geogebra, il faut tout d'abord créer le document Geogebra et le sauvegarder en ligne \footnote{\url{https://www.geogebra.org/}}. Ensuite, il pourra être intégré au document LaTeX au moyen de la balise suivante: \textbackslash geogebra\{référence\}. La structure est la même que pour les vidéos Youtube.
+Pour ajouter une fenêtre Geogebra, il faut tout d'abord créer le document Geogebra et le sauvegarder en ligne <\url{https://www.geogebra.org/}>. Ensuite, il pourra être intégré au document LaTeX au moyen de la balise suivante: \textbackslash geogebra\{référence\}. La structure est la même que pour les vidéos Youtube.
 \begin{lstlisting}[style=MyHTML, caption = Code LaTeX avec ajout d'une fenêtre Geogebra]
 \documentclass[a4paper,11pt]{article}
 \usepackage{commonpackages}
@@ -772,7 +772,10 @@ Mes remerciements vont tout d'abord au Prof. Dr. Jacques Pasquier qui m'a suivi 
 \bibitem{make4ht} MICHAL HOFTICH «The Make4ht build system». <\url{https://ctan.org/pkg/make4ht?lang=en}>\\
 (dernière consultation le 11 mars 2024).
 
-\bibitem{nvd} NIST «National Vulnerability Database». <\url{https://nvd.nist.gov/vuln/}>\\
+\bibitem{cve2016} NIST «National Vulnerability Database: CVE-2016-10243». <\url{https://nvd.nist.gov/vuln/detail/CVE-2016-10243}>\\
+(dernière consultation le 16 mars 2024).
+
+\bibitem{cve2018} NIST «National Vulnerability Database: CVE-2018-17407». <\url{https://nvd.nist.gov/vuln/detail/CVE-2018-17407}>\\
 (dernière consultation le 16 mars 2024).
 
 \bibitem{overleaf} JOHN HAMMERSLEY; JOHN LEES-MILLER «Overleaf». <\url{https://www.overleaf.com/learn}>\\
@@ -805,8 +808,8 @@ Mes remerciements vont tout d'abord au Prof. Dr. Jacques Pasquier qui m'a suivi 
 \section*{Annexes}
 \addcontentsline{toc}{section}{Annexes}
 
-\subsection*{Annexe 1: Tableau comparatif de LaTeX.js et Make4ht}\label{Comparatif}
-\addcontentsline{toc}{subsection}{Annexe 1: Tableau comparatif de LaTeX.js et Make4ht}
+\subsection*{Tableau comparatif de LaTeX.js et Make4ht}\label{Comparatif}
+\addcontentsline{toc}{subsection}{Tableau comparatif de LaTeX.js et Make4ht}
 
 \begin{tabular}{ |  >{\centering} p{7cm}  |  >{\centering} p{4cm}  | >{\centering\arraybackslash} p{4cm} | }
 \hline
@@ -842,8 +845,8 @@ Array avec des espacements de colonnes définis  & pas possible & pas possible \
 \hline
 \end{tabular}
 
-\subsection*{Annexe 2: Outils de rendu LaTeX en HTML}\label{Outils}
-\addcontentsline{toc}{subsection}{Annexe 2: Outils de rendu LaTeX en HTML}
+\subsection*{Outils de rendu LaTeX en HTML}\label{Outils}
+\addcontentsline{toc}{subsection}{Outils de rendu LaTeX en HTML}
 \begin{tabular}{ |  >{\centering} p{2cm}  |  >{\centering} p{5cm}  | >{\centering\arraybackslash} p{8cm} | }
 \hline
 Nom & Site & Description  \\
